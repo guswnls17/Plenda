@@ -9,7 +9,7 @@ import SideButton from '../../Images/sideButton.png';
 import useInput from '../Hooks/useInput';
 
 const Header = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
@@ -20,7 +20,7 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #253245;
-  padding: 0 40px;
+  padding: 0 30px;
 
   & > img {
     margin-right: auto;
@@ -50,7 +50,7 @@ const HeaderToggle = styled.div`
   display: ${props => props.headerToggle ? "block" : "none"};
   position: absolute;
   top: 52px;
-  right: 20px;
+  right: 10px;
   width: 140px;
   padding: 10px 0;
   background-color: white;
@@ -70,7 +70,7 @@ const HeaderToggle = styled.div`
   }
 `
 
-export default ({ SidebarControl }) => {
+export default ({ SidebarControl, sidebarBoolean }) => {
   const headerToggle = useInput(false);
 
   const HeaderToggleControler = () => {
@@ -86,10 +86,13 @@ export default ({ SidebarControl }) => {
 
   return (
     <Header>
-      <Media query={{ maxWidth: 1000 }}>
+      <Media query={{ maxWidth: 1439 }}>
         {matches =>
           matches ? (
+            sidebarBoolean ?
             <img alt="" src={SideButton} style={{width: 24}} onClick={SidebarControl} />
+            :
+            <img alt="" src={HeaderLogo} style={{width: 110}} />
           ) : (
             <img alt="" src={HeaderLogo} style={{width: 110}} />
           )

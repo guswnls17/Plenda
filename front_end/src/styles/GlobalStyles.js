@@ -34,8 +34,8 @@ export default createGlobalStyle`
 
     p {
         font-family: "Noto Sans KR", 'Noto Sans', sans-serif;
-        word-break: break-all;
+        /* word-break: break-all;
         word-wrap: break-word;
-        white-space: pre-line;
+        white-space: pre-line; */
     }
 `;

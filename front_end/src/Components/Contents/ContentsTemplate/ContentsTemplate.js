@@ -7,10 +7,13 @@ import useInput from '../../../Common/Hooks/chackdInput';
 
 const Container = styled.div`
   position: relative;
-  padding-top: 50px;
 `
 
 const Body = styled.div`
+  padding-top: 60px;
+  padding-bottom: 140px;
+  min-height: 100vh;
+  background-color: #f8f8f8;
 `
 
 const Sidebar = styled.div`
@@ -23,19 +26,17 @@ const Sidebar = styled.div`
   background-color: #455571;
   transition: margin-left 200ms ease-in-out;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1439px) {
     margin-left: ${props => props.sidebar ? "0px" : "-240px"};
     z-index: 200;
   }
 `
 
 const Contents = styled.div`
-  border: 1px solid red;
-  margin-left: 240px;
+  margin-left: ${props => props.sidebarBoolean ? "240px" : "0px"};
   transition: margin-left 200ms ease-in-out;
-  padding: 0 40px;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1439px) {
     margin-left: 0px;
   }
 `
@@ -51,12 +52,12 @@ const BlackBg = styled.div`
   background-color: black;
   opacity: 0.4;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1170px) {
     display: none;
   }
 `
 
-export default ({ children }) => {
+export default ({ children, sidebarBoolean=true }) => {
   const sidebar = useInput(false)
 
   const SidebarControl = () => {
@@ -72,12 +73,14 @@ export default ({ children }) => {
 
   return (
     <Container>
-      <Header SidebarControl={SidebarControl}/>
-      <Sidebar sidebar={sidebar.value}>
-        
-      </Sidebar>
+      <Header SidebarControl={SidebarControl} sidebarBoolean={sidebarBoolean}/>
+      {sidebarBoolean &&
+        <Sidebar sidebar={sidebar.value}>
+          
+        </Sidebar> 
+      }
       <Body>
-        <Contents>
+        <Contents sidebarBoolean={sidebarBoolean}>
           {children}
         </Contents>
       </Body>
