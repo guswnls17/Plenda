@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContentsTemplate from '../ContentsTemplate/ContentsTemplate';
+import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
 import ContentsHeader from '../../../Common/Header/ContentsHeader';
-import BrandItem from './BrandItem';
+import BrandItem from '../../../Common/Item/BrandItem/BrandItem';
+
 
 const ContentsBody = styled.div`
   padding: 0 40px;
@@ -38,7 +39,7 @@ export default () => {
     },
   ]
   return (
-    <ContentsTemplate sidebarBoolean={false}>
+    <ContentsTemplate sidebarBoolean={false} bgColor={"#ffffff"}>
       <ContentsHeader text={"브랜드"} />
       <ContentsBody>
         <BrandItemBox>
@@ -46,6 +47,7 @@ export default () => {
             data.map((item, index)=>{
               return(
                 <BrandItem
+                  key={index}
                   img={item.img}
                   title={"할리스커피"}
                   text={"매니저Manager"}

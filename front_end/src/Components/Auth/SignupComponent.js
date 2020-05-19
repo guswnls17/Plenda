@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import useInput from '../../Common/Hooks/useInput';
 import chackdInput from '../../Common/Hooks/chackdInput';
-import AuthTemplate from './AuthTemplate/AuthTemplate';
+import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 import BoxInput from '../../Common/Input/BoxInput';
 import ChackBox from '../../Common/ChackBox/ChackBox';
 import BasicButton from '../../Common/Button/BasicButton';

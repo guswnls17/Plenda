@@ -13,7 +13,7 @@ const Body = styled.div`
   padding-top: 60px;
   padding-bottom: 140px;
   min-height: 100vh;
-  background-color: #f8f8f8;
+  background-color: ${props => props.bgColor};
 `
 
 const Sidebar = styled.div`
@@ -57,7 +57,7 @@ const BlackBg = styled.div`
   }
 `
 
-export default ({ children, sidebarBoolean=true }) => {
+export default ({ children, sidebarBoolean=true, bgColor }) => {
   const sidebar = useInput(false)
 
   const SidebarControl = () => {
@@ -79,7 +79,7 @@ export default ({ children, sidebarBoolean=true }) => {
           
         </Sidebar> 
       }
-      <Body>
+      <Body bgColor={bgColor}>
         <Contents sidebarBoolean={sidebarBoolean}>
           {children}
         </Contents>

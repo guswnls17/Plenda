@@ -26,6 +26,10 @@ const Header = styled.div`
     margin-right: auto;
   }
 
+  & > a {
+    margin-right: auto;
+  }
+
   & > div {
     display: flex;
     flex-direction: row;
@@ -92,9 +96,13 @@ export default ({ SidebarControl, sidebarBoolean }) => {
             sidebarBoolean ?
             <img alt="" src={SideButton} style={{width: 24}} onClick={SidebarControl} />
             :
-            <img alt="" src={HeaderLogo} style={{width: 110}} />
+            <Link to="/">
+              <img alt="" src={HeaderLogo} style={{width: 110}} />
+            </Link>
           ) : (
-            <img alt="" src={HeaderLogo} style={{width: 110}} />
+            <Link to="/">
+              <img alt="" src={HeaderLogo} style={{width: 110}} />
+            </Link>
           )
         }
       </Media>
@@ -103,7 +111,7 @@ export default ({ SidebarControl, sidebarBoolean }) => {
         <p>username</p>
         <HeaderToggle headerToggle={headerToggle.value}>
           <div><Link to="/profile">프로필</Link></div>
-          <div><Link>내 브랜드</Link></div>
+          <div><Link to="/">내 브랜드</Link></div>
           <div><Link>설정</Link></div>
           <div><Link>로그아웃</Link></div>
         </HeaderToggle>

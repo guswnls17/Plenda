@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import useInput from '../../Common/Hooks/useInput';
-import AuthTemplate from './AuthTemplate/AuthTemplate';
 import BoxInput from '../../Common/Input/BoxInput';
 import BasicButton from '../../Common/Button/BasicButton';
+import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 
 
 const SignupBox = styled.div`

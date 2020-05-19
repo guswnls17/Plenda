@@ -10,7 +10,7 @@ import LoginPlendaLogo from '../../Images/login_plendaLogo.png'
 import KakaoLogin from '../../Images/kakaoLogin.png'
 import FacebookLogin from '../../Images/facebookLogin.png'
 import NaverLogin from '../../Images/naverLogin.png'
-import AuthTemplate from './AuthTemplate/AuthTemplate';
+import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 
 const AuthFrom = styled.div`
   margin-top: 20px;

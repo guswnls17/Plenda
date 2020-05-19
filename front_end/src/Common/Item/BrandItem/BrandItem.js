@@ -9,6 +9,10 @@ const BrandItem = styled.div`
   width: 280px;
   cursor: pointer;
 
+  &:hover {
+    opacity: 0.8;
+  }
+
   & > a {
     display: flex;
     flex-direction: column;

@@ -7,8 +7,8 @@ const ContentsHeader = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 30px;
+  padding: 40px 20px 30px 20px;
+  margin: 0 20px;
   border-bottom: 1px solid #e8e8e8;
 
   & > p {
@@ -19,7 +19,8 @@ const ContentsHeader = styled.div`
 
   & > a {
     & > div {
-      padding: 10px 30px;
+      min-width: 100px;
+      padding: 10px 20px;
       border: 1px solid #253245;
       border-radius: 4px;
       cursor: pointer;

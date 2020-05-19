@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContentsTemplate from '../ContentsTemplate/ContentsTemplate';
-import DashbordItem from '../../../Common/Item/DashbordItem';
+import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
+import DashbordHeader from '../../../Common/Header/DashbordHeader';
+import DashbordItem from '../../../Common/Item/DashbordItem/DashbordItem';
 
 import NoticeIcon from '../../../Images/noticeIcon.png'
-import DashbordHeader from '../../../Common/Header/DashbordHeader';
 
 const ContentsBody = styled.div`
   padding: 0 25px;
@@ -25,12 +25,6 @@ const DashbordItemBox = styled.div`
       margin-top: 50px;
     }
   }
-`
-
-const Item = styled.div`
-  height: 400px;
-  margin: 0 15px;
-  margin-top: 40px;
 `
 
 export default () => {
@@ -87,58 +81,68 @@ export default () => {
   ]
 
   return (
-    <ContentsTemplate>
+    <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsBody>
         <DashbordItemBox style={{marginTop: 60}}>
-          <DashbordItem 
+          <DashbordItem
             style={{flex: 1}}
             minHeight={362}
-            bordTitle={"플렌다 공지사항"}
-            iconBoxColor={"#F2C94C"}
-            iconBoxImg={NoticeIcon}
-            data={plendaNoticeData.slice(0, 5)}
-            category={[
-              {
-                type: "title",
-                data: "title",
-                width: "50%"
-              },
-              {
-                type: "text",
-                data: "writer",
-                width: "25%"
-              },
-              {
-                type: "date",
-                data: "date",
-                width: "25%"
-              }
-            ]}
+            bordHeader={{
+              title: "플렌다 공지사항",
+              iconBoxColor: "#F2C94C",
+              iconBoxImg: NoticeIcon
+            }}
+            list={{
+              title: "",
+              data: plendaNoticeData.slice(0, 5),
+              category: [
+                {
+                  type: "title",
+                  data: "title",
+                  width: "50%"
+                },
+                {
+                  type: "text",
+                  data: "writer",
+                  width: "25%"
+                },
+                {
+                  type: "date",
+                  data: "date",
+                  width: "25%"
+                }
+              ]
+            }}
           />
           <DashbordItem 
             style={{flex: 1}}
             minHeight={362}
-            bordTitle={"브랜드 공지사항"}
-            iconBoxColor={"#6FCF97"}
-            iconBoxImg={NoticeIcon}
-            data={BrandNoticeData.slice(0, 5)}
-            category={[
-              {
-                type: "title",
-                data: "title",
-                width: "50%"
-              },
-              {
-                type: "text",
-                data: "writer",
-                width: "25%"
-              },
-              {
-                type: "date",
-                data: "date",
-                width: "25%"
-              }
-            ]}
+            bordHeader={{
+              title: "브랜드 공지사항",
+              iconBoxColor: "#6FCF97",
+              iconBoxImg: NoticeIcon
+            }}
+            list={{
+              title: "",
+              data: BrandNoticeData.slice(0, 5),
+              category: [
+                {
+                  type: "title",
+                  data: "title",
+                  width: "50%"
+                },
+                {
+                  type: "text",
+                  data: "writer",
+                  width: "25%"
+                },
+                {
+                  type: "date",
+                  data: "date",
+                  width: "25%"
+                }
+              ]
+            }}
           />
         </DashbordItemBox>
 
@@ -152,31 +156,41 @@ export default () => {
           <DashbordItem 
             style={{flex: 1}}
             minHeight={415}
-            bordTitle={"매장정보 변경사항"}
-            iconBoxColor={"#56CCF2"}
-            iconBoxImg={NoticeIcon}
-            data={plendaNoticeData.slice(0, 6)}
-            category={[
-              {
-                type: "title",
-                data: "title",
-                width: "50%"
-              },
-              {
-                type: "text",
-                data: "writer",
-                width: "25%"
-              },
-              {
-                type: "date",
-                data: "date",
-                width: "25%"
-              }
-            ]}
+            bordHeader={{
+              title: "매장정보 변경사항",
+              iconBoxColor: "#56CCF2",
+              iconBoxImg: NoticeIcon
+            }}
+            list={{
+              title: "",
+              data: plendaNoticeData.slice(0, 6),
+              category: [
+                {
+                  type: "title",
+                  data: "title",
+                  width: "50%"
+                },
+                {
+                  type: "text",
+                  data: "writer",
+                  width: "25%"
+                },
+                {
+                  type: "date",
+                  data: "date",
+                  width: "25%"
+                }
+              ]
+            }}
           />
           <DashbordItem 
             style={{flex: 1}}
             minHeight={415}
+            bordHeader={{
+              title: "적용중인 메뉴판",
+              iconBoxColor: "#F2C94C",
+              iconBoxImg: NoticeIcon
+            }}
             ContentsData={[
               {
                 type: "text",
@@ -184,32 +198,36 @@ export default () => {
                 data: "2019 가을 메뉴"
               }
             ]}
-            listTitle={"메뉴판 변경사항"}
-            bordTitle={"적용중인 메뉴판"}
-            iconBoxColor={"#F2C94C"}
-            iconBoxImg={NoticeIcon}
-            data={plendaNoticeData.slice(0, 3)}
-            category={[
-              {
-                type: "title",
-                data: "title",
-                width: "50%"
-              },
-              {
-                type: "text",
-                data: "writer",
-                width: "25%"
-              },
-              {
-                type: "date",
-                data: "date",
-                width: "25%"
-              }
-            ]}
+            list={{
+              title: "메뉴판 변경사항",
+              data: plendaNoticeData.slice(0, 3),
+              category: [
+                {
+                  type: "title",
+                  data: "title",
+                  width: "50%"
+                },
+                {
+                  type: "text",
+                  data: "writer",
+                  width: "25%"
+                },
+                {
+                  type: "date",
+                  data: "date",
+                  width: "25%"
+                }
+              ]
+            }}
           />
           <DashbordItem 
             style={{flex: 1}}
             minHeight={415}
+            bordHeader={{
+              title: "스태프 관리",
+              iconBoxColor: "#6FCF97",
+              iconBoxImg: NoticeIcon
+            }}
             ContentsData={[
               {
                 type: "staff",
@@ -217,28 +235,27 @@ export default () => {
                 data: {master: 3, manager: 2, staff: 5}
               }
             ]}
-            bordTitle={"스태프 관리"}
-            listTitle={"스태프 변경사항"}
-            iconBoxColor={"#6FCF97"}
-            iconBoxImg={NoticeIcon}
-            data={BrandNoticeData.slice(0, 3)}
-            category={[
-              {
-                type: "title",
-                data: "title",
-                width: "50%"
-              },
-              {
-                type: "text",
-                data: "writer",
-                width: "25%"
-              },
-              {
-                type: "date",
-                data: "date",
-                width: "25%"
-              }
-            ]}
+            list={{
+              title: "스태프 변경사항",
+              data: BrandNoticeData.slice(0, 3),
+              category: [
+                {
+                  type: "title",
+                  data: "title",
+                  width: "50%"
+                },
+                {
+                  type: "text",
+                  data: "writer",
+                  width: "25%"
+                },
+                {
+                  type: "date",
+                  data: "date",
+                  width: "25%"
+                }
+              ]
+            }}
           />
         </DashbordItemBox>
 
@@ -248,9 +265,38 @@ export default () => {
           storeToggle={true}
           dateToggle={true}
         />
-        <DashbordItemBox>
-          <Item style={{flexGrow: 3, backgroundColor: 'black'}}></Item>
-          <Item style={{flexGrow: 2, backgroundColor: 'black'}}></Item>
+        <DashbordItemBox style={{marginTop: 60}}>
+          <DashbordItem 
+            style={{flex: 3}}
+            minHeight={415}
+            bordHeader={{
+              title: "매출관리 그래프",
+              iconBoxColor: "#6FCF97",
+              iconBoxImg: NoticeIcon
+            }}
+            chartBoolean={true}
+          />
+          <DashbordItem 
+            style={{flex: 3}}
+            minHeight={415}
+            bordHeader={{
+              title: "매출현황요약",
+              iconBoxColor: "#F2C94C",
+              iconBoxImg: NoticeIcon
+            }}
+            ContentsData={[
+              {
+                type: "text",
+                title: "주간 총 주문건수",
+                data: "100,000 건"
+              },
+              {
+                type: "text",
+                title: "주간 총 매출액",
+                data: "100,00,000 원"
+              }
+            ]}
+          />
         </DashbordItemBox>
       </ContentsBody>
     </ContentsTemplate> 
