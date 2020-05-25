@@ -7,7 +7,7 @@ import DashbordItem from '../../../Common/Item/DashbordItem/DashbordItem';
 import NoticeIcon from '../../../Images/noticeIcon.png'
 
 const ContentsBody = styled.div`
-  padding: 0 25px;
+  padding: 0 40px;
   width: 100%;
 
   @media (max-width: 600px) {
@@ -277,7 +277,7 @@ export default () => {
             chartBoolean={true}
           />
           <DashbordItem 
-            style={{flex: 3}}
+            style={{flex: 2}}
             minHeight={415}
             bordHeader={{
               title: "매출현황요약",

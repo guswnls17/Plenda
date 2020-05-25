@@ -1,55 +1,116 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import BasicButton from '../Button/BasicButton';
+import HeaderNavigation from '../NavMenu/HeaderNavigation';
 
 const ContentsHeader = styled.div`
+  
+`
+
+const HeaderTop = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px 30px 20px;
-  margin: 0 20px;
-  border-bottom: 1px solid #e8e8e8;
+  margin: 0 40px;
+  height: 80px;
+  padding-top: 20px;
 
-  & > p {
-    margin-right: auto;
-    font-weight: bold;
-    font-size: 24px;
-  }
+  & > div:nth-child(1) {
+      margin-right: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
 
-  & > a {
-    & > div {
-      min-width: 100px;
-      padding: 10px 20px;
-      border: 1px solid #253245;
-      border-radius: 4px;
-      cursor: pointer;
+    & > p:nth-child(2), p:nth-child(3) {
+      margin-left: 10px;
+      margin-top: auto;
+      margin-bottom: 1px;
+      font-weight: 300;
+      font-size: 14px;
+    }
 
-      &:hover {
-        background-color: #253245;
-
-        & p {
-          color: white;
-        }
-      }
-
-      & > p {
-        color: #253245;
-        font-size: 13px;
-      }
+    & > p:nth-child(1) {
+      font-weight: bold;
+      font-size: 24px;
     }
   }
 `
 
-export default ({ text }) => {
+const UploadButtonBox = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  & > div + div {
+    margin-left: 20px;
+  }
+`
+
+const HeaderBottom = styled.div`
+  margin: 0 40px;
+  padding-top: 20px;
+  border-bottom: 1px solid #cccccc;
+`
+
+// LinkButton={{
+//   text: "",
+//   link: ""
+// }}
+
+// UploadButton= {{
+//   closetext: "",
+//   uploadtext: "",
+//   closeClick: "",
+//   uploadClick: ""
+// }} 
+
+export default memo(({ 
+  title,
+  subTitle,
+  UploadButton,
+  LinkButton,
+  navBarData
+}) => {
+
   return (
     <ContentsHeader>
-      <p>{text}</p>
-      <Link to="addbrand">
+      <HeaderTop>
         <div>
-          <p>추가하기 +</p>
+          <p>{title}</p>
+          {subTitle &&
+            <>
+              <p>›    </p>
+              <p>{subTitle}</p>
+            </>
+          }
         </div>
-      </Link>
+        { LinkButton &&
+          <BasicButton
+            text={LinkButton.text}
+            link={LinkButton.link}
+          />
+        }
+        { UploadButton && 
+          <UploadButtonBox>
+            <BasicButton
+              text={UploadButton.closetext}
+              link={UploadButton.closeClick}
+            />
+            <BasicButton
+              text={UploadButton.uploadtext}
+              onClick={UploadButton.uploadClick}
+            />
+          </UploadButtonBox>
+        }
+      </HeaderTop>
+      <HeaderBottom>
+        {navBarData &&
+          <HeaderNavigation
+            navBarData={navBarData}
+          />
+        }
+      </HeaderBottom>
     </ContentsHeader> 
   )
-}
+})

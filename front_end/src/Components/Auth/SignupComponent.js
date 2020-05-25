@@ -6,7 +6,7 @@ import chackdInput from '../../Common/Hooks/chackdInput';
 import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 import BoxInput from '../../Common/Input/BoxInput';
 import ChackBox from '../../Common/ChackBox/ChackBox';
-import BasicButton from '../../Common/Button/BasicButton';
+import AuthButton from '../../Common/Button/AuthButton';
 
 
 const SignupBox = styled.div`
@@ -128,7 +128,7 @@ export default () => {
               view={true}
             />
           </ChackBoxContainer>
-          <BasicButton
+          <AuthButton
             style={{ marginTop: "50px" }}
             text={"SIGN UP"}
           />

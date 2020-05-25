@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Footer from '../../../Common/Footer/Footer';
 import Header from '../../../Common/Header/Header';
 import useInput from '../../../Common/Hooks/chackdInput';
+import SideBar from '../../../Common/SideBar/SideBar';
 
 const Container = styled.div`
   position: relative;
@@ -14,22 +15,6 @@ const Body = styled.div`
   padding-bottom: 140px;
   min-height: 100vh;
   background-color: ${props => props.bgColor};
-`
-
-const Sidebar = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 240px;
-  height: 100vh;
-  background-color: #455571;
-  transition: margin-left 200ms ease-in-out;
-
-  @media (max-width: 1439px) {
-    margin-left: ${props => props.sidebar ? "0px" : "-240px"};
-    z-index: 200;
-  }
 `
 
 const Contents = styled.div`
@@ -52,7 +37,7 @@ const BlackBg = styled.div`
   background-color: black;
   opacity: 0.4;
 
-  @media (min-width: 1170px) {
+  @media (min-width: 1439px) {
     display: none;
   }
 `
@@ -75,9 +60,7 @@ export default ({ children, sidebarBoolean=true, bgColor }) => {
     <Container>
       <Header SidebarControl={SidebarControl} sidebarBoolean={sidebarBoolean}/>
       {sidebarBoolean &&
-        <Sidebar sidebar={sidebar.value}>
-          
-        </Sidebar> 
+        <SideBar sidebar={sidebar.value}/>
       }
       <Body bgColor={bgColor}>
         <Contents sidebarBoolean={sidebarBoolean}>

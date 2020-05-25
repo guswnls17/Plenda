@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
 import ContentsHeader from '../../../Common/Header/ContentsHeader';
+import LineInput from '../../../Common/Input/LineInput';
+import useInput from '../../../Common/Hooks/useInput';
+import ImgInput from '../../../Common/Input/ImgInput';
 
 const ContentsBody = styled.div`
-  padding: 30px 40px 0 40px;
+  padding: 30px 60px 0 60px;
 
   @media (max-width: 1000px) {
     padding: 30px 20px 0 20px;
@@ -14,50 +17,70 @@ const ContentsBody = styled.div`
 const ContentsBox = styled.div`
   background-color: white;
   width: 100%;
-  height: 200px;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-`
+  padding: 40px 40px;
 
-const ProfileImgInput = styled.div`
-  & > div {
-    & > input {
-      display: none;
-    }
-
-    & > label {
-      cursor: pointer;
-      
-      & > div {
-        background-color: #FFFFFF;
-        border: 1.5px dashed #C8C8C8;
-        border-radius: 5px;
-        width: 100px;
-        height: 100px;
-      }
-    }
+  & > div + div {
+    margin-top: 50px;
   }
-
-
 `
 
 export default () => {
+  const brandName = useInput("");
+  const businessNum = useInput("");
+  const phoneNum = useInput("");
+  const adress = useInput("");
+  const img = useInput("");
+  const previewImg = useInput("");
+  
   return (
     <ContentsTemplate sidebarBoolean={false} bgColor={"#f8f8f8"}>
-      <ContentsHeader text={"브랜드"} />
+      <ContentsHeader
+        title={"브랜드"}
+        subTitle={"브랜드 추가하기"} 
+        // LinkButton={{
+        //   text: "추가하기 +",
+        //   link: "/addbrand"
+        // }}
+        UploadButton= {{
+          closetext: "취소",
+          uploadtext: "등록",
+          closeClick: "/",
+          uploadClick: () => {}
+        }} 
+      />
       <ContentsBody>
         <ContentsBox>
-          <ProfileImgInput>
-            <p>브랜드 이미지</p>
-            <div>
-              <input id="imgInput" type="file"></input>
-              <label for="imgInput">
-                <div>
-
-                </div>
-              </label>
-            </div>
-          </ProfileImgInput>
+          <ImgInput 
+            title={"브랜드 로고"}
+            img={img}
+            previewImg={previewImg}
+          />
+          <LineInput
+            {...brandName}
+            title={"브랜드 이름"}
+            type={"text"}
+            placeholder={"브랜드 이름을 입력해주세요."}
+          />
+          <LineInput
+            {...businessNum}
+            title={"사업자번호"}
+            type={"number"}
+            placeholder={"사업자번호를 입력해주세요."}
+          />
+          <LineInput
+            {...phoneNum}
+            title={"전화번호"}
+            type={"number"}
+            placeholder={"브랜드 전화번호를 입력해주세요."}
+          />
+          <LineInput
+            {...adress}
+            title={"주소"}
+            type={"text"}
+            placeholder={"브랜드 주소를 입력해주세요."}
+          />
         </ContentsBox>
       </ContentsBody>
     </ContentsTemplate>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import useInput from '../../Common/Hooks/useInput';
 import BoxInput from '../../Common/Input/BoxInput';
-import BasicButton from '../../Common/Button/BasicButton';
+import AuthButton from '../../Common/Button/AuthButton';
 import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 
 
@@ -73,7 +73,7 @@ export default () => {
             type={"text"}
             style={{marginTop: 14}}
           />
-          <BasicButton
+          <AuthButton
             style={{ marginTop: "50px" }}
             text={"FIND PASSWORD"}
           />

@@ -40,7 +40,19 @@ export default () => {
   ]
   return (
     <ContentsTemplate sidebarBoolean={false} bgColor={"#ffffff"}>
-      <ContentsHeader text={"브랜드"} />
+      <ContentsHeader 
+        title={"브랜드"} 
+        LinkButton={{
+          text: "추가하기 +",
+          link: "/addbrand"
+        }}
+        // UploadButton= {{
+        //   closetext: "",
+        //   uploadtext: "",
+        //   closeClick: "",
+        //   uploadClick: ""
+        // }} 
+      />
       <ContentsBody>
         <BrandItemBox>
           {

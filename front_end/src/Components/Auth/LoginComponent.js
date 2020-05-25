@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import BoxInput from '../../Common/Input/BoxInput';
 import useInput from '../../Common/Hooks/useInput';
 import ChackBox from '../../Common/ChackBox/ChackBox';
-import BasicButton from '../../Common/Button/BasicButton';
+import AuthButton from '../../Common/Button/AuthButton';
 
 import LoginPlendaLogo from '../../Images/login_plendaLogo.png'
 import KakaoLogin from '../../Images/kakaoLogin.png'
@@ -135,7 +135,7 @@ export default () => {
             <p>비밀번호를 잊어버리셨나요?</p>
           </Link>
         </ChackContainer>
-        <BasicButton
+        <AuthButton
           text={"LOGIN"}
         />
         <AuthLinkButton>

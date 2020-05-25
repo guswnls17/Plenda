@@ -1,32 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const BasicButton = styled.button`
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 48px;
-  border-radius: 48px;
-  background-color: #1DE6BA;
-  cursor: pointer;
+const BasicButton = styled.div`
+  & > a {
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 100px;
+      padding: 10px 20px;
+      border: 1px solid #253245;
+      border-radius: 4px;
+      cursor: pointer;
 
-  &:hover {
-    opacity: 0.8;
-  }
+      &:hover {
+        background-color: #253245;
 
-  & > h1 {
-    font-size: 16px;
-    font-weight: bold;
+        & p {
+          color: white;
+        }
+      }
+
+      & > p {
+        color: #253245;
+        font-size: 13px;
+      }
+    }
   }
 `
 
-export default ({ text, style }) => {
-  
+
+export default ({ text, link, onClick }) => {
   return (
-    <BasicButton type="submit" style={style}>
-      <h1>{text}</h1>
+    <BasicButton onClick={onClick}>
+      <Link to={link}>
+        <div>
+          <p>{text}</p>
+        </div>
+      </Link>
     </BasicButton>
   )
 }

@@ -6,6 +6,9 @@ import FindPasswordPage from './Pages/Auth/FindPasswordPage';
 import BrandPage from './Pages/Contents/BrandPage/BrandPage';
 import DashbordPage from './Pages/Contents/DashbordPage/DashbordPage';
 import AddBrandPage from './Pages/Contents/BrandPage/AddBrandPage';
+import InfoBrandPage from './Pages/Contents/BrandPage/InfoBrandPage';
+import ModifyBrandPage from './Pages/Contents/BrandPage/ModifyBrandPage';
+import NoticePage from './Pages/Notice/NoticePage';
 
 
 const Routes = () => {
@@ -23,6 +26,9 @@ const Routes = () => {
           <Route exact path="/" component={BrandPage} />
           <Route exact path="/dashbord" component={DashbordPage} />
           <Route exact path="/addbrand" component={AddBrandPage} />
+          <Route exact path="/infobrand" component={InfoBrandPage} />
+          <Route exact path="/modifybrand" component={ModifyBrandPage} />
+          <Route exact path="/notice" component={NoticePage} />
         </>
       }
     </Switch>
