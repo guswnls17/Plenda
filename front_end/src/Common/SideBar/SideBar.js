@@ -135,7 +135,7 @@ export default ({ sidebar }) => {
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={"/notice"} activeClassName={"active"}>
+          <NavLink strict to={"/notice"} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>공지사항</p>
           </NavLink>
@@ -150,7 +150,7 @@ export default ({ sidebar }) => {
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={"/brandinfo"} activeClassName={"active"}>
+          <NavLink to={"/store"} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>매장 관리</p>
           </NavLink>

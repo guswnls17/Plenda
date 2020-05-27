@@ -40,10 +40,34 @@ const plendaNoticeData = [
   }
 ]
 
+const storeData = [
+  {
+    "category": "서울대입구점"
+  },
+  {
+    "category": "서울대입구점"
+  },
+  {
+    "category": "서울대입구점"
+  },
+  {
+    "category": "서울대입구점"
+  },
+  {
+    "category": "서울대입구점"
+  },
+  {
+    "category": "서울대입구점"
+  },
+  {
+    "category": "서울대입구점"
+  },
+]
+
 export default () => {
   return (
     <NoticeBord
-      link={"/notice/postbrand"}
+      link={""}
       data={plendaNoticeData}
       category={[
         {
@@ -55,7 +79,8 @@ export default () => {
         },
         {
           type: "text",
-          title: "작성자",
+          toggleData: storeData,
+          title: "지점",
           data: "writer",
           width: "15%",
           minwidth: 120

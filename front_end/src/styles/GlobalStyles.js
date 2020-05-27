@@ -26,6 +26,13 @@ export default createGlobalStyle`
         outline:none;
     }
 
+    input {
+        &::placeholder {
+            color: #aaa;
+            font-weight: 100;
+        }
+    }
+
     h1 {
         font-family: "Sen", "Noto Sans KR", 'Noto Sans', sans-serif;
         word-break: keep-all;

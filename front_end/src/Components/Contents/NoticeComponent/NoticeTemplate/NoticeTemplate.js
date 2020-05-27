@@ -1,11 +1,8 @@
-import React from 'react';
+import React, { useEffect, cloneElement } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
-import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
-import ContentsHeader from '../../../Common/Header/ContentsHeader';
-import PlendaNoticeCommon from './NoticeCommon/PlendaNoticeCommon';
-import BrandNoticeCommon from './NoticeCommon/BrandNoticeCommon';
-import { useNoticeNavNum } from '../../../Common/Context/MenuContext';
+import ContentsTemplate from '../../../Template/ContentsTemplate/ContentsTemplate';
+import ContentsHeader from '../../../../Common/Header/ContentsHeader';
+import useInput from '../../../../Common/Hooks/useInput';
 
 const ContentsBody = styled.div`
   padding: 30px 60px 0 60px;
@@ -15,14 +12,14 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history }) => {
-  const navBarNum = useNoticeNavNum();
+export default ({ children }) => {
+  const navBarNum = useInput(0)
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsHeader
         title={"공지사항"}
-        // subTitle={"브랜드 추가하기"} 
+        // subTitle={""} 
         LinkButton={navBarNum.value === 1 ? {
           text: "글쓰기",
           link: "/notice/add"
@@ -31,12 +28,10 @@ export default withRouter(({ history }) => {
           num: navBarNum,
           data: [
             {
-              text: "플렌다",
-              link: "/notice"
+              text: "플렌다"
             },
             {
-              text: "브랜드",
-              link: "/notice"
+              text: "브랜드"
             }
           ]
         }}
@@ -48,9 +43,14 @@ export default withRouter(({ history }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <PlendaNoticeCommon/>}
-        {navBarNum.value === 1 && <BrandNoticeCommon/>}
+      {React.Children.map(children(data, index)=> {
+        return (
+          <div key={index}>
+            {cloneElement(data, {navBarNum: navBarNum.value})}
+          </div>
+        )
+      })}
       </ContentsBody>
     </ContentsTemplate>
   )
-})
+}

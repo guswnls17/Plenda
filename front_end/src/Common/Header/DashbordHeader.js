@@ -83,13 +83,13 @@ export default ({ text, storeToggle=false, dateToggle=false }) => {
       <div>
         { storeToggle && 
           <BasicToggle
-            fullText={true}
+            fullText={"전체"}
             data={storeData}
           />
         }
         { dateToggle && 
           <BasicToggle
-            fullText={false}
+            fullText={""}
             data={revenueData}
           />
         }

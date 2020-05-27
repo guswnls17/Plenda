@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
+import ListToggle from '../Toggle/ListToggle';
 
 const List = styled.div`
   padding: 15px 0;
@@ -21,14 +23,14 @@ const ItemList = styled.div`
   align-items: center;
   width: 100%;
 
-  & > div {
+  & > div, a{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 20px 20px;
   }
 
-  & > .title {
+  & .title {
     & > p {
       font-weight: 500;
       font-size: 14px;
@@ -36,7 +38,7 @@ const ItemList = styled.div`
       color: #000000;
     }
   }
-  & > .text {
+  & .text {
     justify-content: center;
     & > p {
       font-family: Noto Sans KR;
@@ -45,7 +47,7 @@ const ItemList = styled.div`
       color: #000000;
     }
   }
-  & > .date {
+  & .date {
     justify-content: center;
     & > p {
       font-family: Noto Sans KR;
@@ -97,9 +99,17 @@ export default ({ list }) => {
         {
           list.category.map((item, index) => {
             return (
-              <div key={index} style={{width: item.width, justifyContent: item.type === "title" && "flex-start", minWidth: item.minwidth }}>
-                <p>{item.title}</p>
-              </div>
+              !item.toggleData ? 
+                <div key={index} style={{width: item.width, justifyContent: item.type === "title" && "flex-start", minWidth: item.minwidth }}>
+                  <p>{item.title}</p>
+                </div>
+                :
+                <div key={index} style={{width: item.width, justifyContent: item.type === "title" && "flex-start", minWidth: item.minwidth }}>
+                  <ListToggle
+                    fullText={item.title}
+                    data={item.toggleData}
+                  />
+                </div>
             )
           })
         }
@@ -109,10 +119,16 @@ export default ({ list }) => {
           <ItemList key={index} style={{minWidth: minWidthHandler()}}>
             { list.category.map((category, index) => {
               return (
-                category.type === "title" ? 
-                  <div className="title" key={index} style={{width: category.width, minWidth: category.minwidth}}>
-                    <p>{data[category.data] != null ? data[category.data] : "미등록"}</p>
-                  </div>
+                category.type === "title" ?
+                  (list.link ?
+                    <Link to={`${list.link}/${data["id"]}` } className="title" key={index} style={{width: category.width, minWidth: category.minwidth}}>
+                      <p>{data[category.data] != null ? data[category.data] : "미등록"}</p>
+                    </Link>
+                    :
+                    <div className="title" key={index} style={{width: category.width, minWidth: category.minwidth}}>
+                      <p>{data[category.data] != null ? data[category.data] : "미등록"}</p>
+                    </div>
+                  )
                 :
                 category.type === "text" ? 
                   <div className="text" key={index} style={{width: category.width, minWidth: category.minwidth }}>

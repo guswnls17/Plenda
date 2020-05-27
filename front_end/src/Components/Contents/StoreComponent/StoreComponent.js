@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
 import ContentsHeader from '../../../Common/Header/ContentsHeader';
-import PlendaNoticeCommon from './NoticeCommon/PlendaNoticeCommon';
-import BrandNoticeCommon from './NoticeCommon/BrandNoticeCommon';
-import { useNoticeNavNum } from '../../../Common/Context/MenuContext';
+import { useStoreNavNum } from '../../../Common/Context/MenuContext';
+import ChageStoreCommon from './StoreCommon/ChageStoreCommon';
+import ManagementStoreCommon from './StoreCommon/ManagementStoreCommon';
 
 const ContentsBody = styled.div`
   padding: 30px 60px 0 60px;
@@ -16,27 +16,27 @@ const ContentsBody = styled.div`
 `
 
 export default withRouter(({ history }) => {
-  const navBarNum = useNoticeNavNum();
+  const navBarNum = useStoreNavNum();
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsHeader
-        title={"공지사항"}
+        title={"매장관리"}
         // subTitle={"브랜드 추가하기"} 
         LinkButton={navBarNum.value === 1 ? {
-          text: "글쓰기",
-          link: "/notice/add"
+          text: "매장 등록하기",
+          link: "/store/add"
         } : ""}
         navBarData={{
           num: navBarNum,
           data: [
             {
-              text: "플렌다",
-              link: "/notice"
+              text: "변경사항",
+              link: "/store"
             },
             {
-              text: "브랜드",
-              link: "/notice"
+              text: "매장관리",
+              link: "/store"
             }
           ]
         }}
@@ -48,8 +48,8 @@ export default withRouter(({ history }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <PlendaNoticeCommon/>}
-        {navBarNum.value === 1 && <BrandNoticeCommon/>}
+        {navBarNum.value === 0 && <ChageStoreCommon/>}
+        {navBarNum.value === 1 && <ManagementStoreCommon/>}
       </ContentsBody>
     </ContentsTemplate>
   )

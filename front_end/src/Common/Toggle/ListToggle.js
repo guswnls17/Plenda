@@ -4,31 +4,34 @@ import useInput from '../Hooks/chackdInput';
 
 const ToggleContainer = styled.div`
   position: relative;
-  width: 140px;
   padding: 15px 0;
-  border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 
   & > div:nth-child(1) {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     
     & > p {
       overflow: hidden;
       text-overflow:ellipsis; 
       white-space:nowrap;
-      width: 120px;
       text-align: center;
       padding: 0 10px;
+      font-weight: 600;
       font-size: 14px;
+      color: #000000;
     }
 
     & > div {
-      margin-left: auto;
-      margin-right: 10px;
-      margin-top: -6px;
+      margin-left: 4px;
+      margin-top: 4px;
       width: 0px;
       height: 0px;
       border-top: 4px solid black;
@@ -42,7 +45,7 @@ const ToggleContainer = styled.div`
     z-index: 50;
     display: ${props => props.toggleBoolean ? "block" : "none"};
     position: absolute;
-    top: 52px;
+    top: 48px;
     width: 140px;
     max-height: 164px;
     overflow: hidden;

@@ -9,6 +9,10 @@ import AddBrandPage from './Pages/Contents/BrandPage/AddBrandPage';
 import InfoBrandPage from './Pages/Contents/BrandPage/InfoBrandPage';
 import ModifyBrandPage from './Pages/Contents/BrandPage/ModifyBrandPage';
 import NoticePage from './Pages/Notice/NoticePage';
+import PlendaPostPage from './Pages/Notice/PlendaPostPage';
+import BrandPostPage from './Pages/Notice/BrandPostPage';
+import AddNoticePage from './Pages/Notice/AddNoticePage';
+import StorePage from './Pages/Store/StorePage';
 
 
 const Routes = () => {
@@ -29,6 +33,10 @@ const Routes = () => {
           <Route exact path="/infobrand" component={InfoBrandPage} />
           <Route exact path="/modifybrand" component={ModifyBrandPage} />
           <Route exact path="/notice" component={NoticePage} />
+          <Route exact path="/notice/postplenda/:id" component={PlendaPostPage} />
+          <Route exact path="/notice/postbrand/:id" component={BrandPostPage} />
+          <Route exact path="/notice/add" component={AddNoticePage} />
+          <Route exact path="/store" component={StorePage} />
         </>
       }
     </Switch>

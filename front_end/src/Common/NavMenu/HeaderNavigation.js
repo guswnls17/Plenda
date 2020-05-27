@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const HeaderNavigation = styled.div`
   position: relative;
@@ -19,7 +20,7 @@ const HeaderNavigation = styled.div`
     transition: left 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
 
-  & > div {
+  & > a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,9 +43,15 @@ export default memo(({ navBarData }) => {
       {
         navBarData.data.map((item, index) => {
           return (
-            <div key={index} onClick={() => {navBarData.num.setValue(index)}}>
+            <Link 
+              to={item.link}
+              key={index} 
+              onClick={() => {
+                navBarData.num.setValue(index)
+              }}
+            >
               <p style={{fontWeight: navBarData.num.value === index ? 500 : 100}}>{item.text}</p>
-            </div>
+            </Link>
           )
         })
       }
