@@ -24,7 +24,7 @@ export default withRouter(({ history }) => {
         title={"매장관리"}
         // subTitle={"브랜드 추가하기"} 
         LinkButton={navBarNum.value === 1 ? {
-          text: "매장 등록하기",
+          text: "매장 추가하기",
           link: "/store/add"
         } : ""}
         navBarData={{

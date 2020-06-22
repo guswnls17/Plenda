@@ -98,8 +98,8 @@ export default ({ data=[], fullText }) => {
       <div>
         {
           fullText &&
-            <div onClick={() => {toggleText.setValue("전체")}}>
-              <p>전체</p>
+            <div onClick={() => {toggleText.setValue(fullText)}}>
+              <p>{fullText}</p>
             </div> 
         }
         {

@@ -11,7 +11,7 @@ const ContentsBox = styled.div`
   width: 100%;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px 20px 20px 20px;
+  padding: 0 20px 20px 20px;
 `
 
 const PagingBox = styled.div`
@@ -32,7 +32,31 @@ const PagingBox = styled.div`
   }
 `
 
-export default ({ data, category, link }) => {
+const Button = styled.div`
+  margin-left: auto;
+  margin-top: 15px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  width: 100px;
+  height: 32px;
+  background: #1DE6BA;
+  border-radius: 4px;
+
+  & > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    & > p {
+      font-size: 14px;
+      color: #253245;
+    }
+  }
+`
+
+export default ({ data, category, link, page=true, button }) => {
 
   return (
     <ContentsBox>
@@ -43,31 +67,41 @@ export default ({ data, category, link }) => {
           link: link
         }}
       />
-      <PagingBox>
-        <MemoryRouter initialEntries={['/inbox']} initialIndex={0}>
-          <Route>
-            {({ location }) => {
-              const query = new URLSearchParams(location.search);
-              const page = parseInt(query.get('page') || '1', 10);
-              // pageNum.setValue(page)
-              return (
-                <Pagination
-                  page={page}
-                  // count={plendaNoticeData.length / 10}
-                  count={10}
-                  renderItem={(item) => (
-                    <PaginationItem
-                      component={Link}
-                      to={`/inbox${item.page === 1 ? '' : `?page=${item.page}`}`}
-                      {...item}
-                    />
-                  )}
-                />
-              );
-            }}
-          </Route>
-        </MemoryRouter>
-      </PagingBox>
+      {page &&
+        <PagingBox>
+          <MemoryRouter initialEntries={['/inbox']} initialIndex={0}>
+            <Route>
+              {({ location }) => {
+                const query = new URLSearchParams(location.search);
+                const page = parseInt(query.get('page') || '1', 10);
+                // pageNum.setValue(page)
+                return (
+                  <Pagination
+                    page={page}
+                    // count={plendaNoticeData.length / 10}
+                    count={10}
+                    renderItem={(item) => (
+                      <PaginationItem
+                        component={Link}
+                        to={`/inbox${item.page === 1 ? '' : `?page=${item.page}`}`}
+                        {...item}
+                      />
+                    )}
+                  />
+                );
+              }}
+            </Route>
+          </MemoryRouter>
+        </PagingBox>
+      }
+      {
+        button && 
+          <Button onClick={button.onClick}>
+            <Link to={button.link}>
+              <p>{ button.text ? button.text : "수정" }</p>
+            </Link>
+          </Button>
+      }
     </ContentsBox>
   )
 }

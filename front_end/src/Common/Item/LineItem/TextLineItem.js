@@ -21,11 +21,38 @@ const LineInput = styled.div`
     width: 100%;
 
     & > p {
-      padding: 30px 10px 20px 10px;
+      padding: 15px 10px 15px 10px;
       border: none;
       width: 100%;
       font-size: 16px;
       line-height: 20px;
+      white-space:pre;
+    }
+  }
+`
+
+const Tag = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 20px 15px 10px;
+  width: 100%;
+
+  & > div {
+    margin-top: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: #e8e8e8;
+
+    & + div {
+      margin-left: 5px;
+    }
+  
+    & > p {
+      font-size: 12px;
+      color: black;
     }
   }
 `
@@ -39,6 +66,17 @@ export default ({ title, text, type }) => {
         {type === "text" && <p>{text}</p>}
         {type === "phone" && <p>{text.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3")}</p>}
         {type === "business" && <p>{text.replace(/(\d{3})(\d{2})(\d{5})/, '$1-$2-$3')}</p>}
+        {type === "tag" &&
+          <Tag>
+            {text.map((item, index) => {
+              return (
+                <div key={index}>
+                  <p>{"#"+item}</p>
+                </div>
+              )
+            })}
+          </Tag>
+        }
       </div>
     </LineInput>
   )

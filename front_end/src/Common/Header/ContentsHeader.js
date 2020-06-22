@@ -89,6 +89,7 @@ export default memo(({
           <BasicButton
             text={LinkButton.text}
             link={LinkButton.link}
+            onClick={LinkButton.onClick}
           />
         }
         { UploadButton && 

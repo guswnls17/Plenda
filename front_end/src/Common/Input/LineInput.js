@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useInput from '../Hooks/useInput';
+import ChackBox from '../ChackBox/ChackBox';
 
 const LineInput = styled.div`
   position: relative;
@@ -8,24 +9,65 @@ const LineInput = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  /* min-height: 60px; */
 
-  & > p {
+  & > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & > div {
+      margin-left: 20px;
+    }
+  }
+  & > div > p {
     margin-right: auto;
     font-weight: ${props => props.inputFocus ? `500` : `300`};
     font-size: 12px;
+    line-height: 14px;
     color: ${props => props.inputFocus ? `#253245` : `#000000`};
     transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
   }
 
-  & > div {
+  & > .text {
     width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+
+    & > img {
+      margin-top: auto;
+      margin-bottom: 16px;
+      width: 16px;
+      height: 16px;
+    }
 
     & > input {
-      padding: 30px 20px 15px 20px;
+      margin-top: 2px;
+      padding: 18px 20px 15px 20px;
       border: none;
       width: 100%;
       font-size: 16px;
+
+      &::placeholder {
+        font-size: 14px;
+        color: #aaa;
+        font-weight: 100;
+      }
+    }
+
+    & > textarea {
+      margin: 17px 20px 10px 20px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      min-height: 16px;
+      height: 26px;
+      line-height: 26px;
+      resize: none;
+      outline: none;
+      overflow: hidden;
 
       &::placeholder {
         font-size: 14px;
@@ -54,22 +96,154 @@ const LineInput = styled.div`
   }
 `
 
-export default ({ title, type, onChange, value, placeholder }) => {
+const TagInput = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 20px 10px 10px;
+  width: 100%;
+
+  & > div {
+    margin-top: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: #e8e8e8;
+
+    & + div {
+      margin-left: 5px;
+    }
+  
+    & > p {
+      font-size: 12px;
+      color: black;
+    }
+  }
+
+  & > input {
+    margin-top: 12px;
+    margin-left: 10px;
+    font-size: 16px;
+    border: none;
+    padding: 6px 0;
+    flex: 1;
+
+    &::placeholder {
+      font-size: 14px;
+      color: #aaa;
+      font-weight: 100;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    width: 100%;
+    transform: ${props => props.inputFocus ? `scaleX(1)` : `scaleX(0)`};
+    transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    border: 1px solid #253245;
+  }
+`
+
+export default ({ title, type, onChange, value, setValue, placeholder, chackState, img }) => {
   const inputFocus = useInput(false)
 
   return (
     <LineInput inputFocus={inputFocus.value}>
-      <p>{title}</p>
       <div>
-        <input
-          value={value}
-          onChange={onChange}
-          type={type} 
-          placeholder={placeholder}
-          onFocus={() => {inputFocus.setValue(true)}}
-          onBlur={() => {inputFocus.setValue(false)}}
-        />
+        <p>{title}</p>
+        { chackState &&
+          <ChackBox
+            {...chackState.state}
+            id={chackState.id}
+            text={chackState.text}
+            color={chackState.color}
+          />
+        }
       </div>
+      {type === "tags" ? 
+        <TagInput inputFocus={inputFocus.value}>
+          {value.map((item, index) => {
+            return (
+              <div key={index}>
+                <p>{"#"+item}</p>
+              </div>
+            )
+          })}
+          <input 
+            type="text"
+            placeholder={placeholder}
+            onFocus={() => {inputFocus.setValue(true)}}
+            onBlur={() => {inputFocus.setValue(false)}}
+            onChange={(e) => {
+              e.target.value = e.target.value.replace(' ', '')
+            }}
+            onKeyPress={(e) => {
+              if(e.key === "Enter"){
+                setValue(value.concat(e.target.value));
+                e.target.value = ""
+              }
+            }}
+            onKeyDown={(e) => {
+              if(e.key === "Backspace"){
+                if(e.target.value === ""){
+                  setValue(value.slice(0, value.length-1))
+                }
+              }
+              if(e.key === " "){
+                setValue(value.concat(e.target.value));
+                e.target.value = ""
+              }
+            }}
+          />
+        </TagInput>
+        :
+        type === "textarea" ? 
+        <div className="text">
+          <textarea
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            onFocus={(e) => {
+              inputFocus.setValue(true)
+              e.target.style.height = e.target.scrollHeight;
+            }}
+            onBlur={(e) => {
+              inputFocus.setValue(false);
+            }}
+            onKeyDown={(e) => {
+              if(e.key === "Enter"){
+                e.target.style.height = "26px";
+                e.target.style.height = e.target.scrollHeight + 26 + "px";
+              }
+            }}
+            onKeyUp={(e) => {
+              if(e.key === "Backspace"){
+                e.target.style.height = "26px";
+                e.target.style.height = e.target.scrollHeight + "px";
+              }
+            }}
+          />
+        </div>
+        :
+        <div className="text">
+          {img &&
+            <img alt="" src={img} />
+          }
+          <input
+            value={value}
+            onChange={onChange}
+            type={type} 
+            placeholder={placeholder}
+            onFocus={() => {inputFocus.setValue(true)}}
+            onBlur={() => {inputFocus.setValue(false)}}
+          />
+        </div>
+      }
     </LineInput>
   )
 }

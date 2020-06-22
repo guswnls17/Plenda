@@ -6,9 +6,13 @@ export const MenuContext = createContext();
 export const MenuProvider = ({ children }) => {
   const NoticeNavNum = useInput(0);
   const StoreNavNum = useInput(0);
+  const PointStoreNavNum = useInput(0);
+  const MenuNavNum = useInput(0);
+  const PointMenuNavNum = useInput(0);
+  const StaffNavNum = useInput(0);
 
   return (
-    <MenuContext.Provider value={{ NoticeNavNum, StoreNavNum }}>
+    <MenuContext.Provider value={{ NoticeNavNum, StoreNavNum, PointStoreNavNum, MenuNavNum, PointMenuNavNum, StaffNavNum }}>
       {children}
     </MenuContext.Provider>
   );
@@ -22,4 +26,24 @@ export const useNoticeNavNum = () => {
 export const useStoreNavNum = () => {
   const { StoreNavNum } = useContext(MenuContext);
   return StoreNavNum;
+};
+
+export const usePointStoreNavNum = () => {
+  const { PointStoreNavNum } = useContext(MenuContext);
+  return PointStoreNavNum;
+};
+
+export const useMenuNavNum = () => {
+  const { MenuNavNum } = useContext(MenuContext);
+  return MenuNavNum;
+};
+
+export const usePointMenuNavNum = () => {
+  const { PointMenuNavNum } = useContext(MenuContext);
+  return PointMenuNavNum;
+};
+
+export const useStaffNavNum = () => {
+  const { StaffNavNum } = useContext(MenuContext);
+  return StaffNavNum;
 };

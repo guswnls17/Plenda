@@ -14,27 +14,12 @@ const ImgInput = styled.div`
   }
 
   & > div {
-    padding: 30px 10px 15px 10px; 
-
-    & > input {
-      display: none;
-    }
-
-    & > label {
-      display: ${props => props.previewImg ? "none" : "flex"};
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      background-color: #FFFFFF;
-      border: 1.5px dashed #e8e8e8;
-      border-radius: 5px;
-      width: 100px;
-      height: 100px;
-      
-      & > img {
-        width: 36px;
-      }
-    }
+    padding: 10px 5px 15px 5px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
   }
 `
 
@@ -44,20 +29,20 @@ const ImgBox = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  width: 100px;
-  height: 100px;
+  width: ${props => props.imgWidth ? props.imgWidth : "100px"};
+  height: ${props => props.imgHeight ? props.imgHeight : "100px"};
   
 
   & > div:nth-child(1) {
-    width: 100px;
-    height: 100px;
+    width: ${props => props.imgWidth ? props.imgWidth : "100px"};
+    height: ${props => props.imgHeight ? props.imgHeight : "100px"};
     overflow: hidden;
     border-radius: 5px;
 
     & > img {
       object-fit: cover;
-      height: 100px;
-      width: 100px;
+      width: ${props => props.imgWidth ? props.imgWidth : "100px"};
+    height: ${props => props.imgHeight ? props.imgHeight : "100px"};
     }
   }
 
@@ -81,45 +66,86 @@ const ImgBox = styled.div`
   }
 `
 
-export default ({ title, previewImg, img }) => {
+const ImgContainer = styled.div`
+  margin: 0 10px;
+  margin-top: 10px;
 
-  const ImgChangeHandler = (e) => {
-    let fileReader = new FileReader();
-    let file = e.target.files[0];
+  & > input {
+    display: none;
+  }
 
-    previewImg.setValue(file);
+  & > label {
+    display: ${props => props.previewImg ? "none" : "flex"};
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1.5px dashed #e8e8e8;
+    border-radius: 5px;
+    width: ${props => props.imgWidth ? props.imgWidth : "100px"};
+    height: ${props => props.imgHeight ? props.imgHeight : "100px"};
     
-    fileReader.onload = (e) => {
-      img.setValue(e.target.result)
-    }
-    if (file) {
-      fileReader.readAsDataURL(file);
-    } else {
-      img.setValue("");
+    & > img {
+      width: 36px;
     }
   }
+`
 
-  const ImgCloseHandler = () => {
-    img.setValue("");
-    previewImg.setValue(null);
-  }
+export default ({ title, value, setValue, imgWidth, imgHeight }) => {
 
   return (
-    <ImgInput previewImg={previewImg.value}>
+    <ImgInput >
       <p>{title}</p>
       <div>
-        <label htmlFor="imgInput">
-          <img alt="" src={Camera} />
-        </label>
-        <ImgBox previewImg={previewImg.value}>
-          <div>
-            <img alt="" src={img.value} />
-          </div>
-          <div onClick={ImgCloseHandler}>
-            <img alt="" src={ImgClose} />
-          </div>
-        </ImgBox>
-        <input id="imgInput" type="file" onChange={ImgChangeHandler} />
+        {value.map((item, index) => {
+          return (
+            <ImgContainer previewImg={item.preView} key={index} imgWidth={imgWidth} imgHeight={imgHeight} >
+              <label htmlFor={`imgInput${index}`}>
+                <img alt="" src={Camera} />
+              </label>
+              <ImgBox previewImg={item.preView} imgWidth={imgWidth} imgHeight={imgHeight}>
+                <div>
+                  <img alt="" src={item.img} />
+                </div>
+                <div 
+                  onClick={() => {
+                    setValue(value.map((state, id) => {
+                      return (
+                        id === index ? { ...state, img:"", preView:"" } : state
+                      )
+                    }))
+                  }}
+                >
+                  <img alt="" src={ImgClose} />
+                </div>
+              </ImgBox>
+              <input id={`imgInput${index}`} type="file" 
+                onChange={(e) => {
+                  let fileReader = new FileReader();
+                  let file = e.target.files[0];
+                  
+                  fileReader.onload = (e) => {
+                    setValue(value.map((state, id) => {
+                      return (
+                        id === index ? { ...state, img:e.target.result, preView:file } : state
+                      )
+                    }))
+                  }
+
+                  if (file) {
+                    fileReader.readAsDataURL(file);
+                  } else {
+                    setValue(value.map((state, id) => {
+                      return (
+                        id === index ? { ...state, img:"", preView:"" } : state
+                      )
+                    }))
+                  }
+                }} 
+              />
+            </ImgContainer>
+          )
+        })}
       </div>
     </ImgInput>
   )

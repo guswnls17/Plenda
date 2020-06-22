@@ -23,7 +23,7 @@ export default () => {
         // subTitle={"브랜드 추가하기"} 
         LinkButton={{
           text: "수정하기",
-          link: "/modifybrand"
+          link: "/infobrand/modify"
         }}
         navBarData={{
           num: navBarNum,

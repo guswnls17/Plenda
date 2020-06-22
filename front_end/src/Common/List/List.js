@@ -5,8 +5,12 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import ListToggle from '../Toggle/ListToggle';
 
+import modifyImg from '../Image/modify.png';
+import deleteImg from '../Image/delete.png';
+
 const List = styled.div`
   padding: 15px 0;
+  padding-top: 10px;
   overflow: auto;
   /* -ms-overflow-style: none;
 
@@ -82,6 +86,43 @@ const CategoryMenu = styled.div`
     }
 `
 
+const ImgContainer = styled.div`
+  & > div {
+    width: 40px;
+    height: 40px;
+    background-color: #c8c8c8;
+    border-radius: 4px;
+    overflow: hidden;
+
+    & > img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+  }
+`
+
+const Delete = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
+  align-items: center;
+
+  & > div {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    
+    & + div {
+      margin-left: 10px;
+    }
+    & > img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+`
+
 export default ({ list }) => {
   
 
@@ -134,6 +175,28 @@ export default ({ list }) => {
                   <div className="text" key={index} style={{width: category.width, minWidth: category.minwidth }}>
                     <p>{data[category.data] != null ? data[category.data] : "미등록"}</p>
                   </div>
+                :
+                category.type === "img" ? 
+                  <ImgContainer className="text" key={index} style={{width: category.width, minWidth: category.minwidth }}>
+                    <div>
+                      <img alt="" src={data[category.data] != null ? data[category.data] : "미등록"} />
+                    </div>
+                  </ImgContainer>
+                :
+                category.type === "bigtext" ? 
+                  <div className="text" key={index} style={{width: category.width, minWidth: category.minwidth }}>
+                    <p style={{ fontSize: 14}}>{data[category.data] != null ? data[category.data] : "미등록"}</p>
+                  </div>
+                :
+                category.type === "delete" ? 
+                  <Delete key={index} style={{width: category.width, minWidth: category.minwidth }}>
+                    <div onClick={category.modify}>
+                      <img alt="" src={modifyImg} />
+                    </div>
+                    <div onClick={category.delete}>
+                      <img alt="" src={deleteImg} />
+                    </div>
+                  </Delete>
                 :
                 category.type === "date" ? 
                   <div className="date" key={index} style={{width: category.width, minWidth: category.minwidth }}>

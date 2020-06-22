@@ -26,6 +26,7 @@ export default () => {
   return (
     <StoreItem
       data={data}
+      link={`/store/point/`}
     />    
   )
 }

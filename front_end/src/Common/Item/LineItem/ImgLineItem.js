@@ -13,7 +13,13 @@ const ImgInput = styled.div`
   }
 
   & > div {
-    padding: 30px 10px 20px 10px; 
+    /* padding: 30px 10px 20px 10px; */
+    padding: 10px 5px 15px 5px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
   }
 `
 
@@ -23,35 +29,41 @@ const ImgBox = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  width: 100px;
-  height: 100px;
+  width: ${props => props.imgWidth ? props.imgWidth : "100px"};
+  height: ${props => props.imgHeight ? props.imgHeight : "100px"};
+  margin: 0 10px;
+  margin-top: 10px;
   
 
   & > div:nth-child(1) {
-    width: 100px;
-    height: 100px;
+    width: ${props => props.imgWidth ? props.imgWidth : "100px"};
+    height: ${props => props.imgHeight ? props.imgHeight : "100px"};
     overflow: hidden;
     border-radius: 5px;
 
     & > img {
       object-fit: cover;
-      height: 100px;
-      width: 100px;
+      width: ${props => props.imgWidth ? props.imgWidth : "100px"};
+    height: ${props => props.imgHeight ? props.imgHeight : "100px"};
     }
   }
 `
 
-export default ({ title, img }) => {
+export default ({ title, img, value, setValue, imgWidth, imgHeight }) => {
 
   return (
     <ImgInput>
-      <p>{title}</p>
+      {title && <p>{title}</p>}
       <div>
-        <ImgBox>
-          <div>
-            <img alt="" src={img ? img : BrandBasicImg} />
-          </div>
-        </ImgBox>
+        {value.map((item, index) => {
+          return (
+            <ImgBox key={index} imgWidth={imgWidth} imgHeight={imgHeight}>
+              <div>
+                <img alt="" src={item.img ? item.img : BrandBasicImg} />
+              </div>
+            </ImgBox>
+          )
+        })}
       </div>
     </ImgInput>
   )

@@ -18,7 +18,8 @@ const ChackBox = styled.div`
       background-color: #1DE6BA;
     }
     & > p {
-      /* font-weight: bold; */
+      color: ${props => props.color && "black"};
+      font-weight: ${props => props.color && 500};
     }
   }
 
@@ -44,10 +45,9 @@ const ChackBox = styled.div`
       }
     }
     & > p {
-      margin-top: 1px;
       margin-left: 10px;
       font-size: ${props => props.fontWeight ? "13px" : "12px"};
-      color: white;
+      color: ${props => props.color ? props.color : "white"};
       font-weight: ${props => props.fontWeight ? "500" : "300"};
     }
   }
@@ -63,9 +63,9 @@ const ChackBox = styled.div`
   }
 `
 
-export default ({ text, id, onChange, value, style, fontWeight, onClick, view }) => {
+export default ({ text, id, onChange, value, style, fontWeight, onClick, view, color }) => {
   return (
-    <ChackBox style={style} fontWeight={fontWeight}>
+    <ChackBox style={style} fontWeight={fontWeight} color={color}>
       <input 
         id={id}
         type="checkbox" 

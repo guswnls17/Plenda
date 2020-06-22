@@ -31,8 +31,12 @@ export default () => {
   const businessNum = useInput("");
   const phoneNum = useInput("");
   const adress = useInput("");
-  const img = useInput("");
-  const previewImg = useInput("");
+  const imgData = useInput([
+    {
+      img: "",
+      preView: "",
+    }
+  ]);
   
   return (
     <ContentsTemplate sidebarBoolean={false} bgColor={"#f8f8f8"}>
@@ -53,9 +57,10 @@ export default () => {
       <ContentsBody>
         <ContentsBox>
           <ImgInput 
+            {...imgData}
             title={"브랜드 로고"}
-            img={img}
-            previewImg={previewImg}
+            imgWidth={"100px"}
+            imgHeight={"100px"}
           />
           <LineInput
             {...brandName}

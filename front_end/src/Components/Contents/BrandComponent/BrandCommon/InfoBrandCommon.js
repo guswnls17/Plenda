@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TextLineItem from '../../../../Common/Item/LineItem/TextLineItem';
 import ImgLineItem from '../../../../Common/Item/LineItem/ImgLineItem';
+import useInput from '../../../../Common/Hooks/chackdInput';
 
 const ContentsBox = styled.div`
   background-color: white;
@@ -16,9 +17,20 @@ const ContentsBox = styled.div`
 `
 
 export default () => {
+  const brandImg = useInput([
+    {
+      img: "https://modo-phinf.pstatic.net/20190510_79/1557487249108wjhDH_JPEG/mosakOAmIU.jpeg?type=f320_320",
+    }
+  ])
+
   return (
     <ContentsBox>
-      <ImgLineItem title={"브랜드 이미지"} img={"https://modo-phinf.pstatic.net/20190510_79/1557487249108wjhDH_JPEG/mosakOAmIU.jpeg?type=f320_320"}/>
+      <ImgLineItem
+        {...brandImg}
+        title={"브랜드 이미지"}
+        imgWidth={"100px"}
+        imgHeight={"100px"}
+      />
       <TextLineItem title={"브랜드 이름"} text={"할리스커피"} type={"text"} />
       <TextLineItem title={"사업자번호"} text={"1029229182"} type={"business"} />
       <TextLineItem title={"전화번호"} text={"07056869822"} type={"phone"} />
