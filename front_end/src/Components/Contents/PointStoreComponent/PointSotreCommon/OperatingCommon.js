@@ -9,7 +9,7 @@ const Container = styled.div`
   }
 `
 
-export default withRouter(({ match }) => {
+export default withRouter(({ match, CloseModalBoolean }) => {
   const plendaNoticeData = [
     {
       day: "월요일",
@@ -93,9 +93,9 @@ export default withRouter(({ match }) => {
         type={"closed"}
         data={["2020.06.11(목요일) ~ 2020.06.20(화요일)", "2020.06.11(목요일) ~ 2020.06.20(화요일)", "2020.06.11(목요일) ~ 2020.06.20(화요일)"]}
         button={{
-          // text:"삭제하기",
-          link: "/store/point/1/operating",
-          onClick:()=>{},
+          text:"추가하기",
+          // link: "/store/point/1/operating",
+          onClick:()=>{CloseModalBoolean.setValue(true)},
         }}
       />
     </Container>

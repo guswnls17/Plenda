@@ -14,12 +14,17 @@ const SignupBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 
   & > h1 {
     font-weight: bold;
     font-size: 48px;
     text-align: center;
     color: #FFFFFF;
+
+    @media (max-width: 400px) {
+      font-size: 12vw
+    }
   }
 
   & > p {
@@ -31,6 +36,10 @@ const SignupBox = styled.div`
 const AuthFrom = styled.div`
   margin-top: 30px;
   width: 360px;
+
+  @media (max-width: 400px) {
+    width: 88%;
+  }
 `
 
 const ChackBoxContainer = styled.div`
@@ -62,14 +71,53 @@ const AuthLinkButton = styled.div`
   }
 `
 
-export default () => {
+export default ({ alertState }) => {
   const email = useInput("");
+  const emailErr = useInput(false);
   const name = useInput("");
+  const nameErr = useInput(false);
   const password = useInput("");
+  const passwordErr = useInput(false);
   const pwConfirm = useInput("");
+  const pwConfirmErr = useInput(false);
   const fullChack = chackdInput(false);
   const privacy1 = chackdInput(false);
   const privacy2 = chackdInput(false);
+
+  function email_check( email ) {
+    var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return (email !== '' && email !== 'undefined' && regex.test(email));
+  }
+
+  const AlertHandler = () => {
+    if(!privacy1.value || !privacy2.value){
+      alertState.setValue(true)
+    }
+  }
+
+  const signupHandler = () => {
+    if(email.value === "" || email_check( email.value ) !== true){
+      emailErr.setValue(true);
+      return
+    } else {
+      emailErr.setValue(false);
+    }
+    if(name.value === ""){
+      nameErr.setValue(true);
+      return
+    } else {
+      nameErr.setValue(false);
+    }
+    if(pwConfirm.value !== password.value || password.value === "" || pwConfirm.value === ""){
+      pwConfirmErr.setValue(true);
+      passwordErr.setValue(true);
+      return
+    } else {
+      pwConfirmErr.setValue(false);
+      passwordErr.setValue(false);
+    }
+    AlertHandler();
+  }
 
   return (
     <AuthTemplate>
@@ -79,24 +127,31 @@ export default () => {
         <AuthFrom>
           <BoxInput
             {...email}
+            errState={emailErr}
+            errText={"이메일을 확인해주세요."}
             text={"이메일을 입력해주세요."}
             type={"email"}
             style={{marginTop: 14}}
           />
           <BoxInput
             {...name}
+            errState={nameErr}
+            errText={"이름을 확인해주세요."}
             text={"이름을 입력해주세요."}
             type={"text"}
             style={{marginTop: 14}}
           />
           <BoxInput
             {...password}
+            errState={passwordErr}
             text={"비밀번호를 입력해주세요."}
             type={"password"}
             style={{marginTop: 14}}
           />
           <BoxInput
             {...pwConfirm}
+            errState={pwConfirmErr}
+            errText={"비밀번호를 확인해주세요."}
             text={"비밀번호를 확인해주세요."}
             type={"password"}
             style={{marginTop: 14}}
@@ -131,6 +186,7 @@ export default () => {
           <AuthButton
             style={{ marginTop: "50px" }}
             text={"SIGN UP"}
+            onClick={signupHandler}
           />
           <AuthLinkButton>
             <Link to="/">

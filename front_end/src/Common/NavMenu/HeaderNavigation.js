@@ -9,6 +9,14 @@ const HeaderNavigation = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding-bottom: 10px;
+  overflow: hidden;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+      display: none;
+  }
 
   &::after{
     content: "";
@@ -18,9 +26,16 @@ const HeaderNavigation = styled.div`
     width: 140px;
     border: 1px solid black;
     transition: left 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+
+    @media (max-width: 1000px) {
+      width: 120px;
+      left: ${props => props.navBarNum * 120 + "px"};
+    }
   }
 
   & > a {
+
+    & > div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,10 +43,19 @@ const HeaderNavigation = styled.div`
     padding: 10px;
     cursor: pointer;
 
-    & > p {
-      font-size: 16px;
-      text-align: center;
-      color: #000000;
+      & > p {
+        font-size: 16px;
+        text-align: center;
+        color: #000000;
+      }
+
+      @media (max-width: 1000px) {
+        width: 120px;
+
+        & > p {
+          font-size: 14px;
+        }
+      }
     }
   }
 `
@@ -50,7 +74,9 @@ export default memo(({ navBarData }) => {
                 navBarData.num.setValue(index)
               }}
             >
-              <p style={{fontWeight: navBarData.num.value === index ? 500 : 100}}>{item.text}</p>
+              <div>
+                <p style={{fontWeight: navBarData.num.value === index ? 500 : 100}}>{item.text}</p>
+              </div>
             </Link>
           )
         })

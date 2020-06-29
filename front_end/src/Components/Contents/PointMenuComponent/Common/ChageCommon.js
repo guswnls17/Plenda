@@ -74,7 +74,7 @@ export default () => {
           type: "title",
           title: "제목",
           data: "title",
-          width: "70%",
+          width: "61%",
           minwidth: 240
         },
         {
@@ -82,15 +82,22 @@ export default () => {
           toggleData: storeData,
           title: "지점",
           data: "writer",
-          width: "15%",
-          minwidth: 120
+          width: "12%",
+          minwidth: 100
         },
         {
           type: "date",
           title: "날짜",
           data: "date",
-          width: "15%",
-          minwidth: 120
+          width: "12%",
+          minwidth: 100
+        },
+        {
+          type: "delete",
+          title: "상태",
+          // data: "date",
+          width: "12%",
+          minwidth: 100
         }
       ]}
     />

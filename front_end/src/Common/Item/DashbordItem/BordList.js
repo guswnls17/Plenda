@@ -4,6 +4,9 @@ import moment from 'moment';
 import 'moment/locale/ko'
 import BordTitle from './BordTitle';
 
+import modifyImg from '../../Image/modify.png';
+import deleteImg from '../../Image/delete.png';
+
 const BordList = styled.div`
   padding: 15px 0;
 
@@ -57,6 +60,27 @@ const BordList = styled.div`
   }
 `
 
+const Delete = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
+  align-items: center;
+
+  & > div {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    
+    & + div {
+      margin-left: 6px;
+    }
+    & > img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+`
+
 export default ({ list }) => {
   return (
     <BordList>
@@ -85,6 +109,16 @@ export default ({ list }) => {
                   <div className="date" key={index} style={{width: category.width}}>
                     <p>{data[category.data] === null ? "" : moment(data.date).format('L')}</p>
                   </div>
+                :
+                category.type === "delete" ? 
+                  <Delete key={index} style={{width: category.width, minWidth: category.minwidth }}>
+                    <div onClick={category.modify}>
+                      <img alt="" src={modifyImg} />
+                    </div>
+                    <div onClick={category.delete}>
+                      <img alt="" src={deleteImg} />
+                    </div>
+                  </Delete>
                 :
                 null
               )

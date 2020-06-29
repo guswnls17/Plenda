@@ -54,7 +54,7 @@ export default ({ bordHeader }) => {
     <BordHeader iconBoxColor={bordHeader.iconBoxColor}>
       <div><img alt="" src={bordHeader.iconBoxImg}/></div>
       <p>{bordHeader.title}</p>
-      <Link>
+      <Link to={bordHeader.link}>
         <p>more ›</p>
       </Link>
     </BordHeader>

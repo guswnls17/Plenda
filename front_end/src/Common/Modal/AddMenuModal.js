@@ -45,6 +45,10 @@ const Modal = styled.div`
     width: calc(100% - 40px);
   }
 
+  & > div {
+    flex-shrink: 0;
+  }
+
   & > p:nth-child(1) {
     font-weight: bold;
     font-size: 18px;

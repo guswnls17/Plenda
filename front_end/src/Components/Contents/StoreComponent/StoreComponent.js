@@ -15,7 +15,7 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history }) => {
+export default withRouter(({ history, confirmState, confirmTextState }) => {
   const navBarNum = useStoreNavNum();
 
   return (
@@ -23,7 +23,7 @@ export default withRouter(({ history }) => {
       <ContentsHeader
         title={"매장관리"}
         // subTitle={"브랜드 추가하기"} 
-        LinkButton={navBarNum.value === 1 ? {
+        LinkButton={navBarNum.value === 0 ? {
           text: "매장 추가하기",
           link: "/store/add"
         } : ""}
@@ -31,11 +31,11 @@ export default withRouter(({ history }) => {
           num: navBarNum,
           data: [
             {
-              text: "변경사항",
+              text: "매장관리",
               link: "/store"
             },
             {
-              text: "매장관리",
+              text: "변경사항",
               link: "/store"
             }
           ]
@@ -48,8 +48,11 @@ export default withRouter(({ history }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <ChageStoreCommon/>}
-        {navBarNum.value === 1 && <ManagementStoreCommon/>}
+        {navBarNum.value === 0 && <ManagementStoreCommon
+          confirmState={confirmState}
+          confirmTextState={confirmTextState}
+        />}
+        {navBarNum.value === 1 && <ChageStoreCommon/>}
       </ContentsBody>
     </ContentsTemplate>
   )

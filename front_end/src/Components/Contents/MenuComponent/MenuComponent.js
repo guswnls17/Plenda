@@ -24,7 +24,7 @@ export default withRouter(({ history, match }) => {
       <ContentsHeader
         title={"메뉴판 관리"}
         // subTitle={"신림역점"} 
-        LinkButton={navBarNum.value === 1 ? {
+        LinkButton={navBarNum.value === 0 ? {
           text: "메뉴판 등록하기",
           link: `/menu/add`
         } : ""}
@@ -32,14 +32,14 @@ export default withRouter(({ history, match }) => {
           num: navBarNum,
           data: [
             {
-              text: "변경사항",
-            },
-            {
               text: "메뉴판",
             },
             {
               text: "매장별 메뉴판",
-            }
+            },
+            {
+              text: "변경사항",
+            },
           ]
         }}
         // UploadButton= {{
@@ -50,9 +50,9 @@ export default withRouter(({ history, match }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <ChageCommon/>}
-        {navBarNum.value === 1 && <MenuList/>}
-        {navBarNum.value === 2 && <MenuPointStroe/>}
+        {navBarNum.value === 0 && <MenuList/>}
+        {navBarNum.value === 1 && <MenuPointStroe/>}
+        {navBarNum.value === 2 && <ChageCommon/>}
       </ContentsBody>
     </ContentsTemplate>
   )

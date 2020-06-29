@@ -56,7 +56,7 @@ const Menu = styled.div`
   }
 `
 
-export default ({ type, title, data, category, link, button, more }) => {
+export default ({ type, title, data, category, link, button, more, confirmState }) => {
   return (
     <ContentsBox>
       <Menu>
@@ -76,8 +76,13 @@ export default ({ type, title, data, category, link, button, more }) => {
         <div>
           <OptionToggle
             data={[
-              {"category": "수정하기"},
-              {"category": "삭제하기"},
+              {
+                category: "수정하기"
+              },
+              {
+                category: "삭제하기",
+                onClick: () => {confirmState.setValue(true)}
+              },
             ]}
           />
         </div>

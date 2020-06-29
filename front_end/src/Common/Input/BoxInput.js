@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+`
+
 const BoxInput = styled.fieldset`
   display: flex;
   justify-content: center;
@@ -9,9 +17,13 @@ const BoxInput = styled.fieldset`
   margin-top: 10px;
   width:  100%;
   height: 58px;
-  border: 1px solid white;
+  border: ${props => props.errState ? "1px solid #EB5757" : "1px solid white"};;
   border-radius: 4px; 
   padding: 0 10px;
+
+  /* @media (max-width: 400px ){
+    width: 90%;
+  } */
 
   & > legend {
     font-family: "Noto Sans KR", 'Noto Sans', sans-serif;
@@ -30,7 +42,7 @@ const BoxInput = styled.fieldset`
     left: 20px;
     width: 80%;
     font-size: 14px;
-    color: #c8c8c8;
+    color: ${props => props.errState ? "#EB5757" : "#c8c8c8"};
     transition: top 200ms cubic-bezier(0.0, 0, 0.2, 1), font-size 200ms cubic-bezier(0.0, 0, 0.2, 1);
     z-index: 10;
     font-weight: 300;
@@ -41,7 +53,7 @@ const BoxInput = styled.fieldset`
     font-size: 12px;
     width: auto;
     font-weight: 400;
-    color: white;
+    color: ${props => props.errState ? "#EB5757" : "white"};
   }
 
   & > input {
@@ -51,36 +63,53 @@ const BoxInput = styled.fieldset`
     height: 84%;
     border: none;
     font-size: 16px;
-    color: white;
+    color: ${props => props.errState ? "#EB5757" : "white"};
     background-color: transparent;
     z-index: 20;
     padding: 0 10px;
   }
 `
 
-export default ({ text, type, onChange, value, style }) => {
+const ErrText = styled.div`
+  margin-top: ${props => props.errText ? "10px" : 0};
+  margin-right: auto;
+  & > p {
+    font-size: 12px;
+    color: #EB5757;
+  }
+`
+
+export default ({ text, type, onChange, value, style, errState=false, errText }) => {
   const [focusState, setFocusState] = useState(false);
 
   return (
-    <BoxInput focusState={focusState} style={style}>
-      <legend>{focusState ? text : ""}</legend>
-      <label for="input" className={focusState ? "active" : ""}>{text}</label>
-      <input 
-        id="input"
-        type={type}
-        onChange={onChange}
-        value={value} 
-        onFocus={()=>{
-          setFocusState(true)
-        }} 
-        onBlur={(e) => {
-          if(e.target.value !== ""){
+    <Container>
+      <BoxInput focusState={focusState} style={style} errState={errState.value ? errState.value : false}>
+        <legend>{focusState ? text : ""}</legend>
+        <label htmlFor="input" className={focusState ? "active" : ""}>{text}</label>
+        <input 
+          id="input"
+          type={type}
+          onChange={onChange}
+          value={value} 
+          onFocus={()=>{
             setFocusState(true)
-          } else {
-            setFocusState(false)
-          }
-        }}
-      />
-    </BoxInput>
+          }} 
+          onBlur={(e) => {
+            if(e.target.value !== ""){
+              setFocusState(true)
+            } else {
+              setFocusState(false)
+            }
+          }}
+        />
+      </BoxInput>
+      {
+        errState.value &&
+        <ErrText errText={errText}>
+          <p>{errText}</p>
+        </ErrText>
+      }
+    </Container>
   )
 }

@@ -19,6 +19,12 @@ const Container = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    padding-top: 0px; 
+    padding-bottom: 0px; 
+  }
 `
 
 const AuthContainer = styled.div`
@@ -31,8 +37,16 @@ const AuthContainer = styled.div`
   width: 610px;
   background: rgba(255, 255, 255, 0.05);
 
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+
   & > img {
     width: 300px;
+
+    @media (max-width: 400px) {
+      width: 70%;
+    }
   }
 `
 

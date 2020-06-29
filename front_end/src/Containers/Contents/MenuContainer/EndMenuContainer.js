@@ -2,8 +2,11 @@ import React from 'react';
 import EndMenuComponent from '../../../Components/Contents/MenuComponent/EndMenuComponent';
 
 
-export default () => {
+export default ({ confirmState, confirmTextState}) => {
   return (
-    <EndMenuComponent/>
+    <EndMenuComponent
+      confirmState={confirmState}
+      confirmTextState={confirmTextState}
+    />
   )
 }

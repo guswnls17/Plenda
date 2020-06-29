@@ -22,10 +22,11 @@ const data = [
   },
 ]
 
-export default () => {
+export default ({ confirmState, confirmTextState}) => {
   return (
     <StoreItem
       data={data}
+      optionClick={() => {confirmState.setValue(true)}}
       link={`/store/point/`}
     />    
   )

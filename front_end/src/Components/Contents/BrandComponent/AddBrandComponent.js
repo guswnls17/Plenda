@@ -83,7 +83,7 @@ export default () => {
           <LineInput
             {...adress}
             title={"주소"}
-            type={"text"}
+            type={"adress"}
             placeholder={"브랜드 주소를 입력해주세요."}
           />
         </ContentsBox>

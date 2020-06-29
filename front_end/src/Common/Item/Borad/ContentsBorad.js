@@ -8,6 +8,8 @@ import ImgLineItem from '../LineItem/ImgLineItem';
 import moment from 'moment';
 import 'moment/locale/ko'
 
+import deleteImg from '../../Image/delete.png';
+
 const ContentsBox = styled.div`
   background-color: white;
   width: 100%;
@@ -27,6 +29,10 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+
+  @media (max-width: 1000px) {
+    padding: 20px;
+  }
 
   & > p {
     font-weight: 500;
@@ -48,13 +54,17 @@ const Header = styled.div`
 
 const Body = styled.div`
   padding: 0 30px;
+
+  @media (max-width: 1000px) {
+    padding: 0 20px;
+  }
 `
 
 const Button = styled.div`
   margin-left: auto;
   margin-top: 30px;
   margin-right: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100px;
   height: 32px;
   background: #1DE6BA;
@@ -75,17 +85,32 @@ const Button = styled.div`
 `
 
 const Closed = styled.div`
-  padding-bottom: 30px;
+  margin-top: 20px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #e8e8e8;
 
   & > div {
-    margin-top: 20px;
+    padding: 15px 0;
     margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     
     & > p {
       font-size: 14px;
       line-height: 20px;
       color: #000000;
+    }
+
+    & > div {
+      margin-top: 7px;
+      margin-left: 20px;
+      cursor: pointer;
+
+      & > img {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
 `
@@ -104,6 +129,10 @@ const ZeroPay = styled.div`
 
 const Delete = styled.div`
   padding: 30px 10px 20px 10px;
+
+  @media (max-width: 1000px) {
+    padding: 30px 0px 20px 0px;
+  }
 
   & > p {
     font-size: 14px;
@@ -156,7 +185,7 @@ const Menu = styled.div`
   }
 `
 
-export default ({ type, title, data, category, link, button, more }) => {
+export default ({ type, title, data, category, link, button, more, deleteText }) => {
   return (
     <ContentsBox>
       <Header>
@@ -181,7 +210,12 @@ export default ({ type, title, data, category, link, button, more }) => {
           <Closed>
             {data.map((item, index) => {
               return (
-                <div key={index}><p>{item}</p></div>
+                <div key={index}>
+                  <p>{item}</p>
+                  <div>
+                    <img alt="" src={deleteImg}/>
+                  </div>
+                </div>
               )
             })}
           </Closed>
@@ -205,8 +239,8 @@ export default ({ type, title, data, category, link, button, more }) => {
         }
         { type === "delete" &&
           <Delete>
-            <p>매장 삭제를 진행하는 경우 매장에 관련된 정보가 모두 삭제되며 모든 정보는 복구가 불가능합니다. 재등록 시 모든 정보는 다시 입력하셔야합니다.</p>
-            <p>그래도 매장 삭제하기를 진행하시겠습니까?</p>
+            <p>{deleteText.text1}</p>
+            <p>{deleteText.text2}</p>
           </Delete>
         }
         { type === "menu" &&

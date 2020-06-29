@@ -23,8 +23,8 @@ export default withRouter(({ history, match, staffSearchState }) => {
     <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsHeader
         title={"스태프 관리"}
-        subTitle={"신림역점"} 
-        LinkButton={navBarNum.value === 1 ? {
+        // subTitle={"신림역점"} 
+        LinkButton={navBarNum.value === 0 ? {
           text: "스태프 추가하기",
           // link: `/menu/add`,
           onClick: () => staffSearchState.setValue(true)
@@ -33,14 +33,14 @@ export default withRouter(({ history, match, staffSearchState }) => {
           num: navBarNum,
           data: [
             {
-              text: "변경사항",
-            },
-            {
               text: "스태프",
             },
             {
               text: "매장별 스태프",
-            }
+            },
+            {
+              text: "변경사항",
+            },
           ]
         }}
         // UploadButton= {{
@@ -51,9 +51,9 @@ export default withRouter(({ history, match, staffSearchState }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <ChageCommon/>}
-        {navBarNum.value === 1 && <StaffCommon/>}
-        {navBarNum.value === 2 && <PointCommon/>}
+        {navBarNum.value === 0 && <StaffCommon/>}
+        {navBarNum.value === 1 && <PointCommon/>}
+        {navBarNum.value === 2 && <ChageCommon/>}
       </ContentsBody>
     </ContentsTemplate>
   )

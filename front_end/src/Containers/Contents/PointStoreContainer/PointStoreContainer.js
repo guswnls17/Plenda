@@ -2,8 +2,12 @@ import React from 'react';
 import PointStoreComponent from '../../../Components/Contents/PointStoreComponent/PointStoreComponent';
 
 
-export default () => {
+export default ({ CloseModalBoolean, confirmState, confirmTextState }) => {
   return (
-    <PointStoreComponent/>
+    <PointStoreComponent 
+      CloseModalBoolean={CloseModalBoolean}
+      confirmState={confirmState}
+      confirmTextState={confirmTextState}
+    />
   )
 }

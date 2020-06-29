@@ -46,7 +46,7 @@ const TimeLineItem = styled.div`
     }
     & > div {
       width: calc(50% - 45px );
-      min-width: 200px;
+      min-width: 180px;
       padding: 0 10px;
 
       @media (max-width: 600px) {
@@ -54,7 +54,7 @@ const TimeLineItem = styled.div`
       }
       
       & > .MuiInput-underline:before{
-        border-bottom: 1px solid #e8e8e8;
+      border-bottom: ${props => props.borderColor ? props.borderColor : "1px solid #e8e8e8"};
       }
       & > .MuiInput-underline:after{
         border-bottom: 2px solid #253245;
@@ -65,7 +65,10 @@ const TimeLineItem = styled.div`
       }
       & > div {
         padding: 0 10px;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
+        @media (max-width: 600px) {
+          padding-top: 10px;
+        }
       }
     }
     & > div:nth-child(3) {
@@ -73,25 +76,29 @@ const TimeLineItem = styled.div`
   }
 `
 
-export default ({  data, title }) => {
+export default ({  data, title, borderColor }) => {
   const infinity = chackdInput(false);
 
   return (
     <ContentsBox>
-      <TimeLineItem>
-        <div>
-          <p>{title}</p>
-          <ChackBox
-            {...infinity}
-            id={"infinity"}
-            text={"시작일로 부터 무기한"}
-            color={"#888"}
-          />
-        </div>
+      <TimeLineItem borderColor={borderColor}>
+        { title ?
+          <div>
+            <p>{title}</p>
+            <ChackBox
+              {...infinity}
+              id={"infinity"}
+              text={"시작일로 부터 무기한"}
+              color={"#888"}
+            />
+          </div>
+          :
+          <div></div>
+        }
         <div>
           <TextField
             id="start"
-            label="Birthday"
+            // label="Birthday"
             type="date"
             defaultValue={data.value.start}
             // className={classes.textField}
@@ -106,7 +113,7 @@ export default ({  data, title }) => {
           <TextField
             disabled={infinity.value}
             id="end"
-            label="Birthday"
+            // label="Birthday"
             type="date"
             defaultValue={data.value.end}
             // className={classes.textField}

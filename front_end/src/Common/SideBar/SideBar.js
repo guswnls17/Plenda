@@ -168,7 +168,7 @@ export default ({ sidebar }) => {
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={"/brandinfo"} activeClassName={"active"}>
+          <NavLink to={"/sales"} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>매출 관리</p>
           </NavLink>

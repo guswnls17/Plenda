@@ -1,8 +1,8 @@
 import React from 'react';
 import ModifyBrandComponent from '../../../Components/Contents/BrandComponent/ModifyBrandComponent';
 
-export default () => {
+export default ({ adress, adressModal }) => {
   return (
-    <ModifyBrandComponent/>
+    <ModifyBrandComponent adress={adress} adressModal={adressModal}/>
   )
 }

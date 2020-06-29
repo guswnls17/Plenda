@@ -15,6 +15,10 @@ import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 const AuthFrom = styled.div`
   margin-top: 20px;
   width: 360px;
+
+  @media (max-width: 400px) {
+    width: 88%;
+  }
 `
 
 const ChackContainer = styled.div`
@@ -108,9 +112,15 @@ const SocialLogin = styled.div`
   }
 `
 
-export default () => {
+export default ({ alertState }) => {
   const emailState = useInput("");
   const passwordState = useInput("");
+
+  const LoginHandler = () => {
+    if(emailState.value === "" || passwordState.value === "") {
+      alertState.setValue(true);
+    }
+  }
 
   return (
     <AuthTemplate>
@@ -137,6 +147,7 @@ export default () => {
         </ChackContainer>
         <AuthButton
           text={"LOGIN"}
+          onClick={LoginHandler}
         />
         <AuthLinkButton>
           <Link to="/signup">

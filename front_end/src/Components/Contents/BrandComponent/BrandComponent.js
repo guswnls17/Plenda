@@ -28,7 +28,7 @@ export default () => {
       text: "마스터Master"
     },
     {
-      img: "https://lh3.googleusercontent.com/proxy/oTApOdMDT_FDZSHh4RRaAy8iYIZxIq9QE_riEMtbuMNv5hSMfBO6yExvCJHOqjSaHC0Tj2uGdX9G7tsNyBBX6L1snBxZ_GKEVG5Dg2zdyW7iChT5izJPYPGjKLEgXL_GdBuosoCA2cHvjyhjY5xS43oyQvsOAiWoPoC7qCTAKs0bNP-C-A",
+      img: "https://dimg.donga.com/wps/NEWS/IMAGE/2013/06/05/55655998.3.jpg",
       title: "스타벅스",
       text: "매니저Manager"
     },
@@ -61,8 +61,8 @@ export default () => {
                 <BrandItem
                   key={index}
                   img={item.img}
-                  title={"할리스커피"}
-                  text={"매니저Manager"}
+                  title={item.title}
+                  text={item.text}
                 />
               )
             })

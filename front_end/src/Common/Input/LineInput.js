@@ -50,6 +50,10 @@ const LineInput = styled.div`
       width: 100%;
       font-size: 16px;
 
+      &:disabled{
+        background-color: white;
+      }
+
       &::placeholder {
         font-size: 14px;
         color: #aaa;
@@ -149,7 +153,25 @@ const TagInput = styled.div`
   }
 `
 
-export default ({ title, type, onChange, value, setValue, placeholder, chackState, img }) => {
+const TitleButton = styled.div`
+  padding: 5px 20px;
+  border: 1px solid #888;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #253245;
+
+    & > p {
+      color: white;
+    }
+  }
+
+  & > p {
+    font-size: 10px;
+  }
+`
+
+export default ({ title, type, onChange, value, setValue, placeholder, chackState, img, adressOnClick }) => {
   const inputFocus = useInput(false)
 
   return (
@@ -164,8 +186,13 @@ export default ({ title, type, onChange, value, setValue, placeholder, chackStat
             color={chackState.color}
           />
         }
+        { type === "adress" &&
+          <TitleButton onClick={adressOnClick}>
+            <p>주소찾기</p>
+          </TitleButton>
+        }
       </div>
-      {type === "tags" ? 
+      {type === "tags" && 
         <TagInput inputFocus={inputFocus.value}>
           {value.map((item, index) => {
             return (
@@ -201,49 +228,98 @@ export default ({ title, type, onChange, value, setValue, placeholder, chackStat
             }}
           />
         </TagInput>
-        :
-        type === "textarea" ? 
-        <div className="text">
-          <textarea
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            onFocus={(e) => {
-              inputFocus.setValue(true)
-              e.target.style.height = e.target.scrollHeight;
-            }}
-            onBlur={(e) => {
-              inputFocus.setValue(false);
-            }}
-            onKeyDown={(e) => {
-              if(e.key === "Enter"){
-                e.target.style.height = "26px";
-                e.target.style.height = e.target.scrollHeight + 26 + "px";
-              }
-            }}
-            onKeyUp={(e) => {
-              if(e.key === "Backspace"){
-                e.target.style.height = "26px";
-                e.target.style.height = e.target.scrollHeight + "px";
-              }
-            }}
-          />
-        </div>
-        :
-        <div className="text">
-          {img &&
-            <img alt="" src={img} />
-          }
-          <input
-            value={value}
-            onChange={onChange}
-            type={type} 
-            placeholder={placeholder}
-            onFocus={() => {inputFocus.setValue(true)}}
-            onBlur={() => {inputFocus.setValue(false)}}
-          />
-        </div>
       }
+      {
+        type === "textarea" && 
+          <div className="text">
+            <textarea
+              value={value}
+              onChange={onChange}
+              placeholder={placeholder}
+              onFocus={(e) => {
+                inputFocus.setValue(true)
+                e.target.style.height = e.target.scrollHeight;
+              }}
+              onBlur={(e) => {
+                inputFocus.setValue(false);
+              }}
+              onKeyDown={(e) => {
+                if(e.key === "Enter"){
+                  e.target.style.height = "26px";
+                  e.target.style.height = e.target.scrollHeight + 26 + "px";
+                }
+              }}
+              onKeyUp={(e) => {
+                if(e.key === "Backspace"){
+                  e.target.style.height = "26px";
+                  e.target.style.height = e.target.scrollHeight + "px";
+                }
+              }}
+            />
+          </div>
+        }
+        {
+          type === "adress" && 
+            <div className="text">
+              <input
+                disabled
+                value={value}
+                onChange={onChange}
+                type={type} 
+                placeholder={placeholder}
+                onFocus={() => {inputFocus.setValue(true)}}
+                onBlur={() => {inputFocus.setValue(false)}}
+              />
+            </div>
+        }
+        {
+          type === "text" && 
+          <div className="text">
+            {img &&
+              <img alt="" src={img} />
+            }
+            <input
+              onChange={onChange}
+              value={value} 
+              type={type} 
+              placeholder={placeholder}
+              onFocus={() => {inputFocus.setValue(true)}}
+              onBlur={() => {inputFocus.setValue(false)}}
+            />
+          </div>
+        }
+        {
+          type === "number" && 
+          <div className="text">
+            {img &&
+              <img alt="" src={img} />
+            }
+            <input
+              onChange={onChange}
+              value={value} 
+              type={type} 
+              placeholder={placeholder}
+              onFocus={() => {inputFocus.setValue(true)}}
+              onBlur={() => {inputFocus.setValue(false)}}
+            />
+          </div>
+        }
+        {
+          type === "password" && 
+          <div className="text">
+            {img &&
+              <img alt="" src={img} />
+            }
+            <input
+              onChange={onChange}
+              value={value} 
+              type={type} 
+              placeholder={placeholder}
+              onFocus={() => {inputFocus.setValue(true)}}
+              onBlur={() => {inputFocus.setValue(false)}}
+            />
+          </div>
+        }
     </LineInput>
   )
 }

@@ -8,7 +8,7 @@ const DashbordChart = styled.div`
   }
 `
 
-export default () => {
+export default ({ height }) => {
   
   var chartData = {
     labels: ['월', '화', '수', '목', '금', '토', '일'],
@@ -34,7 +34,7 @@ export default () => {
 
   return (
     <DashbordChart>
-      <ChartistGraph data={chartData} options={options} type={type} style={{height: 300, borderWidth: 1, borderColor: "red"}} />
+      <ChartistGraph data={chartData} options={options} type={type} style={{height: height ? height : 300, borderWidth: 1, borderColor: "red"}} />
     </DashbordChart>
   )
 }

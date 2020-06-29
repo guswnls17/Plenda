@@ -2,8 +2,11 @@ import React from 'react';
 import NextMenuComponent from '../../../Components/Contents/MenuComponent/NextMenuComponent';
 
 
-export default () => {
+export default ({ confirmState, confirmTextState }) => {
   return (
-    <NextMenuComponent/>
+    <NextMenuComponent
+      confirmState={confirmState}
+      confirmTextState={confirmTextState}
+    />
   )
 }

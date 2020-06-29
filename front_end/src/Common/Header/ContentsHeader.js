@@ -16,6 +16,18 @@ const HeaderTop = styled.div`
   height: 80px;
   padding-top: 20px;
 
+  @media (max-width: 1000px) {
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   height: auto;
+   margin: 10px 20px;
+
+   & > div + div {
+     margin-top: 20px;
+   } 
+  }
+
   & > div:nth-child(1) {
       margin-right: auto;
       display: flex;
@@ -29,11 +41,18 @@ const HeaderTop = styled.div`
       margin-bottom: 1px;
       font-weight: 300;
       font-size: 14px;
+      @media (max-width: 1000px) {
+        font-size: 12px;
+      }
     }
 
     & > p:nth-child(1) {
       font-weight: bold;
       font-size: 24px;
+
+      @media (max-width: 1000px) {
+        font-size: 18px;
+      }
     }
   }
 `
@@ -43,14 +62,18 @@ const UploadButtonBox = styled.div`
   flex-direction: row;
 
   & > div + div {
-    margin-left: 20px;
+    margin-left: 10px;
   }
-`
+ `
 
 const HeaderBottom = styled.div`
   margin: 0 40px;
   padding-top: 20px;
   border-bottom: 1px solid #cccccc;
+
+  @media (max-width: 1000px) {
+    margin: 0 20px;
+  }
 `
 
 // LinkButton={{

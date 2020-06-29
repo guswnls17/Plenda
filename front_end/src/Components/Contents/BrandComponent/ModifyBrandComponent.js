@@ -12,7 +12,7 @@ const ContentsBody = styled.div`
   }
 `
 
-export default () => {
+export default ({ adress, adressModal }) => {
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
@@ -39,7 +39,7 @@ export default () => {
         }} 
       />
       <ContentsBody>
-        <ModifyBrandCommon/>
+        <ModifyBrandCommon adress={adress} adressModal={adressModal}/>
       </ContentsBody>
     </ContentsTemplate>
   )

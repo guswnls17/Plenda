@@ -66,7 +66,7 @@ const StoreItem = styled.div`
   }
 `
 
-export default ({ data, option=true, link }) => {
+export default ({ data, option=true, link, optionClick }) => {
   return (
     <div>
       { data.map((item, index) => {
@@ -85,7 +85,10 @@ export default ({ data, option=true, link }) => {
                 <div>
                   <OptionToggle
                     data={[
-                      {"category": "삭제"},
+                      {
+                        category: "삭제",
+                        onClick: optionClick
+                      },
                     ]}
                   />
                 </div>

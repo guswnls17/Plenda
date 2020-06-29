@@ -1,8 +1,8 @@
 import React from 'react';
 import SignupComponent from '../../Components/Auth/SignupComponent';
 
-export default () => {
+export default ({ alertState }) => {
   return (
-    <SignupComponent/>
+    <SignupComponent alertState={alertState}/>
   )
 }

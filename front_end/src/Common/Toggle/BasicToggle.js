@@ -108,9 +108,9 @@ export default ({ data=[], fullText, controlData, type, style, toggleTextState }
         {
           fullText &&
             <div onClick={() => {
-              toggleText.setValue("전체")}}
+              toggleTextState.setValue(fullText)}}
             >
-              <p>전체</p>
+              <p>{fullText}</p>
             </div> 
         }
         {

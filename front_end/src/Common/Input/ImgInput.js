@@ -28,7 +28,7 @@ const ImgBox = styled.div`
   display: ${props => props.previewImg ? "flex" : "none"};
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: ${props => props.type === "profile" ? props.imgHeight : "5px"};
   width: ${props => props.imgWidth ? props.imgWidth : "100px"};
   height: ${props => props.imgHeight ? props.imgHeight : "100px"};
   
@@ -37,12 +37,12 @@ const ImgBox = styled.div`
     width: ${props => props.imgWidth ? props.imgWidth : "100px"};
     height: ${props => props.imgHeight ? props.imgHeight : "100px"};
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: ${props => props.type === "profile" ? props.imgHeight : "5px"};
 
     & > img {
       object-fit: cover;
       width: ${props => props.imgWidth ? props.imgWidth : "100px"};
-    height: ${props => props.imgHeight ? props.imgHeight : "100px"};
+      height: ${props => props.imgHeight ? props.imgHeight : "100px"};
     }
   }
 
@@ -81,9 +81,9 @@ const ImgContainer = styled.div`
     cursor: pointer;
     background-color: #FFFFFF;
     border: 1.5px dashed #e8e8e8;
-    border-radius: 5px;
     width: ${props => props.imgWidth ? props.imgWidth : "100px"};
     height: ${props => props.imgHeight ? props.imgHeight : "100px"};
+    border-radius: ${props => props.type === "profile" ? props.imgHeight : "5px"};
     
     & > img {
       width: 36px;
@@ -91,7 +91,7 @@ const ImgContainer = styled.div`
   }
 `
 
-export default ({ title, value, setValue, imgWidth, imgHeight }) => {
+export default ({ title, value, setValue, imgWidth, imgHeight, type }) => {
 
   return (
     <ImgInput >
@@ -99,11 +99,11 @@ export default ({ title, value, setValue, imgWidth, imgHeight }) => {
       <div>
         {value.map((item, index) => {
           return (
-            <ImgContainer previewImg={item.preView} key={index} imgWidth={imgWidth} imgHeight={imgHeight} >
+            <ImgContainer previewImg={item.preView} key={index} imgWidth={imgWidth} imgHeight={imgHeight} type={type} >
               <label htmlFor={`imgInput${index}`}>
                 <img alt="" src={Camera} />
               </label>
-              <ImgBox previewImg={item.preView} imgWidth={imgWidth} imgHeight={imgHeight}>
+              <ImgBox previewImg={item.preView} imgWidth={imgWidth} imgHeight={imgHeight} type={type}>
                 <div>
                   <img alt="" src={item.img} />
                 </div>

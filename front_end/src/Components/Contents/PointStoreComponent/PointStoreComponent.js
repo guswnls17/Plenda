@@ -18,7 +18,7 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history, match }) => {
+export default withRouter(({ history, match, CloseModalBoolean, confirmState, confirmTextState }) => {
   const navBarNum = usePointStoreNavNum();
 
   return (
@@ -26,16 +26,13 @@ export default withRouter(({ history, match }) => {
       <ContentsHeader
         title={"매장관리"}
         subTitle={"신림역점"} 
-        LinkButton={navBarNum.value === 1 ? {
+        LinkButton={navBarNum.value === 0 ? {
           text: "수정하기",
           link: `/store/point/modify/${match.params.id}`
         } : ""}
         navBarData={{
           num: navBarNum,
           data: [
-            {
-              text: "변경사항",
-            },
             {
               text: "기본정보",
             },
@@ -48,6 +45,9 @@ export default withRouter(({ history, match }) => {
             {
               text: "설정",
             },
+            {
+              text: "변경사항",
+            },
           ]
         }}
         // UploadButton= {{
@@ -58,11 +58,14 @@ export default withRouter(({ history, match }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <ChagePointStoreCommon/>}
-        {navBarNum.value === 1 && <InfoPointStoreCommon/>}
-        {navBarNum.value === 2 && <OperatingCommon/>}
-        {navBarNum.value === 3 && <PaymentCommon/>}
-        {navBarNum.value === 4 && <SetPoindStoreCommon/>}
+        {navBarNum.value === 0 && <InfoPointStoreCommon/>}
+        {navBarNum.value === 1 && <OperatingCommon CloseModalBoolean={CloseModalBoolean}/>}
+        {navBarNum.value === 2 && <PaymentCommon/>}
+        {navBarNum.value === 3 && <SetPoindStoreCommon
+          confirmState={confirmState}
+          confirmTextState={confirmTextState}
+        />}
+        {navBarNum.value === 4 && <ChagePointStoreCommon/>}
       </ContentsBody>
     </ContentsTemplate>
   )

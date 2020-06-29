@@ -22,10 +22,10 @@ const BasicButton = styled.button`
   }
 `
 
-export default ({ text, style }) => {
+export default ({ text, style, onClick }) => {
   
   return (
-    <BasicButton type="submit" style={style}>
+    <BasicButton type="submit" style={style} onClick={onClick}>
       <h1>{text}</h1>
     </BasicButton>
   )

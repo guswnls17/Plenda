@@ -26,6 +26,12 @@ import PostMenuPage from './Pages/Menu/PostMenuPage';
 import AddMenuPage from './Pages/Menu/AddMenuPage';
 import PointMenuPage from './Pages/PointMenu/PointMenuPage';
 import StaffPage from './Pages/Staff/StaffPage';
+import PointStaffPage from './Pages/PointStaff/PointStaffPage';
+import SalesPage from './Pages/Sales/SalesPage';
+import ProfilePage from './Pages/Profile/ProfilePage';
+import AddProfilePage from './Pages/Profile/AddProfilePage';
+import SettingPage from './Pages/Setting/SettingPage';
+import PwChangePage from './Pages/Setting/PwChangePage';
 
 
 const Routes = () => {
@@ -64,6 +70,12 @@ const Routes = () => {
           <Route exact path="/menu/add" component={AddMenuPage} />
           <Route exact path="/menu/point/:id" component={PointMenuPage} />
           <Route exact path="/staff" component={StaffPage} />
+          <Route exact path="/staff/point/:id" component={PointStaffPage} />
+          <Route exact path="/sales" component={SalesPage} />
+          <Route exact path="/profile" component={ProfilePage} />
+          <Route exact path="/profile/add" component={AddProfilePage} />
+          <Route exact path="/setting" component={SettingPage} />
+          <Route exact path="/pwchange" component={PwChangePage} />
         </>
       }
     </Switch>

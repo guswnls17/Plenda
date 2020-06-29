@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
 import DashbordHeader from '../../../Common/Header/DashbordHeader';
 import DashbordItem from '../../../Common/Item/DashbordItem/DashbordItem';
+import { useNoticeNavNum, useStoreNavNum, useMenuNavNum, useStaffNavNum } from '../../../Common/Context/MenuContext';
 
 import NoticeIcon from '../../../Images/noticeIcon.png'
 
@@ -27,8 +28,7 @@ const DashbordItemBox = styled.div`
   }
 `
 
-export default () => {
-
+export default ({ confirmState, confirmTextState}) => {
   const plendaNoticeData = [
     {
       title: "결재시스템 점검안내1",
@@ -62,6 +62,24 @@ export default () => {
     },
   ]
 
+  const menuChangeData = [
+    {
+      title: "아메리카노 1,000원 > 2,000원 인상",
+      writer: "플렌다",
+      date: new Date()
+    },
+    {
+      title: "아메리카노 1,000원 > 2,000원 인상",
+      writer: "플렌다",
+      date: new Date()
+    },
+    {
+      title: "아메리카노 1,000원 > 2,000원 인상",
+      writer: "플렌다",
+      date: new Date()
+    },
+  ]
+
   const BrandNoticeData = [
     {
       title: "여름 메뉴 이벤트관련 안내",
@@ -80,6 +98,11 @@ export default () => {
     },
   ]
 
+  const noticeNavNum = useNoticeNavNum()
+  const storeNavNum = useStoreNavNum()
+  const menuNavNum = useMenuNavNum()
+  const staffNavNum = useStaffNavNum()
+
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsBody>
@@ -90,7 +113,11 @@ export default () => {
             bordHeader={{
               title: "플렌다 공지사항",
               iconBoxColor: "#F2C94C",
-              iconBoxImg: NoticeIcon
+              iconBoxImg: NoticeIcon,
+              link: () => {
+                noticeNavNum.setValue(0)
+                return "/notice"
+              }
             }}
             list={{
               title: "",
@@ -120,7 +147,11 @@ export default () => {
             bordHeader={{
               title: "브랜드 공지사항",
               iconBoxColor: "#6FCF97",
-              iconBoxImg: NoticeIcon
+              iconBoxImg: NoticeIcon,
+              link: () => {
+                noticeNavNum.setValue(1)
+                return "/notice"
+              }
             }}
             list={{
               title: "",
@@ -159,7 +190,11 @@ export default () => {
             bordHeader={{
               title: "매장정보 변경사항",
               iconBoxColor: "#56CCF2",
-              iconBoxImg: NoticeIcon
+              iconBoxImg: NoticeIcon,
+              link: () => {
+                storeNavNum.setValue(1)
+                return "/store"
+              }
             }}
             list={{
               title: "",
@@ -189,7 +224,11 @@ export default () => {
             bordHeader={{
               title: "적용중인 메뉴판",
               iconBoxColor: "#F2C94C",
-              iconBoxImg: NoticeIcon
+              iconBoxImg: NoticeIcon,
+              link: () => {
+                menuNavNum.setValue(0)
+                return "/menu"
+              }
             }}
             ContentsData={[
               {
@@ -200,7 +239,7 @@ export default () => {
             ]}
             list={{
               title: "메뉴판 변경사항",
-              data: plendaNoticeData.slice(0, 3),
+              data: menuChangeData.slice(0, 3),
               category: [
                 {
                   type: "title",
@@ -213,9 +252,17 @@ export default () => {
                   width: "25%"
                 },
                 {
-                  type: "date",
+                  type: "delete",
                   data: "date",
-                  width: "25%"
+                  width: "25%",
+                  modify: () => {
+                    confirmTextState.setValue(`할리스커피 신림역점의\n[아메리카노 2000원 ▸ 3000원 인상]\n변경 사항을 정말 수락하시겠습니까?`)
+                    confirmState.setValue(true)
+                  },
+                  delete: () => {
+                    confirmTextState.setValue(`할리스커피 신림역점의\n[아메리카노 2000원 ▸ 3000원 인상]\n변경 사항을 정말 반려하시겠습니까?`)
+                    confirmState.setValue(true)
+                  }
                 }
               ]
             }}
@@ -226,7 +273,11 @@ export default () => {
             bordHeader={{
               title: "스태프 관리",
               iconBoxColor: "#6FCF97",
-              iconBoxImg: NoticeIcon
+              iconBoxImg: NoticeIcon,
+              link: () => {
+                staffNavNum.setValue(0)
+                return "/staff"
+              }
             }}
             ContentsData={[
               {
@@ -272,7 +323,10 @@ export default () => {
             bordHeader={{
               title: "매출관리 그래프",
               iconBoxColor: "#6FCF97",
-              iconBoxImg: NoticeIcon
+              iconBoxImg: NoticeIcon,
+              link: () => {
+                return "/sales"
+              }
             }}
             chartBoolean={true}
           />
@@ -282,7 +336,10 @@ export default () => {
             bordHeader={{
               title: "매출현황요약",
               iconBoxColor: "#F2C94C",
-              iconBoxImg: NoticeIcon
+              iconBoxImg: NoticeIcon,
+              link: () => {
+                return "/sales"
+              }
             }}
             ContentsData={[
               {

@@ -69,19 +69,19 @@ export default ({ data, category, link }) => {
       <LineInput
         {...businessNum}
         title={"사업자번호"}
-        type={"text"}
+        type={"number"}
         placeholder={"사업자번호를 입력해주세요."}
       />
       <LineInput
         {...Phone}
         title={"전화번호"}
-        type={"text"}
+        type={"number"}
         placeholder={"전화번호를 입력해주세요."}
       />
       <LineInput
         {...Adress}
         title={"주소"}
-        type={"text"}
+        type={"adress"}
         placeholder={"주소를 입력해주세요."}
       />
       <LineInput

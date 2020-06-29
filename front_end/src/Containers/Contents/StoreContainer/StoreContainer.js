@@ -2,8 +2,11 @@ import React from 'react';
 import StoreComponent from '../../../Components/Contents/StoreComponent/StoreComponent';
 
 
-export default () => {
+export default ({ confirmState, confirmTextState }) => {
   return (
-    <StoreComponent/>
+    <StoreComponent
+      confirmState={confirmState}
+      confirmTextState={confirmTextState}
+    />
   )
 }

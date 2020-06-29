@@ -24,7 +24,8 @@ export default ({
   bordHeader={
     title: "",
     iconBoxColor: "",
-    iconBoxImg: ""
+    iconBoxImg: "",
+    link: ""
   },
   list={
     title: "",

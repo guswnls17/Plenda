@@ -46,7 +46,7 @@ const Title = styled.div`
   }
 `
 const Header = styled.div`
-  padding: 40px 40px 30px 40px;
+  padding: 30px 40px 30px 40px;
   background-color: white;
   width: 100%;
   border-radius: 5px;
@@ -54,6 +54,10 @@ const Header = styled.div`
 
   & > div + div {
     margin-top: 30px;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 30px 20px 30px 20px;
   }
 `
 

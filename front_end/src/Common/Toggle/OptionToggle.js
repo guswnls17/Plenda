@@ -54,6 +54,7 @@ const ToggleContainer = styled.div`
       text-align: center;
       width: 140px;
       padding: 10px 0;
+      cursor: pointer;
 
       & > p {
         width: 100%;
@@ -90,7 +91,7 @@ export default ({ data=[] }) => {
         {
           data.map((item, index)=> {
             return (
-              <div key={index} onClick={() => {}}>
+              <div key={index} onClick={item.onClick}>
                 <p>{item.category}</p>
               </div>
             )

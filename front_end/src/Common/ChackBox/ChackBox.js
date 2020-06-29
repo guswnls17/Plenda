@@ -72,7 +72,7 @@ export default ({ text, id, onChange, value, style, fontWeight, onClick, view, c
         onChange={onChange}
         checked={value} 
       />
-      <label for={id} onClick={onClick}>
+      <label htmlFor={id} onClick={onClick}>
         <div>
           <img alt="" src={Chack} />
         </div>

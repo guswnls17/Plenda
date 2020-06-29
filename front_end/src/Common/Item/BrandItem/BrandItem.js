@@ -43,7 +43,7 @@ const BrandItem = styled.div`
     & > p:nth-child(3) {
       margin-top: 10px;
       font-weight: 300;
-      font-size: 10px;
+      font-size: 12px;
       color: black;
     }
   }

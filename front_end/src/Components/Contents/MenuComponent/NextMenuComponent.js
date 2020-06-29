@@ -13,17 +13,17 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history, match }) => {
+export default withRouter(({ history, match, confirmState, confirmTextState }) => {
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsHeader
         title={"메뉴판 관리"}
-        subTitle={"다음 시즌 적용 메뉴판"} 
-        // LinkButton={navBarNum.value === 1 ? {
-        //   text: "수정하기",
-        //   link: `/store/point/modify/${match.params.id}`
-        // } : ""}
+        subTitle={"다음 시즌 적용 메뉴판"}
+        LinkButton={{
+          text: "메뉴판 등록하기",
+          link: `/menu/add`
+        }} 
         // navBarData={{
         //   num: navBarNum,
         //   data: [
@@ -46,7 +46,10 @@ export default withRouter(({ history, match }) => {
         // }} 
       />
       <ContentsBody>
-        <NextMenu/>
+        <NextMenu
+          confirmState={confirmState}
+          confirmTextState={confirmTextState}
+        />
       </ContentsBody>
     </ContentsTemplate>
   )

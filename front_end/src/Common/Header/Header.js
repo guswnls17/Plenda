@@ -22,6 +22,10 @@ const Header = styled.div`
   background-color: #253245;
   padding: 0 30px;
 
+  @media (max-width: 1000px) {
+    padding: 0 20px;
+  }
+
   & > img {
     margin-right: auto;
   }
@@ -46,6 +50,16 @@ const Header = styled.div`
       font-size: 16px;
       color: white;
     }
+
+    @media (max-width: 1000px) {
+      & > img {
+        width: 24px;
+      }
+
+      & > p {
+        font-size: 14px;
+      }
+    }
   }
   
 `
@@ -60,17 +74,12 @@ const HeaderToggle = styled.div`
   background-color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
-  & > div {
+  & > a > div {
     text-align: center;
     width: 140px;
     padding: 10px 0;
-
-    & > a {
-      width: 100%;
-      height: 100%;
-      font-size: 14px;
-      color: black;
-    }
+    font-size: 14px;
+    color: black;
   }
 `
 
@@ -97,7 +106,7 @@ export default ({ SidebarControl, sidebarBoolean }) => {
             <img alt="" src={SideButton} style={{width: 24}} onClick={SidebarControl} />
             :
             <Link to="/">
-              <img alt="" src={HeaderLogo} style={{width: 110}} />
+              <img alt="" src={HeaderLogo} style={{width: 100}} />
             </Link>
           ) : (
             <Link to="/">
@@ -110,10 +119,10 @@ export default ({ SidebarControl, sidebarBoolean }) => {
         <img alt="" src={ProfileImg} />
         <p>username</p>
         <HeaderToggle headerToggle={headerToggle.value}>
-          <div><Link to="/profile">프로필</Link></div>
-          <div><Link to="/">내 브랜드</Link></div>
-          <div><Link>설정</Link></div>
-          <div><Link>로그아웃</Link></div>
+          <Link to="/profile"><div>프로필</div></Link>
+          {/* <Link to="/"><div>내 브랜드</div></Link> */}
+          <Link to="/setting"><div>설정</div></Link>
+          <Link><div>로그아웃</div></Link>
         </HeaderToggle>
       </div>
     </Header>

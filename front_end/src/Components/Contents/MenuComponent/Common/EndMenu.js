@@ -9,7 +9,7 @@ const Container = styled.div`
   }
 `
 
-export default () => {
+export default ({ confirmState, confirmTextState }) => {
   const MenuData = useInput([
     {
       id: 0,
@@ -39,6 +39,7 @@ export default () => {
             type="end"  
             data={item}
             link={`/menu/post/${item.id}`}
+            confirmState={confirmState}
           />
         )
       })}

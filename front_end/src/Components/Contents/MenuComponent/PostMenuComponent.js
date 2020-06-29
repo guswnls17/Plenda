@@ -20,10 +20,6 @@ export default withRouter(({ history, match }) => {
       <ContentsHeader
         title={"메뉴판 관리"}
         subTitle={"메뉴판 상세정보"} 
-        // LinkButton={navBarNum.value === 1 ? {
-        //   text: "수정하기",
-        //   link: `/store/point/modify/${match.params.id}`
-        // } : ""}
         // navBarData={{
         //   num: navBarNum,
         //   data: [

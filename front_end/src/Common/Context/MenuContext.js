@@ -10,9 +10,20 @@ export const MenuProvider = ({ children }) => {
   const MenuNavNum = useInput(0);
   const PointMenuNavNum = useInput(0);
   const StaffNavNum = useInput(0);
+  const PointStaffNavNum = useInput(0);
+  const SalesNavNum = useInput(0);
 
   return (
-    <MenuContext.Provider value={{ NoticeNavNum, StoreNavNum, PointStoreNavNum, MenuNavNum, PointMenuNavNum, StaffNavNum }}>
+    <MenuContext.Provider value={{ 
+      NoticeNavNum, 
+      StoreNavNum, 
+      PointStoreNavNum, 
+      MenuNavNum, 
+      PointMenuNavNum, 
+      StaffNavNum, 
+      PointStaffNavNum, 
+      SalesNavNum 
+    }}>
       {children}
     </MenuContext.Provider>
   );
@@ -46,4 +57,14 @@ export const usePointMenuNavNum = () => {
 export const useStaffNavNum = () => {
   const { StaffNavNum } = useContext(MenuContext);
   return StaffNavNum;
+};
+
+export const usePointStaffNavNum = () => {
+  const { PointStaffNavNum } = useContext(MenuContext);
+  return PointStaffNavNum;
+};
+
+export const useSalesNavNum = () => {
+  const { SalesNavNum } = useContext(MenuContext);
+  return SalesNavNum;
 };

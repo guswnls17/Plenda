@@ -27,7 +27,7 @@ export default () => {
     <StoreItem
       data={data}
       option={false}
-      link={`/menu/point/`}
+      link={`/staff/point/`}
     />    
   )
 }
