@@ -11,7 +11,6 @@ const Container = styled.div`
 `
 
 export default withRouter(({ match }) => {
-  console.log(match.params.id)
 
   const payment = useInput({
     bank: "기업은행",

@@ -34,7 +34,7 @@ const BasicButton = styled.div`
 export default ({ text, link, onClick }) => {
   return (
     <BasicButton onClick={onClick}>
-      <Link to={link}>
+      <Link to={link ? link : "#"}>
         <div>
           <p>{text}</p>
         </div>

@@ -19,6 +19,7 @@ export default () => {
           {...confirmState}
           title={"메뉴판 변경사항"}
           text={confirmTextState.value}
+          trueOnClick={()=>{}}
         />
       }
     </>

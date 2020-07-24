@@ -1,33 +1,26 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import StoreItem from '../../../../Common/Item/StoreItem/StoreItem';
+import NullItem from '../../../../Common/Item/NullItem/NullItem';
 
-const data = [
-  {
-    id: 1,
-    img: "https://image.chosun.com/sitedata/image/201708/23/2017082302455_0.jpg",
-    store: "신림점",
-    manager: "username(매니저)"
-  },
-  {
-    id: 2,
-    img: "https://image.chosun.com/sitedata/image/201708/23/2017082302455_0.jpg",
-    store: "신림점",
-    manager: "username(매니저)"
-  },
-  {
-    id: 3,
-    img: "https://image.chosun.com/sitedata/image/201708/23/2017082302455_0.jpg",
-    store: "신림점",
-    manager: "username(매니저)"
-  },
-]
+export default ({ confirmState, confirmTextState, storeData, storeDeleteHandler}) => {
+  let params = useParams()
 
-export default ({ confirmState, confirmTextState}) => {
   return (
-    <StoreItem
-      data={data}
-      optionClick={() => {confirmState.setValue(true)}}
-      link={`/store/point/`}
-    />    
+    <>
+      { storeData.length !== 0 ?
+        <StoreItem
+          data={storeData}
+          storeDelete={storeDeleteHandler}
+          confirmState={confirmState}
+          // optionClick={() => {}}
+          link={`/store/${params.brand}/point/`}
+        />
+        :
+        <NullItem
+          text={`등록된 매장이 없습니다.\n새로운 매장을 등록해주세요.`}
+        /> 
+      }
+    </>
   )
 }

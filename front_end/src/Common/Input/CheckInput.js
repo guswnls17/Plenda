@@ -78,18 +78,19 @@ const CheckInput = styled.div`
   }
 `
 
-export default ({ title }) => {
+export default ({ title, checkdCommonData, PointStoreTagsData=[] }) => {
   const checkdState = useInput({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-    checkbox5: false,
-    checkbox6: false,
-    checkbox7: false,
-    checkbox8: false,
+    checkbox1: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('dt') === -1 ? false : true) : false,
+    checkbox2: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('patio') === -1 ? false : true) : false,
+    checkbox3: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('parking') === -1 ? false : true) : false,
+    checkbox4: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('wc') === -1 ? false : true) : false,
+    checkbox5: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('smoke') === -1 ? false : true) : false,
+    checkbox6: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('kids') === -1 ? false : true) : false,
+    checkbox7: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('pets') === -1 ? false : true) : false,
+    checkbox8: PointStoreTagsData.common_tag ? (PointStoreTagsData.common_tag.indexOf('_24h') === -1 ? false : true) : false,
   })
 
+  
   return (
     <CheckBox>
       <p>{title}</p>
@@ -101,6 +102,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox1} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox1: !checkdState.value.checkbox1})
+              if(checkdState.value.checkbox1 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "dt"])
+              } else if(checkdState.value.checkbox1 === true){
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "dt"))
+              }
             }} 
           />
           <label htmlFor="checkbox1">
@@ -117,6 +123,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox2} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox2: !checkdState.value.checkbox2})
+              if(checkdState.value.checkbox2 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "patio"])
+              } else if(checkdState.value.checkbox2 === true){
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "patio"))
+              }
             }} 
           />
           <label htmlFor="checkbox2">
@@ -133,6 +144,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox3} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox3: !checkdState.value.checkbox3})
+              if(checkdState.value.checkbox3 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "parking"])
+              } else if(checkdState.value.checkbox3 === true) {
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "parking"))
+              }
             }} 
           />
           <label htmlFor="checkbox3">
@@ -149,6 +165,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox4} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox4: !checkdState.value.checkbox4})
+              if(checkdState.value.checkbox4 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "wc"])
+              } else if(checkdState.value.checkbox4 === true) {
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "wc"))
+              }
             }} 
           />
           <label htmlFor="checkbox4">
@@ -165,6 +186,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox5} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox5: !checkdState.value.checkbox5})
+              if(checkdState.value.checkbox5 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "smoke"])
+              } else if(checkdState.value.checkbox5 === true) {
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "smoke"))
+              }
             }} 
           />
           <label htmlFor="checkbox5">
@@ -181,6 +207,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox6} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox6: !checkdState.value.checkbox6})
+              if(checkdState.value.checkbox6 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "kids"])
+              } else if(checkdState.value.checkbox6 === true) {
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "kids"))
+              }
             }} 
           />
           <label htmlFor="checkbox6">
@@ -197,6 +228,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox7} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox7: !checkdState.value.checkbox7})
+              if(checkdState.value.checkbox7 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "pets"])
+              } else if(checkdState.value.checkbox7 === true) {
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "pets"))
+              }
             }} 
           />
           <label htmlFor="checkbox7">
@@ -213,6 +249,11 @@ export default ({ title }) => {
             checked={checkdState.value.checkbox8} 
             onChange={(e) => {
               checkdState.setValue({...checkdState.value, checkbox8: !checkdState.value.checkbox8})
+              if(checkdState.value.checkbox8 === false) {
+                checkdCommonData.setValue([...checkdCommonData.value, "_24h"])
+              } else if(checkdState.value.checkbox8 === true) {
+                checkdCommonData.setValue(checkdCommonData.value.filter(checkd => checkd !== "_24h"))
+              }
             }} 
           />
           <label htmlFor="checkbox8">

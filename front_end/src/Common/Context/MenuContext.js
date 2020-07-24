@@ -13,6 +13,24 @@ export const MenuProvider = ({ children }) => {
   const PointStaffNavNum = useInput(0);
   const SalesNavNum = useInput(0);
 
+  const confirmState = useInput({
+    boolean: false,
+    title: "",
+    text: "",
+    trueOnClick: () => {}
+  })
+
+  const alertState = useInput({
+    boolean: false,
+    text: "",
+  })
+
+  const adressState = useInput({
+    adressModalNum: 0,
+    boolean: false,
+    adress: ""
+  })
+
   return (
     <MenuContext.Provider value={{ 
       NoticeNavNum, 
@@ -22,7 +40,10 @@ export const MenuProvider = ({ children }) => {
       PointMenuNavNum, 
       StaffNavNum, 
       PointStaffNavNum, 
-      SalesNavNum 
+      SalesNavNum,
+      confirmState,
+      alertState,
+      adressState
     }}>
       {children}
     </MenuContext.Provider>
@@ -67,4 +88,19 @@ export const usePointStaffNavNum = () => {
 export const useSalesNavNum = () => {
   const { SalesNavNum } = useContext(MenuContext);
   return SalesNavNum;
+};
+
+export const useConfirmState = () => {
+  const { confirmState } = useContext(MenuContext);
+  return confirmState;
+};
+
+export const useAlertState = () => {
+  const { alertState } = useContext(MenuContext);
+  return alertState;
+};
+
+export const useAdressState = () => {
+  const { adressState } = useContext(MenuContext);
+  return adressState;
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -79,16 +79,23 @@ const ErrText = styled.div`
   }
 `
 
-export default ({ text, type, onChange, value, style, errState=false, errText }) => {
+export default ({ text, type, onChange, value, style, errState=false, errText, onKeyDown }) => {
   const [focusState, setFocusState] = useState(false);
+
+  useEffect(() => {
+    if(value){
+      setFocusState(true);
+    }
+  }, [setFocusState, value])
 
   return (
     <Container>
       <BoxInput focusState={focusState} style={style} errState={errState.value ? errState.value : false}>
         <legend>{focusState ? text : ""}</legend>
-        <label htmlFor="input" className={focusState ? "active" : ""}>{text}</label>
+        <label htmlFor={text} className={focusState ? "active" : ""}>{text}</label>
         <input 
-          id="input"
+          id={text}
+          onKeyDown={onKeyDown}
           type={type}
           onChange={onChange}
           value={value} 

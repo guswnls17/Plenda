@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import useInput from '../../../../Common/Hooks/chackdInput';
-import moment from 'moment';
 import TimeBorad from '../../../../Common/Item/Borad/TimeBorad';
 
 const Container = styled.div`
@@ -11,7 +9,16 @@ const Container = styled.div`
   }
 `
 
-export default ({ data, category, link }) => {
+export default ({ 
+  MonState,
+  TueState,
+  WedState,
+  ThuState,
+  FriState,
+  SatState,
+  SunState
+}) => {
+
   const toggledata = [
     {
       "category": "매장운영"
@@ -20,120 +27,42 @@ export default ({ data, category, link }) => {
       "category": "매장휴무"
     },
   ]
-
-  const Monday = useInput({
-    openstore: true,
-    operating: {
-      start: moment(new Date()).format('09:00'),
-      end: moment(new Date()).format('22:00')
-    },
-    braketime: {
-      start: moment(new Date()).format('15:00'),
-      end: moment(new Date()).format('17:00')
-    }
-  });
-  const Tuesday = useInput({
-    openstore: true,
-    operating: {
-      start: moment(new Date()).format('09:00'),
-      end: moment(new Date()).format('22:00')
-    },
-    braketime: {
-      start: moment(new Date()).format('15:00'),
-      end: moment(new Date()).format('17:00')
-    }
-  });
-  const Wednesday = useInput({
-    openstore: true,
-    operating: {
-      start: moment(new Date()).format('09:00'),
-      end: moment(new Date()).format('22:00')
-    },
-    braketime: {
-      start: moment(new Date()).format('15:00'),
-      end: moment(new Date()).format('17:00')
-    }
-  });
-  const Thursday = useInput({
-    openstore: true,
-    operating: {
-      start: moment(new Date()).format('09:00'),
-      end: moment(new Date()).format('22:00')
-    },
-    braketime: {
-      start: moment(new Date()).format('15:00'),
-      end: moment(new Date()).format('17:00')
-    }
-  });
-  const Friday = useInput({
-    openstore: true,
-    operating: {
-      start: moment(new Date()).format('09:00'),
-      end: moment(new Date()).format('22:00')
-    },
-    braketime: {
-      start: moment(new Date()).format('15:00'),
-      end: moment(new Date()).format('17:00')
-    }
-  });
-  const Saturday = useInput({
-    openstore: true,
-    operating: {
-      start: moment(new Date()).format('09:00'),
-      end: moment(new Date()).format('22:00')
-    },
-    braketime: {
-      start: moment(new Date()).format('15:00'),
-      end: moment(new Date()).format('17:00')
-    }
-  });
-  const Sunday = useInput({
-    openstore: true,
-    operating: {
-      start: moment(new Date()).format('09:00'),
-      end: moment(new Date()).format('22:00')
-    },
-    braketime: {
-      start: moment(new Date()).format('15:00'),
-      end: moment(new Date()).format('17:00')
-    }
-  });
   
   return (
     <Container>
       <TimeBorad
         title={"월요일"}
-        data={Monday}
+        data={MonState}
         toggle={toggledata}
       />
       <TimeBorad
         title={"화요일"}
-        data={Tuesday}
+        data={TueState}
         toggle={toggledata}
       />
       <TimeBorad
         title={"수요일"}
-        data={Wednesday}
+        data={WedState}
         toggle={toggledata}
       />
       <TimeBorad
         title={"목요일"}
-        data={Thursday}
+        data={ThuState}
         toggle={toggledata}
       />
       <TimeBorad
         title={"금요일"}
-        data={Friday}
+        data={FriState}
         toggle={toggledata}
       />
       <TimeBorad
         title={"토요일"}
-        data={Saturday}
+        data={SatState}
         toggle={toggledata}
       />
       <TimeBorad
         title={"일요일"}
-        data={Sunday}
+        data={SunState}
         toggle={toggledata}
       />
     </Container>

@@ -11,6 +11,7 @@ import KakaoLogin from '../../Images/kakaoLogin.png'
 import FacebookLogin from '../../Images/facebookLogin.png'
 import NaverLogin from '../../Images/naverLogin.png'
 import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
+import chackdInput from '../../Common/Hooks/chackdInput';
 
 const AuthFrom = styled.div`
   margin-top: 20px;
@@ -112,13 +113,30 @@ const SocialLogin = styled.div`
   }
 `
 
-export default ({ alertState }) => {
-  const emailState = useInput("");
+export default ({ alertState, LoginControl }) => {
+  const localId = localStorage.getItem("idsave");
+  const emailState = useInput(localId ? localId : "");
   const passwordState = useInput("");
+  const idSaveState = chackdInput(localId ? true : false);
+
+  const IdSaveControl = () => {
+    if(idSaveState.value) {
+      localStorage.setItem("idsave", emailState.value);
+    } else {
+      localStorage.removeItem("idsave");
+    }
+  }
 
   const LoginHandler = () => {
-    if(emailState.value === "" || passwordState.value === "") {
-      alertState.setValue(true);
+    try {
+      if(emailState.value === "" || passwordState.value === "") {
+        alertState.setValue(true);
+      } else {
+        LoginControl(emailState.value, passwordState.value)
+        IdSaveControl()
+      }
+    } catch(e) {
+      console.log(e)
     }
   }
 
@@ -135,9 +153,15 @@ export default ({ alertState }) => {
           {...passwordState}
           text={"Password"}
           type={"password"}
+          onKeyDown={(e) => {
+            if(e.key === "Enter"){
+              LoginHandler();
+            }
+          }}
         />
         <ChackContainer>
           <ChackBox
+            {...idSaveState}
             id={"idChack"}
             text={"아이디저장"}
           />

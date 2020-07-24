@@ -32,11 +32,9 @@ export default withRouter(({ history }) => {
           data: [
             {
               text: "플렌다",
-              link: "/notice"
             },
             {
               text: "브랜드",
-              link: "/notice"
             }
           ]
         }}

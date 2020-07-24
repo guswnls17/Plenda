@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 import InfoIcon from '../../Images/infoIcon.png'
+import BrandBasicImg from '../../Images/brandBasicImg.png'
 
 const Sidebar = styled.div`
   position: fixed;
@@ -39,7 +40,8 @@ const BrandProfile = styled.div`
     overflow: hidden;
 
     & > img {
-      width: 60px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
   }
@@ -113,29 +115,35 @@ const Item = styled.div`
   }
 `
 
-export default ({ sidebar }) => {
+export default ({ sidebar, detailBrand }) => {
+  let params = useParams()
 
   return (
     <Sidebar sidebar={sidebar}>
-      <BrandProfile>
-        <div>
-          <img alt="" src={"https://modo-phinf.pstatic.net/20190510_79/1557487249108wjhDH_JPEG/mosakOAmIU.jpeg?type=f320_320"} />
-        </div>
-        <div>
-          <p>할리스커피</p>
-          <p>본사</p>
-          <p>마스터Master</p>
-        </div>
-      </BrandProfile>
+      {
+        detailBrand ?
+        <BrandProfile>
+          <div>
+            <img alt="" src={detailBrand.thumbnail ? `http://test.plendar.com/api/image/fetch/thumbnail/${detailBrand.thumbnail}` : BrandBasicImg }/>
+          </div>
+          <div>
+            <p>{detailBrand.store_name ? detailBrand.store_name : "미등록"}</p>
+            {/* <p>본사</p> */}
+            <p>마스터Master</p>
+          </div>
+        </BrandProfile>
+        :
+        null
+      }
       <Menu>
         <Item>
-          <NavLink to={"/infobrand"} activeClassName={"active"}>
+          <NavLink to={`/infobrand/${params.brand}`} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20, marginTop: 3 }}/>
             <p>브랜드 정보</p>
           </NavLink>
         </Item>
         <Item>
-          <NavLink strict to={"/notice"} activeClassName={"active"}>
+          <NavLink strict to={`/notice/${params.brand}`} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>공지사항</p>
           </NavLink>
@@ -144,31 +152,31 @@ export default ({ sidebar }) => {
           <div/>
         </Line>
         <Item>
-          <NavLink to={"/dashbord"} activeClassName={"active"}>
+          <NavLink to={`/dashbord/${params.brand}`} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>대쉬보드</p>
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={"/store"} activeClassName={"active"}>
+          <NavLink to={`/store/${params.brand}`} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>매장 관리</p>
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={"/menu"} activeClassName={"active"}>
+          <NavLink to={`/menu/${params.brand}`} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>메뉴판 관리</p>
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={"/staff"} activeClassName={"active"}>
+          <NavLink to={`/staff/${params.brand}`} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>스태프 관리</p>
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={"/sales"} activeClassName={"active"}>
+          <NavLink to={`/sales/${params.brand}`} activeClassName={"active"}>
             <img alt="" src={InfoIcon} style={{ width: 20 }}/>
             <p>매출 관리</p>
           </NavLink>

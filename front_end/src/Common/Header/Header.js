@@ -83,7 +83,7 @@ const HeaderToggle = styled.div`
   }
 `
 
-export default ({ SidebarControl, sidebarBoolean }) => {
+export default ({ SidebarControl, sidebarBoolean, LogoutHandler }) => {
   const headerToggle = useInput(false);
 
   const HeaderToggleControler = () => {
@@ -122,7 +122,7 @@ export default ({ SidebarControl, sidebarBoolean }) => {
           <Link to="/profile"><div>프로필</div></Link>
           {/* <Link to="/"><div>내 브랜드</div></Link> */}
           <Link to="/setting"><div>설정</div></Link>
-          <Link><div>로그아웃</div></Link>
+          <Link to="" onClick={LogoutHandler}><div>로그아웃</div></Link>
         </HeaderToggle>
       </div>
     </Header>

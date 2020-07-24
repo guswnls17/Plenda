@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import OptionToggle from '../../Toggle/OptionToggle';
+import { useConfirmState } from '../../Context/MenuContext';
+import StoreBasicImg from '../../../Images/storeBasicImg.png'
 
 const StoreItem = styled.div`
   width: 100%;
@@ -66,18 +68,22 @@ const StoreItem = styled.div`
   }
 `
 
-export default ({ data, option=true, link, optionClick }) => {
+export default ({ data, option=true, link, optionClick, storeDelete }) => {
+  let params = useParams();
+  const confirmState = useConfirmState();
+
   return (
     <div>
       { data.map((item, index) => {
           return (
             <StoreItem key={index}>
-              <Link to={link + item.id}>
+              <Link to={link + item.store_id}>
                 <div>
-                  <img alt="" src={item.img} />
+                  <img alt="" src={item.thumbnail ? `http://test.plendar.com/api/image/fetch/thumbnail/${item.thumbnail}` : StoreBasicImg} />
                 </div>
                 <div>
-                  <p>{item.store}</p>
+                  <p>{item.alter_name}</p>
+                  <p>{item.role ? item.role : "미등록" }</p>
                   <p>{item.manager}</p>
                 </div>
               </Link>
@@ -87,7 +93,22 @@ export default ({ data, option=true, link, optionClick }) => {
                     data={[
                       {
                         category: "삭제",
-                        onClick: optionClick
+                        onClick: () => {
+                          try {
+                            confirmState.setValue({
+                              boolean: true,
+                              title: "메뉴판 변경사항",
+                              text: "신림역점 매장을\n정말 삭제하시겠습니까?",
+                              trueOnClick: async() => {
+                                await storeDelete(params.brand, item.store_id)
+                                confirmState.setValue({...confirmState, boolean: false})
+                              }
+                            });
+                          } catch(e) {
+                            console.log(e);
+                            alert(e);
+                          }
+                        }
                       },
                     ]}
                   />

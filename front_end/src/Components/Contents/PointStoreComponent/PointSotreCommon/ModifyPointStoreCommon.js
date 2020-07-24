@@ -28,7 +28,8 @@ export default ({
   storeImg,
   thumImg,
   markerImg,
-  checkdCommonData
+  checkdCommonData,
+  PointStoreTagsData,
 }) => {
   
   return (
@@ -79,6 +80,7 @@ export default ({
       <CheckInput
         title={"매장속성"}
         checkdCommonData={checkdCommonData}
+        PointStoreTagsData={PointStoreTagsData}
       />
       <ImgInput
         {...storeImg}

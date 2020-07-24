@@ -23,6 +23,7 @@ const Modal = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 20px;
 
   /* @media (max-width: 500px) {
     width: calc(100% - 40px);
@@ -34,7 +35,9 @@ const Modal = styled.div`
     text-align: center;
     line-height: 22px;
     color: #000000;
-    white-space:pre;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-line;
   }
 
   & > div {

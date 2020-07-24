@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import ContentsBorad from '../../../../Common/Item/Borad/ContentsBorad';
 import useInput from '../../../../Common/Hooks/useInput';
+import { useConfirmState } from '../../../../Common/Context/MenuContext';
+import { useDispatch } from 'react-redux';
+import { storeDelete } from '../../../../store/modules/store';
+import { useParams, useHistory } from 'react-router-dom';
 
 const Container = styled.div`
   & > div + div {
@@ -9,7 +13,12 @@ const Container = styled.div`
   }
 `
 
-export default ({ confirmState, confirmTextState }) => {
+export default () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const history = useHistory();
+  const confirmState = useConfirmState();
+
   const payment = useInput({
     bank: "기업은행",
     account: "221-65986-65487",
@@ -29,7 +38,23 @@ export default ({ confirmState, confirmTextState }) => {
         button={{
           text:"삭제하기",
           // link: "",
-          onClick:()=>{ confirmState.setValue(true)},
+          onClick:()=>{
+            try {
+              confirmState.setValue({
+                boolean: true,
+                title: "메뉴판 변경사항",
+                text: "신림역점 매장을\n정말 삭제하시겠습니까?",
+                trueOnClick: async() => {
+                  await dispatch(storeDelete(params.brand, params.id))
+                  await confirmState.setValue({...confirmState, boolean: false})
+                  history.push(`/store/${params.brand}`);
+                }
+              });
+            } catch(e) {
+              console.log(e);
+              alert(e);
+            }
+          },
         }}
       />
     </Container>    

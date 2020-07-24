@@ -49,20 +49,21 @@ const ImgBox = styled.div`
   }
 `
 
-export default ({ title, img, value, setValue, imgWidth, imgHeight }) => {
+export default ({ title, img, value=[], setValue, imgWidth, imgHeight, type, imgData }) => {
 
   return (
     <ImgInput>
       {title && <p>{title}</p>}
       <div>
-        {value.map((item, index) => {
-          return (
-            <ImgBox key={index} imgWidth={imgWidth} imgHeight={imgHeight}>
-              <div>
-                <img alt="" src={item.img ? item.img : BrandBasicImg} />
-              </div>
-            </ImgBox>
-          )
+        {imgData &&
+          imgData.map((item, index) => {
+            return (
+              <ImgBox key={index} imgWidth={imgWidth} imgHeight={imgHeight}>
+                <div>
+                  <img alt="" src={item ? `http://test.plendar.com/api/image/fetch/${type}/${item}` : BrandBasicImg} />
+                </div>
+              </ImgBox>
+            )
         })}
       </div>
     </ImgInput>

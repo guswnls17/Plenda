@@ -90,7 +90,7 @@ export default ({ data=[], fullText, controlData, type, style, toggleTextState }
 
   useEffect(() => {
     if(type === "time"){
-      if(controlData.value.openstore === true) {
+      if(!controlData.value.isClosed) {
         toggleText.setValue("매장운영")
       } else {
         toggleText.setValue("매장휴무")
@@ -125,9 +125,9 @@ export default ({ data=[], fullText, controlData, type, style, toggleTextState }
                   }
                   if(type === "time") {
                     if(item.category === "매장운영"){
-                      controlData.setValue({...controlData.value, openstore: true})
+                      controlData.setValue({...controlData.value, isClosed: false})
                     } else {
-                      controlData.setValue({...controlData.value, openstore: false})
+                      controlData.setValue({...controlData.value, isClosed: true})
                     }
                   }
                 }}

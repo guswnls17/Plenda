@@ -55,7 +55,7 @@ export default ({ bordHeader }) => {
       <div><img alt="" src={bordHeader.iconBoxImg}/></div>
       <p>{bordHeader.title}</p>
       <Link to={bordHeader.link}>
-        <p>more ›</p>
+        <p onClick={bordHeader.linkonClick}>more ›</p>
       </Link>
     </BordHeader>
   )

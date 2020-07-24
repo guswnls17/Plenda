@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ImgInput from '../../../../Common/Input/ImgInput';
 import LineInput from '../../../../Common/Input/LineInput';
-import useInput from '../../../../Common/Hooks/useInput';
 
 const ContentsBox = styled.div`
   background-color: white;
@@ -16,16 +15,7 @@ const ContentsBox = styled.div`
   }
 `
 
-export default ({ adress, adressModal }) => {
-  const brandName = useInput("");
-  const businessNum = useInput("");
-  const phoneNum = useInput("");
-  const imgData = useInput([
-    {
-      img: "",
-      preView: "",
-    }
-  ]);
+export default ({ adress, adressModal, brandName, businessNum, phoneNum, imgData }) => {
 
   return (
     <ContentsBox>
@@ -57,7 +47,7 @@ export default ({ adress, adressModal }) => {
         {...adress}
         title={"주소"}
         type={"adress"}
-        adressOnClick={()=>{adressModal.setValue(true)}}
+        adressOnClick={()=>{adress.setValue({...adress.value, boolean: true })}}
         placeholder={"브랜드 주소를 입력해주세요."}
       />
     </ContentsBox>

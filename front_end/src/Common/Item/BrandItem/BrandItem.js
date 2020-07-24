@@ -49,13 +49,13 @@ const BrandItem = styled.div`
   }
 `
 
-export default ({ img, title, text }) => {
+export default ({ img, title, text, id }) => {
   return (
     <BrandItem>
-      <Link to="/dashbord">
+      <Link to={`/dashbord/${id}`}>
         <div>
           {img ?
-            <img alt="" src={img} />
+            <img alt="" src={`http://test.plendar.com/api/image/fetch/thumbnail/${img}`} />
             :
             <img alt="" src={BrandBasicImg} />
           }

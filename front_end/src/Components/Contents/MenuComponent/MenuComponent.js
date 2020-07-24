@@ -26,7 +26,7 @@ export default withRouter(({ history, match }) => {
         // subTitle={"신림역점"} 
         LinkButton={navBarNum.value === 0 ? {
           text: "메뉴판 등록하기",
-          link: `/menu/add`
+          link: `/menu/${match.params.brand}/add`
         } : ""}
         navBarData={{
           num: navBarNum,

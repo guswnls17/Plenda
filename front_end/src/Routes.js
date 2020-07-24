@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from "react-router-dom";
 import LoginPage from './Pages/Auth/LoginPage';
 import SignupPage from './Pages/Auth/SignupPage';
@@ -32,13 +32,22 @@ import ProfilePage from './Pages/Profile/ProfilePage';
 import AddProfilePage from './Pages/Profile/AddProfilePage';
 import SettingPage from './Pages/Setting/SettingPage';
 import PwChangePage from './Pages/Setting/PwChangePage';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { loaduser} from './store/modules/auth';
 
 const Routes = () => {
+  const dispatch = useDispatch();
+  const {user} = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if(!user) {
+      dispatch(loaduser())
+    }
+  }, [user, dispatch])
 
   return (
     <Switch>
-      {false ?
+      {!user ?
         <>
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/signup" component={SignupPage} />
@@ -47,31 +56,31 @@ const Routes = () => {
         :
         <>
           <Route exact path="/" component={BrandPage} />
-          <Route exact path="/dashbord" component={DashbordPage} />
           <Route exact path="/addbrand" component={AddBrandPage} />
-          <Route exact path="/infobrand" component={InfoBrandPage} />
-          <Route exact path="/infobrand/modify" component={ModifyBrandPage} />
-          <Route exact path="/notice" component={NoticePage} />
-          <Route exact path="/notice/postplenda/:id" component={PlendaPostPage} />
-          <Route exact path="/notice/postbrand/:id" component={BrandPostPage} />
-          <Route exact path="/notice/add" component={AddNoticePage} />
-          <Route exact path="/store" component={StorePage} />
-          <Route exact path="/store/add" component={AddStorePage} />
-          <Route exact path="/store/point" component={PointStorePage} />
-          <Route exact path="/store/point/:id" component={PointStorePage} />
-          <Route exact path="/store/point/modify/:id" component={ModifyPointStorePage} />
-          <Route exact path="/store/point/payment/:id" component={PaymentModifyPage} />
-          <Route exact path="/store/point/zeropay/:id" component={ZeroPayPage} />
-          <Route exact path="/store/point/operating/:id" component={ModifyOperatingPage} />
-          <Route exact path="/menu" component={MenuPage} />
-          <Route exact path="/menu/next" component={NextMenuPage} />
-          <Route exact path="/menu/end" component={EndMenuPage} />
-          <Route exact path="/menu/post/:id" component={PostMenuPage} />
-          <Route exact path="/menu/add" component={AddMenuPage} />
-          <Route exact path="/menu/point/:id" component={PointMenuPage} />
-          <Route exact path="/staff" component={StaffPage} />
-          <Route exact path="/staff/point/:id" component={PointStaffPage} />
-          <Route exact path="/sales" component={SalesPage} />
+          <Route exact path="/dashbord/:brand" component={DashbordPage} />
+          <Route exact path="/infobrand/:brand" component={InfoBrandPage} />
+          <Route exact path="/infobrand/:brand/modify" component={ModifyBrandPage} />
+          <Route exact path="/notice/:brand" component={NoticePage} />
+          <Route exact path="/notice/:brand/postplenda/:id" component={PlendaPostPage} />
+          <Route exact path="/notice/:brand/postbrand/:id" component={BrandPostPage} />
+          <Route exact path="/notice/:brand/add" component={AddNoticePage} />
+          <Route exact path="/store/:brand" component={StorePage} />
+          <Route exact path="/store/:brand/add" component={AddStorePage} />
+          <Route exact path="/store/:brand/point" component={PointStorePage} />
+          <Route exact path="/store/:brand/point/:id" component={PointStorePage} />
+          <Route exact path="/store/:brand/point/modify/:id" component={ModifyPointStorePage} />
+          <Route exact path="/store/:brand/point/payment/:id" component={PaymentModifyPage} />
+          <Route exact path="/store/:brand/point/zeropay/:id" component={ZeroPayPage} />
+          <Route exact path="/store/:brand/point/operating/:id" component={ModifyOperatingPage} />
+          <Route exact path="/menu/:brand" component={MenuPage} />
+          <Route exact path="/menu/:brand/next" component={NextMenuPage} />
+          <Route exact path="/menu/:brand/end" component={EndMenuPage} />
+          <Route exact path="/menu/:brand/post/:id" component={PostMenuPage} />
+          <Route exact path="/menu/:brand/add" component={AddMenuPage} />
+          <Route exact path="/menu/:brand/point/:id" component={PointMenuPage} />
+          <Route exact path="/staff/:brand" component={StaffPage} />
+          <Route exact path="/staff/:brand/point/:id" component={PointStaffPage} />
+          <Route exact path="/sales/:brand" component={SalesPage} />
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/profile/add" component={AddProfilePage} />
           <Route exact path="/setting" component={SettingPage} />

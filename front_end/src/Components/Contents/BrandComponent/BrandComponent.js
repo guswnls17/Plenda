@@ -20,24 +20,7 @@ const BrandItemBox = styled.div`
   }
 `
 
-export default () => {
-  const data = [
-    {
-      img: "https://t1.daumcdn.net/cfile/tistory/223BA433586D069517",
-      title: "할리스커피",
-      text: "마스터Master"
-    },
-    {
-      img: "https://dimg.donga.com/wps/NEWS/IMAGE/2013/06/05/55655998.3.jpg",
-      title: "스타벅스",
-      text: "매니저Manager"
-    },
-    {
-      img: "https://modo-phinf.pstatic.net/20190510_79/1557487249108wjhDH_JPEG/mosakOAmIU.jpeg?type=f320_320",
-      title: "비엔나커피",
-      text: "매니저Manager"
-    },
-  ]
+export default ({ brand }) => {
   return (
     <ContentsTemplate sidebarBoolean={false} bgColor={"#ffffff"}>
       <ContentsHeader 
@@ -53,22 +36,28 @@ export default () => {
         //   uploadClick: ""
         // }} 
       />
-      <ContentsBody>
-        <BrandItemBox>
-          {
-            data.map((item, index)=>{
-              return(
-                <BrandItem
-                  key={index}
-                  img={item.img}
-                  title={item.title}
-                  text={item.text}
-                />
-              )
-            })
-          }
-        </BrandItemBox>
-      </ContentsBody>
+      {
+        brand ?
+        <ContentsBody>
+          <BrandItemBox>
+            {
+              brand.map((item, index)=>{
+                return(
+                  <BrandItem
+                    key={index}
+                    img={item.thumbnail}
+                    title={item.store_name}
+                    text={item.role}
+                    id={item.bs_id}
+                  />
+                )
+              })
+            }
+          </BrandItemBox>
+        </ContentsBody>
+        :
+        null
+      }
     </ContentsTemplate> 
   )
 }

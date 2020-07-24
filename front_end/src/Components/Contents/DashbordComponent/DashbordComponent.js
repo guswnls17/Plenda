@@ -4,6 +4,7 @@ import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
 import DashbordHeader from '../../../Common/Header/DashbordHeader';
 import DashbordItem from '../../../Common/Item/DashbordItem/DashbordItem';
 import { useNoticeNavNum, useStoreNavNum, useMenuNavNum, useStaffNavNum } from '../../../Common/Context/MenuContext';
+import { useParams } from 'react-router-dom';
 
 import NoticeIcon from '../../../Images/noticeIcon.png'
 
@@ -29,6 +30,8 @@ const DashbordItemBox = styled.div`
 `
 
 export default ({ confirmState, confirmTextState}) => {
+  let params = useParams()
+
   const plendaNoticeData = [
     {
       title: "결재시스템 점검안내1",
@@ -116,7 +119,7 @@ export default ({ confirmState, confirmTextState}) => {
               iconBoxImg: NoticeIcon,
               link: () => {
                 noticeNavNum.setValue(0)
-                return "/notice"
+                return `/notice/${params.brand}`
               }
             }}
             list={{
@@ -148,9 +151,9 @@ export default ({ confirmState, confirmTextState}) => {
               title: "브랜드 공지사항",
               iconBoxColor: "#6FCF97",
               iconBoxImg: NoticeIcon,
+              linkonClick: () => noticeNavNum.setValue(1),
               link: () => {
-                noticeNavNum.setValue(1)
-                return "/notice"
+                return `/notice/${params.brand}`
               }
             }}
             list={{
@@ -191,9 +194,9 @@ export default ({ confirmState, confirmTextState}) => {
               title: "매장정보 변경사항",
               iconBoxColor: "#56CCF2",
               iconBoxImg: NoticeIcon,
+              linkonClick: () => storeNavNum.setValue(1),
               link: () => {
-                storeNavNum.setValue(1)
-                return "/store"
+                return `/store/${params.brand}`
               }
             }}
             list={{
@@ -227,7 +230,7 @@ export default ({ confirmState, confirmTextState}) => {
               iconBoxImg: NoticeIcon,
               link: () => {
                 menuNavNum.setValue(0)
-                return "/menu"
+                return `/menu/${params.brand}`
               }
             }}
             ContentsData={[
@@ -276,7 +279,7 @@ export default ({ confirmState, confirmTextState}) => {
               iconBoxImg: NoticeIcon,
               link: () => {
                 staffNavNum.setValue(0)
-                return "/staff"
+                return `/staff/${params.brand}`
               }
             }}
             ContentsData={[
@@ -325,7 +328,7 @@ export default ({ confirmState, confirmTextState}) => {
               iconBoxColor: "#6FCF97",
               iconBoxImg: NoticeIcon,
               link: () => {
-                return "/sales"
+                return `/sales/${params.brand}`
               }
             }}
             chartBoolean={true}
@@ -338,7 +341,7 @@ export default ({ confirmState, confirmTextState}) => {
               iconBoxColor: "#F2C94C",
               iconBoxImg: NoticeIcon,
               link: () => {
-                return "/sales"
+                return `/sales/${params.brand}`
               }
             }}
             ContentsData={[

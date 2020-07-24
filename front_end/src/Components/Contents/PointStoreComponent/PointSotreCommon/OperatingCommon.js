@@ -9,47 +9,42 @@ const Container = styled.div`
   }
 `
 
-export default withRouter(({ match, CloseModalBoolean }) => {
+export default withRouter(({ match, CloseModalBoolean, operatingData }) => {
   const plendaNoticeData = [
     {
       day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
+      time: operatingData.hours.length !== 0 ? (operatingData.hours[0].isClosed === "N" ? (operatingData.hours[0].open24 !== "Y" ? `${operatingData.hours[0].startsAt ? operatingData.hours[0].startsAt : "미등록"} ~ ${operatingData.hours[0].endsAt ? operatingData.hours[0].endsAt : "미등록"}` : "24시간 영업") : "휴무일") : "미등록",
+      brake: operatingData.hours.length !== 0 ? (operatingData.hours[0].isClosed === "N" ? (operatingData.hours[0].open24 !== "Y" ? `${operatingData.hours[0].breakFrom ? operatingData.hours[0].breakFrom : "미등록"} ~ ${operatingData.hours[0].breakBy ? operatingData.hours[0].breakBy : "미등록"}` : "없음") : "없음" ) : "미등록",
     },
     {
-      day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
+      day: "화요일",
+      time: operatingData.hours.length !== 0 ? (operatingData.hours[1].isClosed === "N" ? (operatingData.hours[1].open24 !== "Y" ? `${operatingData.hours[1].startsAt ? operatingData.hours[1].startsAt : "미등록"} ~ ${operatingData.hours[1].endsAt ? operatingData.hours[1].endsAt : "미등록"}` : "24시간 영업") : "휴무일") : "미등록",
+      brake: operatingData.hours.length !== 0 ? (operatingData.hours[1].isClosed === "N" ? (operatingData.hours[1].open24 !== "Y" ? `${operatingData.hours[1].breakFrom ? operatingData.hours[1].breakFrom : "미등록"} ~ ${operatingData.hours[1].breakBy ? operatingData.hours[1].breakBy : "미등록"}` : "없음") : "없음" ) : "미등록",
     },
     {
-      day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
+      day: "수요일",
+      time: operatingData.hours.length !== 0 ? (operatingData.hours[2].isClosed === "N" ? (operatingData.hours[2].open24 !== "Y" ? `${operatingData.hours[2].startsAt ? operatingData.hours[2].startsAt : "미등록"} ~ ${operatingData.hours[2].endsAt ? operatingData.hours[2].endsAt : "미등록"}` : "24시간 영업") : "휴무일") : "미등록",
+      brake: operatingData.hours.length !== 0 ? (operatingData.hours[2].isClosed === "N" ? (operatingData.hours[2].open24 !== "Y" ? `${operatingData.hours[2].breakFrom ? operatingData.hours[2].breakFrom : "미등록"} ~ ${operatingData.hours[2].breakBy ? operatingData.hours[2].breakBy : "미등록"}` : "없음") : "없음" ) : "미등록",
     },
     {
-      day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
+      day: "목요일",
+      time: operatingData.hours.length !== 0 ? (operatingData.hours[3].isClosed === "N" ? (operatingData.hours[3].open24 !== "Y" ? `${operatingData.hours[3].startsAt ? operatingData.hours[3].startsAt : "미등록"} ~ ${operatingData.hours[3].endsAt ? operatingData.hours[3].endsAt : "미등록"}` : "24시간 영업") : "휴무일") : "미등록",
+      brake: operatingData.hours.length !== 0 ? (operatingData.hours[3].isClosed === "N" ? (operatingData.hours[3].open24 !== "Y" ? `${operatingData.hours[3].breakFrom ? operatingData.hours[3].breakFrom : "미등록"} ~ ${operatingData.hours[3].breakBy ? operatingData.hours[3].breakBy : "미등록"}` : "없음") : "없음" ) : "미등록",
     },
     {
-      day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
+      day: "금요일",
+      time: operatingData.hours.length !== 0 ? (operatingData.hours[4].isClosed === "N" ? (operatingData.hours[4].open24 !== "Y" ? `${operatingData.hours[4].startsAt ? operatingData.hours[4].startsAt : "미등록"} ~ ${operatingData.hours[4].endsAt ? operatingData.hours[4].endsAt : "미등록"}` : "24시간 영업") : "휴무일") : "미등록",
+      brake: operatingData.hours.length !== 0 ? (operatingData.hours[4].isClosed === "N" ? (operatingData.hours[4].open24 !== "Y" ? `${operatingData.hours[4].breakFrom ? operatingData.hours[4].breakFrom : "미등록"} ~ ${operatingData.hours[4].breakBy ? operatingData.hours[4].breakBy : "미등록"}` : "없음") : "없음" ) : "미등록",
     },
     {
-      day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
+      day: "토요일",
+      time: operatingData.hours.length !== 0 ? (operatingData.hours[5].isClosed === "N" ? (operatingData.hours[5].open24 !== "Y" ? `${operatingData.hours[5].startsAt ? operatingData.hours[5].startsAt : "미등록"} ~ ${operatingData.hours[5].endsAt ? operatingData.hours[5].endsAt : "미등록"}` : "24시간 영업") : "휴무일") : "미등록",
+      brake: operatingData.hours.length !== 0 ? (operatingData.hours[5].isClosed === "N" ? (operatingData.hours[5].open24 !== "Y" ? `${operatingData.hours[5].breakFrom ? operatingData.hours[5].breakFrom : "미등록"} ~ ${operatingData.hours[5].breakBy ? operatingData.hours[5].breakBy : "미등록"}` : "없음") : "없음" ) : "미등록",
     },
     {
-      day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
-    },
-    {
-      day: "월요일",
-      time: "10:00 AM ~ 02:00 AM",
-      brake: "02:00 PM ~ 04:00 PM",
+      day: "일요일",
+      time: operatingData.hours.length !== 0 ? (operatingData.hours[6].isClosed === "N" ? (operatingData.hours[6].open24 !== "Y" ? `${operatingData.hours[6].startsAt ? operatingData.hours[6].startsAt : "미등록"} ~ ${operatingData.hours[6].endsAt ? operatingData.hours[6].endsAt : "미등록"}` : "24시간 영업") : "휴무일") : "미등록",
+      brake: operatingData.hours.length !== 0 ? (operatingData.hours[6].isClosed === "N" ? (operatingData.hours[6].open24 !== "Y" ? `${operatingData.hours[6].breakFrom ? operatingData.hours[6].breakFrom : "미등록"} ~ ${operatingData.hours[6].breakBy ? operatingData.hours[6].breakBy : "미등록"}` : "없음") : "없음" ) : "미등록",
     },
   ]
 
@@ -61,7 +56,7 @@ export default withRouter(({ match, CloseModalBoolean }) => {
         data={plendaNoticeData}
         button={{
           // text:"삭제하기",
-          link: `/store/point/operating/${match.params.id}`,
+          link: `/store/${match.params.brand}/point/operating/${match.params.id}`,
           onClick:()=>{},
         }}
         category={[

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import BasicToggle from '../../../Common/Toggle/BasicToggle';
 import TextField from '@material-ui/core/TextField';
@@ -90,6 +90,20 @@ const TimeLineItem = styled.div`
 
 export default ({ title, data, toggle }) => {
   
+  useEffect(() => {
+    if(!data.value.startsAt){
+      data.setValue({...data.value, startsAt: moment(new Date()).format("09:00")})
+    }
+    if(!data.value.endsAt){
+      data.setValue({...data.value, endsAt: moment(new Date()).format("22:00")})
+    }
+    if(!data.value.breakFrom){
+      data.setValue({...data.value, breakFrom: moment(new Date()).format("15:00")})
+    }
+    if(!data.value.breakBy){
+      data.setValue({...data.value, breakBy: moment(new Date()).format("16:00")})
+    }
+  })
 
   return (
     <ContentsBox>
@@ -106,11 +120,12 @@ export default ({ title, data, toggle }) => {
         <p>운영시간</p>
         <div>
           <TextField
-            disabled={!data.value.openstore}
+            disabled={data.value.isClosed}
             id="time"
             label="Alarm clock"
             type="time"
-            defaultValue={data.value.operating.start}
+            // value={data.value.startsAt ? data.value.startsAt : "09:00"}
+            defaultValue={data.value.startsAt ? data.value.startsAt : "09:00"}
             InputLabelProps={{
               shrink: true,
             }}
@@ -118,16 +133,17 @@ export default ({ title, data, toggle }) => {
               step: 300, // 5 min
             }}
             onChange={(e) => {
-              data.setValue({...data.value, operating:{...data.value.operating, start: moment(new Date()).format(e.target.value)}})
+              data.setValue({...data.value, startsAt: moment(new Date()).format(e.target.value)})
             }}
           />
           <p>~</p>
           <TextField
-            disabled={!data.value.openstore}
+            disabled={data.value.isClosed}
             id="time"
             label="Alarm clock"
             type="time"
-            defaultValue={data.value.operating.end}
+            // value={data.value.endsAt ? data.value.endsAt : "22:00"}
+            defaultValue={data.value.endsAt ? data.value.endsAt : "22:00"}
             InputLabelProps={{
               shrink: true,
             }}
@@ -135,7 +151,7 @@ export default ({ title, data, toggle }) => {
               step: 300, // 5 min
             }}
             onChange={(e) => {
-              data.setValue({...data.value, operating:{...data.value.operating, end: moment(new Date()).format(e.target.value)}})
+              data.setValue({...data.value, endsAt: moment(new Date()).format(e.target.value)})
             }}
           />
         </div>
@@ -144,11 +160,12 @@ export default ({ title, data, toggle }) => {
         <p>브레이크타임</p>
         <div>
           <TextField
-            disabled={!data.value.openstore}
+            disabled={data.value.isClosed}
             id="time"
             label="Alarm clock"
             type="time"
-            defaultValue={data.value.braketime.start}
+            // value={data.value.breakFrom ? data.value.breakFrom : "14:00"}
+            defaultValue={data.value.breakFrom ? data.value.breakFrom : "14:00"}
             InputLabelProps={{
               shrink: true,
             }}
@@ -156,16 +173,17 @@ export default ({ title, data, toggle }) => {
               step: 300, // 5 min
             }}
             onChange={(e) => {
-              data.setValue({...data.value, braketime:{...data.value.operating, start: moment(new Date()).format(e.target.value)}})
+              data.setValue({...data.value, breakFrom: moment(new Date()).format(e.target.value)})
             }}
           />
           <p>~</p>
           <TextField
-            disabled={!data.value.openstore}
+            disabled={data.value.isClosed}
             id="time"
             label="Alarm clock"
             type="time"
-            defaultValue={data.value.braketime.end}
+            // value={data.value.breakBy ? data.value.breakBy : "15:00"}
+            defaultValue={data.value.breakBy ? data.value.breakBy : "15:00"}
             InputLabelProps={{
               shrink: true,
             }}
@@ -173,7 +191,7 @@ export default ({ title, data, toggle }) => {
               step: 300, // 5 min
             }}
             onChange={(e) => {
-              data.setValue({...data.value, braketime:{...data.value.operating, end: moment(new Date()).format(e.target.value)}})
+              data.setValue({...data.value, breakBy: moment(new Date()).format(e.target.value)})
             }}
           />
         </div>

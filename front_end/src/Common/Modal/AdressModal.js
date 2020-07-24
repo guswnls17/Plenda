@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import DaumPostcode from 'react-daum-postcode';
 import LineInput from '../Input/LineInput';
+import useInput from '../Hooks/useInput';
 
 const Container = styled.div`
   position: fixed;
@@ -113,7 +114,10 @@ const Button = styled.div`
     }
   }
 `
-export default ({ value, setValue, adress, basicAdress, detailAdress, adressModalNum}) => {
+export default ({ value, setValue, adress, adressModalNum}) => {
+  const basicAdress = useInput("")
+  const detailAdress = useInput("")
+
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = ''; 
@@ -129,14 +133,13 @@ export default ({ value, setValue, adress, basicAdress, detailAdress, adressModa
     }
 
     basicAdress.setValue(fullAddress)
-    adressModalNum.setValue(1)
-    console.log(fullAddress);  // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    setValue({...value, adressModalNum: 1})
   }
   
   return (
     <Container>
       {
-        adressModalNum.value === 0 &&
+        adressModalNum === 0 &&
         <Modal>
           <p>주소찾기</p>
           <p>찾으실 주소를 입력해주세요.</p>
@@ -147,14 +150,14 @@ export default ({ value, setValue, adress, basicAdress, detailAdress, adressModa
             />
           </div>
           <Button>
-            <div onClick={() => setValue(false)}>
+            <div onClick={() => setValue({...value, boolean: false})}>
               <p>취소</p>
             </div>
           </Button>
         </Modal>
       }
       {
-        adressModalNum.value === 1 &&
+        adressModalNum === 1 &&
         <Modal>
           <p>상세주소 입력하기</p>
           <p>{"주소: " + basicAdress.value}</p>
@@ -167,13 +170,15 @@ export default ({ value, setValue, adress, basicAdress, detailAdress, adressModa
             />
           </div>
           <Button>
-            <div onClick={() => adressModalNum.setValue(0)}>
+            <div onClick={() => setValue(setValue({...value, adressModalNum: 0}))}>
               <p>취소</p>
             </div>
             <div onClick={async() => {
-              await setValue(false)
-              await adressModalNum.setValue(0)
-              await adress.setValue(basicAdress.value + " " + detailAdress.value)
+              await setValue({
+                adressModalNum: 0,
+                boolean: false,
+                adress: basicAdress.value + " " + detailAdress.value
+              })
               await basicAdress.setValue("")
               await detailAdress.setValue("")
             }}>

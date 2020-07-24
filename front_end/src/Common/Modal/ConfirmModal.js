@@ -90,7 +90,7 @@ const Button = styled.div`
     }
   }
 `
-export default ({ value, setValue, text, title}) => {
+export default ({ value, setValue, text, title, trueOnClick}) => {
   return (
     <Container>
       <Modal title={title}>
@@ -102,7 +102,7 @@ export default ({ value, setValue, text, title}) => {
           <div onClick={() => setValue(false)}>
             <p>취소</p>
           </div>
-          <div onClick={() => {}}>
+          <div onClick={trueOnClick}>
             <p>확인</p>
           </div>
         </Button>

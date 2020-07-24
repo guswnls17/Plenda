@@ -71,7 +71,7 @@ const AuthLinkButton = styled.div`
   }
 `
 
-export default ({ alertState }) => {
+export default ({ alertState, register }) => {
   const email = useInput("");
   const emailErr = useInput(false);
   const name = useInput("");
@@ -80,43 +80,51 @@ export default ({ alertState }) => {
   const passwordErr = useInput(false);
   const pwConfirm = useInput("");
   const pwConfirmErr = useInput(false);
+  const pwErrMessage = useInput("")
   const fullChack = chackdInput(false);
   const privacy1 = chackdInput(false);
   const privacy2 = chackdInput(false);
+
 
   function email_check( email ) {
     var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return (email !== '' && email !== 'undefined' && regex.test(email));
   }
 
-  const AlertHandler = () => {
-    if(!privacy1.value || !privacy2.value){
-      alertState.setValue(true)
+  const password_check = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  const signupHandler = async() => {
+    try {
+      if(email.value === "" || email_check( email.value ) !== true){
+        emailErr.setValue(true);
+        return
+      } else {
+        emailErr.setValue(false);
+      } if(name.value === ""){
+        nameErr.setValue(true);
+        return
+      } else {
+        nameErr.setValue(false);
+      } if(pwConfirm.value !== password.value || password.value === "" || pwConfirm.value === ""){
+        pwErrMessage.setValue("비밀번호를 확인해주세요.")
+        pwConfirmErr.setValue(true);
+        passwordErr.setValue(true);
+        return
+      } if(!password_check.test(password.value)){
+        pwErrMessage.setValue('비밀번호는 8자 이상이어야 하며, 대문자/특수문자를 포함해야 합니다.')
+        pwConfirmErr.setValue(true);
+        passwordErr.setValue(true);
+        return
+      } else {
+        pwConfirmErr.setValue(false);
+        passwordErr.setValue(false);
+      } if(!privacy1.value || !privacy2.value){
+        alertState.setValue(true)
+        return
+      }
+      register(name.value, email.value, password.value)
+    } catch (e) {
+      console.log(e)
     }
-  }
-
-  const signupHandler = () => {
-    if(email.value === "" || email_check( email.value ) !== true){
-      emailErr.setValue(true);
-      return
-    } else {
-      emailErr.setValue(false);
-    }
-    if(name.value === ""){
-      nameErr.setValue(true);
-      return
-    } else {
-      nameErr.setValue(false);
-    }
-    if(pwConfirm.value !== password.value || password.value === "" || pwConfirm.value === ""){
-      pwConfirmErr.setValue(true);
-      passwordErr.setValue(true);
-      return
-    } else {
-      pwConfirmErr.setValue(false);
-      passwordErr.setValue(false);
-    }
-    AlertHandler();
   }
 
   return (
@@ -151,7 +159,7 @@ export default ({ alertState }) => {
           <BoxInput
             {...pwConfirm}
             errState={pwConfirmErr}
-            errText={"비밀번호를 확인해주세요."}
+            errText={pwErrMessage.value}
             text={"비밀번호를 확인해주세요."}
             type={"password"}
             style={{marginTop: 14}}

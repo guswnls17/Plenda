@@ -67,7 +67,7 @@ const LineInput = styled.div`
       width: 100%;
       font-size: 16px;
       min-height: 16px;
-      height: 26px;
+      /* height: 26px; */
       line-height: 26px;
       resize: none;
       outline: none;
@@ -233,6 +233,7 @@ export default ({ title, type, onChange, value, setValue, placeholder, chackStat
         type === "textarea" && 
           <div className="text">
             <textarea
+              style={{height: value ? "auto" : 26}}
               value={value}
               onChange={onChange}
               placeholder={placeholder}
@@ -263,7 +264,7 @@ export default ({ title, type, onChange, value, setValue, placeholder, chackStat
             <div className="text">
               <input
                 disabled
-                value={value}
+                value={value.adress}
                 onChange={onChange}
                 type={type} 
                 placeholder={placeholder}

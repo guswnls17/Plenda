@@ -91,7 +91,7 @@ const ImgContainer = styled.div`
   }
 `
 
-export default ({ title, value, setValue, imgWidth, imgHeight, type }) => {
+export default ({ title, value, setValue, imgWidth, imgHeight, type, id }) => {
 
   return (
     <ImgInput >
@@ -100,7 +100,7 @@ export default ({ title, value, setValue, imgWidth, imgHeight, type }) => {
         {value.map((item, index) => {
           return (
             <ImgContainer previewImg={item.preView} key={index} imgWidth={imgWidth} imgHeight={imgHeight} type={type} >
-              <label htmlFor={`imgInput${index}`}>
+              <label htmlFor={`${id+index}`}>
                 <img alt="" src={Camera} />
               </label>
               <ImgBox previewImg={item.preView} imgWidth={imgWidth} imgHeight={imgHeight} type={type}>
@@ -119,7 +119,7 @@ export default ({ title, value, setValue, imgWidth, imgHeight, type }) => {
                   <img alt="" src={ImgClose} />
                 </div>
               </ImgBox>
-              <input id={`imgInput${index}`} type="file" 
+              <input id={`${id+index}`} type="file" 
                 onChange={(e) => {
                   let fileReader = new FileReader();
                   let file = e.target.files[0];

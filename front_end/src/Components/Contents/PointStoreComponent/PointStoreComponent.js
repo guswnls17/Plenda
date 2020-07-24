@@ -18,17 +18,16 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history, match, CloseModalBoolean, confirmState, confirmTextState }) => {
+export default withRouter(({ history, match, CloseModalBoolean, confirmState, confirmTextState, PointStoreData, PointStoreTagsData, operatingData }) => {
   const navBarNum = usePointStoreNavNum();
-
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsHeader
         title={"매장관리"}
-        subTitle={"신림역점"} 
+        subTitle={PointStoreData && PointStoreData.alter_name} 
         LinkButton={navBarNum.value === 0 ? {
           text: "수정하기",
-          link: `/store/point/modify/${match.params.id}`
+          link: `/store/${match.params.brand}/point/modify/${match.params.id}`
         } : ""}
         navBarData={{
           num: navBarNum,
@@ -57,16 +56,26 @@ export default withRouter(({ history, match, CloseModalBoolean, confirmState, co
         //   uploadClick: () => {}
         // }} 
       />
-      <ContentsBody>
-        {navBarNum.value === 0 && <InfoPointStoreCommon/>}
-        {navBarNum.value === 1 && <OperatingCommon CloseModalBoolean={CloseModalBoolean}/>}
-        {navBarNum.value === 2 && <PaymentCommon/>}
-        {navBarNum.value === 3 && <SetPoindStoreCommon
-          confirmState={confirmState}
-          confirmTextState={confirmTextState}
-        />}
-        {navBarNum.value === 4 && <ChagePointStoreCommon/>}
-      </ContentsBody>
+      {PointStoreData && PointStoreTagsData && operatingData?
+        <ContentsBody>
+          {navBarNum.value === 0 && <InfoPointStoreCommon 
+            PointStoreData={PointStoreData}
+            PointStoreTagsData={PointStoreTagsData}
+          />}
+          {navBarNum.value === 1 && <OperatingCommon 
+            CloseModalBoolean={CloseModalBoolean}
+            operatingData={operatingData}
+          />}
+          {navBarNum.value === 2 && <PaymentCommon/>}
+          {navBarNum.value === 3 && <SetPoindStoreCommon
+            confirmState={confirmState}
+            confirmTextState={confirmTextState}
+          />}
+          {navBarNum.value === 4 && <ChagePointStoreCommon/>}
+        </ContentsBody>
+        :
+        null
+      }
     </ContentsTemplate>
   )
 })
