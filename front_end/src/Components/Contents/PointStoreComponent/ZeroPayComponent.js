@@ -13,7 +13,7 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history }) => {  
+export default withRouter(({ match: {params} }) => {  
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
@@ -40,7 +40,7 @@ export default withRouter(({ history }) => {
         UploadButton= {{
           closetext: "취소",
           uploadtext: "등록",
-          closeClick: "/store/point",
+          closeClick: `/store/${params.brand}/point/${params.id}`,
           uploadClick: () => {}
         }} 
       />

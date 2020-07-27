@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import useInput from '../../../../Common/Hooks/chackdInput';
 import MenuBorad from '../../../../Common/Item/Borad/MenuBorad';
 
@@ -10,6 +11,8 @@ const Container = styled.div`
 `
 
 export default ({ confirmState, confirmTextState }) => {
+  const params = useParams()
+
   const MenuData = useInput([
     {
       id: 0,
@@ -38,7 +41,7 @@ export default ({ confirmState, confirmTextState }) => {
           <MenuBorad
             type="end"  
             data={item}
-            link={`/menu/post/${item.id}`}
+            link={`/menu/${params.brand}/post/${item.id}`}
             confirmState={confirmState}
           />
         )

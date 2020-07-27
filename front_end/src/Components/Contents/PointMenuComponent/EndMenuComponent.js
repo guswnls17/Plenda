@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
 import ContentsHeader from '../../../Common/Header/ContentsHeader';
-import { usePointMenuNavNum } from '../../../Common/Context/MenuContext';
-import ChageCommon from './Common/ChageCommon';
-import MenuList from './Common/MenuList';
+import EndMenu from '../MenuComponent/Common/EndMenu';
 
 const ContentsBody = styled.div`
   padding: 30px 60px 0 60px;
@@ -15,29 +13,31 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history, match:{params} }) => {
-  const navBarNum = usePointMenuNavNum();
+export default withRouter(({ history, match:{params}, confirmState, confirmTextState }) => {
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
       <ContentsHeader
         title={"메뉴판 관리"}
-        subTitle={"신림역점"} 
-        LinkButton={navBarNum.value === 0 ? {
+        subTitle={"시즌 기간이 지나간 메뉴판"} 
+        LinkButton={{
           text: "메뉴판 등록하기",
           link: `/menu/${params.brand}/add`
-        } : ""}
-        navBarData={{
-          num: navBarNum,
-          data: [
-            {
-              text: "메뉴판",
-            },
-            {
-              text: "변경사항",
-            },
-          ]
         }}
+        // navBarData={{
+        //   num: navBarNum,
+        //   data: [
+        //     {
+        //       text: "변경사항",
+        //     },
+        //     {
+        //       text: "메뉴판",
+        //     },
+        //     {
+        //       text: "매장별 메뉴판",
+        //     }
+        //   ]
+        // }}
         // UploadButton= {{
         //   closetext: "취소",
         //   uploadtext: "등록",
@@ -46,8 +46,10 @@ export default withRouter(({ history, match:{params} }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <MenuList/>}
-        {navBarNum.value === 1 && <ChageCommon/>}
+        <EndMenu
+          confirmState={confirmState}
+          confirmTextState={confirmTextState}
+        />
       </ContentsBody>
     </ContentsTemplate>
   )

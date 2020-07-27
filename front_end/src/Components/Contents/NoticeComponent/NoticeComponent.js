@@ -15,7 +15,7 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history }) => {
+export default withRouter(({ match: { params } }) => {
   const navBarNum = useNoticeNavNum();
 
   return (
@@ -25,7 +25,7 @@ export default withRouter(({ history }) => {
         // subTitle={"브랜드 추가하기"} 
         LinkButton={navBarNum.value === 1 ? {
           text: "글쓰기",
-          link: "/notice/add"
+          link: `/notice/${params.brand}/add`
         } : ""}
         navBarData={{
           num: navBarNum,

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import ContentsBorad from '../../../../Common/Item/Borad/ContentsBorad';
 import useInput from '../../../../Common/Hooks/chackdInput';
 
@@ -10,6 +11,8 @@ const Container = styled.div`
 `
 
 export default () => {
+  const params = useParams()
+
   const NowMenu = useInput({
     title: "5월 가정의달 이벤트 메뉴",
     start: new Date("2020-04-20"),
@@ -37,7 +40,7 @@ export default () => {
       />
       <ContentsBorad
         more={{
-          link: "/menu/next"
+          link: `/menu/${params.brand}/point/next/${params.id}`
         }}
         title={"다음 시즌 적용 메뉴판"}
         type={"menu"}
@@ -45,7 +48,7 @@ export default () => {
       />
       <ContentsBorad
         more={{
-          link: "/menu/end"
+          link: `/menu/${params.brand}/point/end/${params.id}`
         }}
         title={"시즌 기간이 지나간 메뉴판"}
         type={"menu"}

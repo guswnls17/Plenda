@@ -270,7 +270,7 @@ export default ({ type, title, data, category, link, button, more, deleteText })
         {
           button && 
             <Button onClick={button.onClick}>
-              <Link to={button.link}>
+              <Link to={button.link ? button.link : "#"}>
                 <p>{ button.text ? button.text : "수정" }</p>
               </Link>
             </Button>

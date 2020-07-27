@@ -23,10 +23,10 @@ const instance = axios.create({
   export const tagsPost = ( bs_id, store_id, data ) => instance.post(`admin/${bs_id}/store/${store_id}/tags`, data);
   export const storeDelete = ( bs_id, store_id ) => instance.post(`admin/${bs_id}/store/${store_id}/close`);
   export const getPointStore = ( bs_id, store_id ) => instance.get(`admin/${bs_id}/store/${store_id}/basic`);
-  export const getTags = ( bs_id, store_id ) => instance.get(`/admin/${bs_id}/store/${store_id}/tags`);
-  export const patchStore = ( bs_id, store_id, data ) => instance.post(`/admin/${bs_id}/store/${store_id}/basic`, data);
-  export const getOperating = ( bs_id, store_id ) => instance.get(`/admin/${bs_id}/store/${store_id}/hours`);
-  export const postOperating = ( bs_id, store_id, data ) => instance.post(`/admin/${bs_id}/store/${store_id}/hours`, data);
+  export const getTags = ( bs_id, store_id ) => instance.get(`admin/${bs_id}/store/${store_id}/tags`);
+  export const patchStore = ( bs_id, store_id, data ) => instance.post(`admin/${bs_id}/store/${store_id}/basic`, data);
+  export const getOperating = ( bs_id, store_id ) => instance.get(`admin/${bs_id}/store/${store_id}/hours`);
+  export const postOperating = ( bs_id, store_id, data ) => instance.post(`admin/${bs_id}/store/${store_id}/hours`, data);
 
-
-
+  //메뉴판 등록
+  export const addMenu = ( bs_id, data ) => instance.post(`admin/${bs_id}/menu/create_rev`, data);

@@ -34,6 +34,8 @@ import SettingPage from './Pages/Setting/SettingPage';
 import PwChangePage from './Pages/Setting/PwChangePage';
 import { useDispatch, useSelector } from 'react-redux';
 import { loaduser} from './store/modules/auth';
+import PointNextMenuPage from './Pages/PointMenu/PointNextMenuPage';
+import PointEndMenuPage from './Pages/PointMenu/PointEndMenuPage';
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -78,6 +80,8 @@ const Routes = () => {
           <Route exact path="/menu/:brand/post/:id" component={PostMenuPage} />
           <Route exact path="/menu/:brand/add" component={AddMenuPage} />
           <Route exact path="/menu/:brand/point/:id" component={PointMenuPage} />
+          <Route exact path="/menu/:brand/point/next/:id" component={PointNextMenuPage} />
+          <Route exact path="/menu/:brand/point/end/:id" component={PointEndMenuPage} />
           <Route exact path="/staff/:brand" component={StaffPage} />
           <Route exact path="/staff/:brand/point/:id" component={PointStaffPage} />
           <Route exact path="/sales/:brand" component={SalesPage} />

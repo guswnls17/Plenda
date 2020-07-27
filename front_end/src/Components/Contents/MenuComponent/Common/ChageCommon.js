@@ -1,5 +1,6 @@
 import React from 'react';
 import NoticeBord from '../../../../Common/Item/NoticeBord/NoticeBord';
+import { useConfirmState } from '../../../../Common/Context/MenuContext';
 
 const plendaNoticeData = [
   {
@@ -65,6 +66,8 @@ const storeData = [
 ]
 
 export default () => {
+  const confirmState = useConfirmState()
+
   return (
     <NoticeBord
       link={""}
@@ -95,9 +98,26 @@ export default () => {
         {
           type: "delete",
           title: "상태",
-          // data: "date",
           width: "12%",
-          minwidth: 100
+          minwidth: 100,
+          modify: () => {
+            confirmState.setValue({
+              ...confirmState.value, 
+              boolean: true,
+              title: "메뉴판 변경사항",
+              text: `할리스커피 신림역점의\n[아메리카노 2000원 ▸ 3000원 인상]\n변경 사항을 정말 수락하시겠습니까?`,
+              trueOnClick: () => {}
+            })
+          },
+          delete: () => {
+            confirmState.setValue({
+              ...confirmState.value, 
+              boolean: true,
+              title: "메뉴판 변경사항",
+              text: `할리스커피 신림역점의\n[아메리카노 2000원 ▸ 3000원 인상]\n변경 사항을 정말 반려하시겠습니까?`,
+              trueOnClick: () => {}
+            })
+          }
         }
       ]}
     />

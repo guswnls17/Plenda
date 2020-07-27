@@ -49,13 +49,19 @@ const ImgBox = styled.div`
   }
 `
 
-export default ({ title, img, value=[], setValue, imgWidth, imgHeight, type, imgData }) => {
+export default ({ title, img, value=[], setValue, imgWidth, imgHeight, type, imgData = [] }) => {
 
   return (
     <ImgInput>
       {title && <p>{title}</p>}
       <div>
-        {imgData &&
+        {imgData.length === 0 || !imgData || imgData === null || imgData === undefined ?
+          <ImgBox imgWidth={imgWidth} imgHeight={imgHeight}>
+            <div>
+              <img alt="" src={BrandBasicImg} />
+            </div>
+          </ImgBox>
+        :
           imgData.map((item, index) => {
             return (
               <ImgBox key={index} imgWidth={imgWidth} imgHeight={imgHeight}>

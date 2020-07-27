@@ -1,5 +1,7 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import NoticeBord from '../../../../Common/Item/NoticeBord/NoticeBord';
+import { useConfirmState } from '../../../../Common/Context/MenuContext';
 
 const plendaNoticeData = [
   {
@@ -41,9 +43,12 @@ const plendaNoticeData = [
 ]
 
 export default () => {
+  const params = useParams()
+  const confirmState = useConfirmState()
+  
   return (
     <NoticeBord
-      link={"/notice/postbrand"}
+      link={`/notice/${params.brand}/postbrand`}
       data={plendaNoticeData}
       category={[
         {
@@ -70,9 +75,18 @@ export default () => {
         {
           type: "delete",
           title: "수정",
-          // data: "date",
           width: "12%",
-          minwidth: 100
+          minwidth: 100,
+          modify: () => {},
+          delete: () => {
+            confirmState.setValue({
+              ...confirmState.value, 
+              boolean: true,
+              title: "",
+              text: "해당 공지사항을 \n정말 삭제하시겠습니까?",
+              trueOnClick: () => {}
+            })
+          }
         }
       ]}
     />

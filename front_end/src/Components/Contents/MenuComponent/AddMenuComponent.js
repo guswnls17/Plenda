@@ -13,7 +13,7 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history, match, addCategorymodal, addMenuModal }) => {
+export default withRouter(({ history, match:{params}, addCategorymodal, addMenuModal }) => {
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
@@ -41,7 +41,7 @@ export default withRouter(({ history, match, addCategorymodal, addMenuModal }) =
         UploadButton= {{
           closetext: "취소",
           uploadtext: "등록",
-          closeClick: "/menu",
+          closeClick: `/menu/${params.brand}`,
           uploadClick: () => {}
         }} 
       />

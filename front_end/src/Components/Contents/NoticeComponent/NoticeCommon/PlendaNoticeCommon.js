@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import NoticeBord from '../../../../Common/Item/NoticeBord/NoticeBord';
 
 const plendaNoticeData = [
@@ -41,9 +42,11 @@ const plendaNoticeData = [
 ]
 
 export default () => {
+  const params = useParams()
+
   return (
     <NoticeBord
-      link={"/notice/postplenda"}
+      link={`/notice/${params.brand}/postplenda`}
       data={plendaNoticeData}
       category={[
         {

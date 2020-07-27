@@ -47,7 +47,7 @@ export default withRouter(({ history, match, staffSearchState }) => {
         // }} 
       />
       <ContentsBody>
-        {navBarNum.value === 0 && <StaffCommon/>}
+        {navBarNum.value === 0 && <StaffCommon staffSearchState={staffSearchState}/>}
         {navBarNum.value === 1 && <ChageCommon/>}
       </ContentsBody>
     </ContentsTemplate>

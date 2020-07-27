@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BasicToggle from '../Toggle/BasicToggle';
+import useInput from '../Hooks/useInput';
 
 const DashbordHeader = styled.div`
   padding: 60px 20px 0 20px;
@@ -76,6 +77,7 @@ const revenueData = [
 ]
 
 export default ({ text, storeToggle=false, dateToggle=false }) => {
+  const toggleTextState = useInput("전체");
 
   return (
     <DashbordHeader>
@@ -83,14 +85,15 @@ export default ({ text, storeToggle=false, dateToggle=false }) => {
       <div>
         { storeToggle && 
           <BasicToggle
-            fullText={"전체"}
             data={storeData}
+            fullText={"전체"}
+            toggleTextState={toggleTextState}
           />
         }
         { dateToggle && 
           <BasicToggle
-            fullText={""}
             data={revenueData}
+            fullText={""}
           />
         }
       </div>

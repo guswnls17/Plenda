@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import LineInput from '../../../../Common/Input/LineInput';
 import CheckInput from '../../../../Common/Input/CheckInput';
@@ -31,6 +31,10 @@ export default ({
   checkdCommonData
 }) => {
   
+  useEffect(() => {
+    adress.setValue({...adress.value, adress: "" })
+  }, [])
+
   return (
     <ContentsBox>
       {/* <LineInput

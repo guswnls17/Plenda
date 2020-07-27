@@ -1,5 +1,6 @@
 import React from 'react';
 import NoticeBord from '../../../../Common/Item/NoticeBord/NoticeBord';
+import { useConfirmState } from '../../../../Common/Context/MenuContext';
 
 const plendaNoticeData = [
   {
@@ -58,7 +59,9 @@ const rankData = [
   },
 ]
 
-export default () => {
+export default ({ staffSearchState }) => {
+  const confirmState = useConfirmState()
+
   return (
     <NoticeBord
       link={""}
@@ -97,7 +100,19 @@ export default () => {
           type: "delete",
           title: "수정",
           width: "18%",
-          minwidth: 120
+          minwidth: 120,
+          modify: () => {
+            staffSearchState.setValue(true)
+          },
+          delete: () => {
+            confirmState.setValue({
+              ...confirmState.value, 
+              boolean: true,
+              title: "",
+              text: `username을 정말\n삭제하시겠습니까?`,
+              trueOnClick: () => {}
+            })
+          }
         }
       ]}
     />

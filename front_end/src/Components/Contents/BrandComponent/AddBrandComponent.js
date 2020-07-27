@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ContentsTemplate from '../../Template/ContentsTemplate/ContentsTemplate';
 import ContentsHeader from '../../../Common/Header/ContentsHeader';
 import LineInput from '../../../Common/Input/LineInput';
 import useInput from '../../../Common/Hooks/useInput';
 import ImgInput from '../../../Common/Input/ImgInput';
+import { useAdressState } from '../../../Common/Context/MenuContext';
 
 const ContentsBody = styled.div`
   padding: 30px 60px 0 60px;
@@ -27,6 +28,7 @@ const ContentsBox = styled.div`
 `
 
 export default () => {
+  const adressState = useAdressState()
   const brandName = useInput("");
   const businessNum = useInput("");
   const phoneNum = useInput("");
@@ -37,6 +39,10 @@ export default () => {
       preView: "",
     }
   ]);
+
+  useEffect(() => {
+    adressState.setValue({...adressState.value, adress: "" })
+  }, [])
   
   return (
     <ContentsTemplate sidebarBoolean={false} bgColor={"#f8f8f8"}>
@@ -81,10 +87,11 @@ export default () => {
             placeholder={"브랜드 전화번호를 입력해주세요."}
           />
           <LineInput
-            {...adress}
-            title={"주소"}
+            {...adressState}
+            title={"주소 (필수)"}
             type={"adress"}
-            placeholder={"브랜드 주소를 입력해주세요."}
+            adressOnClick={()=>{adressState.setValue({...adressState.value, boolean: true })}}
+            placeholder={"주소를 입력해주세요."}
           />
         </ContentsBox>
       </ContentsBody>

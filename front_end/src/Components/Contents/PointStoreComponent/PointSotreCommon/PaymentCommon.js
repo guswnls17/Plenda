@@ -32,7 +32,7 @@ export default withRouter(({ match }) => {
         data={payment.value}
         button={{
           // text:"삭제하기",
-          link: `/store/point/payment/${match.params.id}`,
+          link: `/store/${match.params.brand}/point/payment/${match.params.id}`,
           onClick:()=>{},
         }}
       />
@@ -42,7 +42,7 @@ export default withRouter(({ match }) => {
         data={zeropay}
         button={{
           // text:"삭제하기",
-          link: `/store/point/zeropay/${match.params.id}`,
+          link: `/store/${match.params.brand}/point/zeropay/${match.params.id}`,
           onClick:()=>{},
         }}
       />

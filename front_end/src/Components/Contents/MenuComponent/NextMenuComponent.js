@@ -13,7 +13,7 @@ const ContentsBody = styled.div`
   }
 `
 
-export default withRouter(({ history, match, confirmState, confirmTextState }) => {
+export default withRouter(({ history, match:{params}, confirmState, confirmTextState }) => {
 
   return (
     <ContentsTemplate bgColor={"#f8f8f8"}>
@@ -22,7 +22,7 @@ export default withRouter(({ history, match, confirmState, confirmTextState }) =
         subTitle={"다음 시즌 적용 메뉴판"}
         LinkButton={{
           text: "메뉴판 등록하기",
-          link: `/menu/add`
+          link: `/menu/${params.brand}/add`
         }} 
         // navBarData={{
         //   num: navBarNum,
