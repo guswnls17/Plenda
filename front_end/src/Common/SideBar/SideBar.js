@@ -3,6 +3,12 @@ import styled from 'styled-components'
 import { NavLink, useParams } from 'react-router-dom';
 
 import InfoIcon from '../../Images/infoIcon.png'
+import noticeIcon from '../../Images/noticeIcon.png'
+import dashboradIcon from '../../Images/dashboradIcon.png'
+import storeIcon from '../../Images/storeIcon.png'
+import menuIcon from '../../Images/menuIcon.png'
+import staffIcon from '../../Images/staffIcon.png'
+import paymentIcon from '../../Images/paymentIcon.png'
 import BrandBasicImg from '../../Images/brandBasicImg.png'
 
 const Sidebar = styled.div`
@@ -144,7 +150,7 @@ export default ({ sidebar, detailBrand }) => {
         </Item>
         <Item>
           <NavLink strict to={`/notice/${params.brand}`} activeClassName={"active"}>
-            <img alt="" src={InfoIcon} style={{ width: 20 }}/>
+            <img alt="" src={noticeIcon} style={{ width: 20 }}/>
             <p>공지사항</p>
           </NavLink>
         </Item>
@@ -153,31 +159,31 @@ export default ({ sidebar, detailBrand }) => {
         </Line>
         <Item>
           <NavLink to={`/dashbord/${params.brand}`} activeClassName={"active"}>
-            <img alt="" src={InfoIcon} style={{ width: 20 }}/>
+            <img alt="" src={dashboradIcon} style={{ width: 20 }}/>
             <p>대쉬보드</p>
           </NavLink>
         </Item>
         <Item>
           <NavLink to={`/store/${params.brand}`} activeClassName={"active"}>
-            <img alt="" src={InfoIcon} style={{ width: 20 }}/>
+            <img alt="" src={storeIcon} style={{ width: 20 }}/>
             <p>매장 관리</p>
           </NavLink>
         </Item>
         <Item>
           <NavLink to={`/menu/${params.brand}`} activeClassName={"active"}>
-            <img alt="" src={InfoIcon} style={{ width: 20 }}/>
+            <img alt="" src={menuIcon} style={{ width: 20 }}/>
             <p>메뉴판 관리</p>
           </NavLink>
         </Item>
         <Item>
           <NavLink to={`/staff/${params.brand}`} activeClassName={"active"}>
-            <img alt="" src={InfoIcon} style={{ width: 20 }}/>
+            <img alt="" src={staffIcon} style={{ width: 20 }}/>
             <p>스태프 관리</p>
           </NavLink>
         </Item>
         <Item>
           <NavLink to={`/sales/${params.brand}`} activeClassName={"active"}>
-            <img alt="" src={InfoIcon} style={{ width: 20 }}/>
+            <img alt="" src={paymentIcon} style={{ width: 20 }}/>
             <p>매출 관리</p>
           </NavLink>
         </Item>

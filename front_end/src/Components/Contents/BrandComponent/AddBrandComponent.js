@@ -32,7 +32,7 @@ export default () => {
   const brandName = useInput("");
   const businessNum = useInput("");
   const phoneNum = useInput("");
-  const adress = useInput("");
+  // const adress = useInput("");
   const imgData = useInput([
     {
       img: "",

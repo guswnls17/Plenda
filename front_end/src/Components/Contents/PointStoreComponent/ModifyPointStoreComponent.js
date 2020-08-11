@@ -34,16 +34,16 @@ export default withRouter(({ match: {params}, history, adress, adressModal, Poin
 
   const storeImg = useInput([
     {
-      img: PointStoreData.images[0] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[0]}` : "",
-      preView: PointStoreData.images[0] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[0]}` : "",
+      img: PointStoreData.images === null ? "" :  (PointStoreData.images[0] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[0]}` : ""),
+      preView: PointStoreData.images === null ? "" : (PointStoreData.images[0] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[0]}` : ""),
     },
     {
-      img: PointStoreData.images[1] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[1]}` : "",
-      preView: PointStoreData.images[1] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[1]}` : "",
+      img: PointStoreData.images === null ? "" : (PointStoreData.images[1] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[1]}` : ""),
+      preView: PointStoreData.images === null ? "" : (PointStoreData.images[1] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[1]}` : ""),
     },
     {
-      img: PointStoreData.images[2] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[2]}` : "",
-      preView: PointStoreData.images[2] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[2]}` : ""
+      img: PointStoreData.images === null ? "" : (PointStoreData.images[2] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[2]}` : ""),
+      preView: PointStoreData.images === null ? "" : (PointStoreData.images[2] ? `http://test.plendar.com/api/image/fetch/store/${PointStoreData.images[2]}` : "")
     },
   ])
   const thumImg = useInput([
