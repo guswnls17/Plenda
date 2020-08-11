@@ -36,6 +36,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loaduser} from './store/modules/auth';
 import PointNextMenuPage from './Pages/PointMenu/PointNextMenuPage';
 import PointEndMenuPage from './Pages/PointMenu/PointEndMenuPage';
+import EmailConfirmPage from './Pages/Auth/EmailConfirmPage';
+import ConfirmPasswordPage from './Pages/Auth/ConfirmPasswordPage';
+import PasswordChangePage from './Pages/Auth/PasswordChangePage';
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -53,7 +56,10 @@ const Routes = () => {
         <>
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/signup" component={SignupPage} />
+          <Route exact path="/emailconfirm" component={EmailConfirmPage} />
           <Route exact path="/findpassword" component={FindPasswordPage} />
+          <Route exact path="/confirmpassword" component={ConfirmPasswordPage} />
+          <Route exact path="/passwordchange" component={PasswordChangePage} />
         </>
         :
         <>

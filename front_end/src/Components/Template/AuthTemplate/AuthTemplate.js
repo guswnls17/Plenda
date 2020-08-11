@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Footer from '../../../Common/Footer/Footer';
+import { useAlertState } from '../../../Common/Context/MenuContext';
 
 import PrendaLoginBg from '../../../Images/prenda_loginBg.png'
+import AlertModal from '../../../Common/Modal/AlertModal';
 
 const Container = styled.div`
   position: relative;
@@ -51,12 +53,21 @@ const AuthContainer = styled.div`
 `
 
 export default ({ children }) => {
+  const alertState = useAlertState()
+
   return (
     <Container>
       <AuthContainer>
         {children}
       </AuthContainer>
       <Footer/>
+      {
+        alertState.value.boolean &&
+        <AlertModal
+          {...alertState}
+          text={alertState.value.text}
+        />
+      }
     </Container> 
   )
 }

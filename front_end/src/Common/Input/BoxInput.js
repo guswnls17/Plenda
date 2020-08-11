@@ -32,7 +32,7 @@ const BoxInput = styled.fieldset`
     padding: ${props => props.focusState ? "0 10px" : "0px"};
     color: transparent;
 
-    transition: ${props => props.focusState ? "max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms" : "max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms"};
+    /* transition: ${props => props.focusState ? "max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms" : "max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms"}; */
   }
 
   & > label {
@@ -46,6 +46,9 @@ const BoxInput = styled.fieldset`
     transition: top 200ms cubic-bezier(0.0, 0, 0.2, 1), font-size 200ms cubic-bezier(0.0, 0, 0.2, 1);
     z-index: 10;
     font-weight: 300;
+    @supports (-moz-appearance:none) {
+      top: 13px;
+    }
   }
 
   & .active {
@@ -54,6 +57,9 @@ const BoxInput = styled.fieldset`
     width: auto;
     font-weight: 400;
     color: ${props => props.errState ? "#EB5757" : "white"};
+    @supports (-moz-appearance:none) {
+      top: -13px;
+    }
   }
 
   & > input {
@@ -67,6 +73,12 @@ const BoxInput = styled.fieldset`
     background-color: transparent;
     z-index: 20;
     padding: 0 10px;
+  }
+
+  & > input[type="number"]::-webkit-outer-spin-button,
+  & > input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `
 

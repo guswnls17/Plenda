@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import useInput from '../../Common/Hooks/useInput';
+import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 import BoxInput from '../../Common/Input/BoxInput';
 import AuthButton from '../../Common/Button/AuthButton';
-import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
+import { useSelector } from 'react-redux';
 
 
 const SignupBox = styled.div`
@@ -12,6 +13,7 @@ const SignupBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 
   & > h1 {
     font-weight: bold;
@@ -39,6 +41,7 @@ const AuthFrom = styled.div`
   }
 `
 
+
 const AuthLinkButton = styled.div`
   margin-top: 30px;
   display: flex;
@@ -59,47 +62,50 @@ const AuthLinkButton = styled.div`
   }
 `
 
-export default () => {
-  const email = useInput("");
-  const emailErr = useInput(false);
+export default ({ register }) => {
+  const authCode = useInput("");
+  const authCodeErr = useInput(false);
+  const { email, name, password }= useSelector(state => state.signup)
+
   const history = useHistory()
 
-  function email_check( email ) {
-    var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return (email !== '' && email !== 'undefined' && regex.test(email));
-  }
-
-  const signupHandler = () => {
+  const signupHandler = async() => {
     try {
-      if(email.value === "" || email_check( email.value ) !== true){
-        emailErr.setValue(true);
+      if(authCode.value === ""){
+        authCodeErr.setValue(true);
         return
       } else {
-        emailErr.setValue(false);
-      }
-      history.push('/confirmpassword');
-    } catch(e) {
+        authCodeErr.setValue(false);
+      } 
+      register(name, email, password)
+    } catch (e) {
       console.log(e)
     }
   }
 
+  useEffect(() => {
+    if(!email){
+      history.push("/signup")
+    }
+  })
+
   return (
     <AuthTemplate>
       <SignupBox>
-        <h1>FIND PASSWORD</h1>
-        <p>비밀번호찾기</p>
+        <h1>SIGN UP</h1>
+        <p>등록하신 이메일로 인증코드가 전송되었습니다.</p>
         <AuthFrom>
           <BoxInput
-            {...email}
-            errState={emailErr}
-            errText={"이메일을 확인해주세요."}
-            text={"이메일을 입력해주세요."}
-            type={"email"}
+            {...authCode}
+            errState={authCodeErr}
+            errText={"인증코드를 인력해주세요."}
+            text={"인증코드를 인력해주세요."}
+            type={"number"}
             style={{marginTop: 14}}
           />
           <AuthButton
             style={{ marginTop: "50px" }}
-            text={"FIND PASSWORD"}
+            text={"SIGN UP"}
             onClick={signupHandler}
           />
           <AuthLinkButton>

@@ -60,24 +60,32 @@ const AuthLinkButton = styled.div`
 `
 
 export default () => {
-  const email = useInput("");
-  const emailErr = useInput(false);
+  const password = useInput("");
+  const passwordErr = useInput(false);
+  const pwConfirm = useInput("");
+  const pwConfirmErr = useInput(false);
+  const pwErrMessage = useInput("")
   const history = useHistory()
 
-  function email_check( email ) {
-    var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return (email !== '' && email !== 'undefined' && regex.test(email));
-  }
+  const password_check = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
   const signupHandler = () => {
     try {
-      if(email.value === "" || email_check( email.value ) !== true){
-        emailErr.setValue(true);
+      if(pwConfirm.value !== password.value || password.value === "" || pwConfirm.value === ""){
+        pwErrMessage.setValue("비밀번호를 확인해주세요.")
+        pwConfirmErr.setValue(true);
+        passwordErr.setValue(true);
+        return
+      } if(!password_check.test(password.value)){
+        pwErrMessage.setValue('비밀번호는 8자 이상이어야 하며, 대문자/특수문자를 포함해야 합니다.')
+        pwConfirmErr.setValue(true);
+        passwordErr.setValue(true);
         return
       } else {
-        emailErr.setValue(false);
+        pwConfirmErr.setValue(false);
+        passwordErr.setValue(false);
       }
-      history.push('/confirmpassword');
+      history.push('/');
     } catch(e) {
       console.log(e)
     }
@@ -86,20 +94,27 @@ export default () => {
   return (
     <AuthTemplate>
       <SignupBox>
-        <h1>FIND PASSWORD</h1>
-        <p>비밀번호찾기</p>
+        <h1>CHANGE PASSWORD</h1>
+        <p>비밀번호 변경하기</p>
         <AuthFrom>
           <BoxInput
-            {...email}
-            errState={emailErr}
-            errText={"이메일을 확인해주세요."}
-            text={"이메일을 입력해주세요."}
-            type={"email"}
+            {...password}
+            errState={passwordErr}
+            text={"비밀번호를 입력해주세요."}
+            type={"password"}
+            style={{marginTop: 14}}
+          />
+          <BoxInput
+            {...pwConfirm}
+            errState={pwConfirmErr}
+            errText={pwErrMessage.value}
+            text={"비밀번호 확인해주세요."}
+            type={"password"}
             style={{marginTop: 14}}
           />
           <AuthButton
             style={{ marginTop: "50px" }}
-            text={"FIND PASSWORD"}
+            text={"CHANGE PASSWORD"}
             onClick={signupHandler}
           />
           <AuthLinkButton>

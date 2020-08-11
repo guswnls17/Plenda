@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useInput from '../../Common/Hooks/useInput';
 import chackdInput from '../../Common/Hooks/chackdInput';
 import AuthTemplate from '../Template/AuthTemplate/AuthTemplate';
 import BoxInput from '../../Common/Input/BoxInput';
 import ChackBox from '../../Common/ChackBox/ChackBox';
 import AuthButton from '../../Common/Button/AuthButton';
+import { signupState } from '../../store/modules/signup'
+import { useDispatch } from 'react-redux';
 
 
 const SignupBox = styled.div`
@@ -85,6 +87,9 @@ export default ({ alertState, register }) => {
   const privacy1 = chackdInput(false);
   const privacy2 = chackdInput(false);
 
+  const history = useHistory()
+  const dispatch = useDispatch();
+
 
   function email_check( email ) {
     var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -121,7 +126,13 @@ export default ({ alertState, register }) => {
         alertState.setValue(true)
         return
       }
-      register(name.value, email.value, password.value)
+      // register(name.value, email.value, password.value)
+      dispatch(signupState({
+        name: name.value,
+        email: email.value,
+        password: password.value
+      }))
+      return history.push(`/emailconfirm`);
     } catch (e) {
       console.log(e)
     }
@@ -193,7 +204,7 @@ export default ({ alertState, register }) => {
           </ChackBoxContainer>
           <AuthButton
             style={{ marginTop: "50px" }}
-            text={"SIGN UP"}
+            text={"NEXT"}
             onClick={signupHandler}
           />
           <AuthLinkButton>
